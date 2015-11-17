@@ -1,0 +1,37 @@
+# adapted from https://github.com/andyli/HaxeCI/blob/master/.travis.yml
+language: haxe
+
+# TravisCI by default run on linux.
+# Let's enable both linux and mac builds because why not?
+os:
+  - linux
+  - osx
+
+# Test with Haxe 3.2.0 and Haxe development.
+haxe:
+  - "3.2.1"
+  - development
+
+matrix:
+  # Allow Haxe development to fail.
+  allow_failures:
+    - haxe: development
+
+#before_install:
+#  - haxelib git snow https://github.com/underscorediscovery/snow.git
+
+install:
+  # os-specific config
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
+      export DISPLAY=:99.0;
+      export AUDIODEV=null;
+    fi
+  # Install haxelibs
+  - haxelib install hxcpp
+  - haxelib install buddy
+  - haxelib list
+
+script:
+  - haxe test.interp.hxml
+  - haxe test.node.hxml         && node bin/TestMain.node.js
+  - haxe test.cpp.hxml          && ./bin/TestMain

@@ -1,0 +1,5 @@
+-lib buddy
+-cp test
+-cp src
+-D testing
+-main TestMain

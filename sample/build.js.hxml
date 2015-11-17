@@ -1,0 +1,3 @@
+-lib glm
+-main Sample
+-js output/partials.js
