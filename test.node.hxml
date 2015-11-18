@@ -1,3 +1,0 @@
-test.each.hxml
--D nodejs
--js bin/TestMain.node.js

@@ -57,13 +57,13 @@ install:
   - haxelib list
 
 script:
-  - haxe build-interp.hxml
-  - haxe build-neko.hxml         && neko bin/TestMain.n
-  - haxe build-js.hxml           && node bin/TestMain.js
+  - haxe test.interp.hxml
+  - haxe test.neko.hxml         && neko bin/TestMain.n
+  - haxe test.js.hxml           && node bin/TestMain.js
                                  && haxe phantomjs/run.hxml bin/TestMain.js
-  - haxe build-java.hxml         && java -jar bin/TestMain.jar
-  - haxe build-php.hxml          && php bin/index.php
-  - haxe build-cs.hxml           && mono bin/bin/TestMain.exe
-  - haxe build-flash.hxml -D fdb && haxe flash/run.hxml bin/TestMain.swf
-  - haxe build-cpp.hxml          && ./bin/TestMain
-  - haxe build-python.hxml       && python3 bin/TestMain.py
+  - haxe test.java.hxml         && java -jar bin/TestMain.jar
+  - haxe test.php.hxml          && php bin/index.php
+  - haxe test.cs.hxml           && mono bin/bin/TestMain.exe
+  - haxe test.flash.hxml -D fdb && haxe flash/run.hxml bin/TestMain.swf
+  - haxe test.cpp.hxml          && ./bin/TestMain
+  - haxe test.python.hxml       && python3 bin/TestMain.py

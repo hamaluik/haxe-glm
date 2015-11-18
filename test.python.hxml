@@ -1,0 +1,2 @@
+test.each.hxml
+-python bin/TestMain.py
