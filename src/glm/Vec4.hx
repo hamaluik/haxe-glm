@@ -243,7 +243,7 @@ abstract Vec4(Array<Float>) {
 		this[0] -= b[0];
 		this[1] -= b[1];
 		this[2] -= b[2];
-		this[4] -= b[4];
+		this[3] -= b[3];
 		return cast this;
 	}
 
@@ -263,15 +263,6 @@ abstract Vec4(Array<Float>) {
 	@:op(A * B)
 	public static inline function multiplyScalarOp2(b:Float, a:Vec4):Vec4 {
 		return a.clone().multiplyScalar(b);
-	}
-
-	/**
-	 * Calculates the dot product
-	 * @param  b the vector to dot with
-	 * @return   `this · b`
-	 */
-	public function dot(b:Vec4):Float {
-		return (this[0] * b[0]) + (this[1] * b[1]) + (this[2] * b[2]) + (this[3] * b[3]);
 	}
 
 	/**
