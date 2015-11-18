@@ -1,0 +1,11 @@
+::use 'main.mtt'::
+    <header>
+        $$printPackage(::type::)
+        <h2>::if type.isInterface::interface::else::class::end::</h2> <h1>::api.getPathName(type.path)::</h1>
+        <!-- todo: extends, implements, module, platforms, etc -->
+    </header>
+    <main>
+    	::raw type.doc::
+        $$printClassBody(::type::)
+    </main>
+::end::

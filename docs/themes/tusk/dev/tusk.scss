@@ -1,0 +1,292 @@
+/*@import 'lib/_boneless/colors';
+@import 'lib/_boneless/config';
+@import 'lib/_boneless/_utilities/mixins';
+@import 'lib/_boneless/base';
+@import 'lib/_boneless/grid';
+//@import 'lib/_boneless/typography';
+@import 'typebase';
+@import 'lib/_boneless/buttons';
+@import 'lib/_boneless/forms';
+@import 'lib/_boneless/tables';
+@import 'lib/_boneless/utilities';*/
+@import 'typebase';
+
+@import '//fonts.googleapis.com/css?family=Raleway:400,700|Inconsolata:400,700)';
+
+$gray-base:			  #000 !default;
+$gray-darker:			lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:			  lighten($gray-base, 20%) !default;   // #333
+$gray:				   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:			 lighten($gray-base, 70%) !default;   // #999
+$gray-lighter:		   lighten($gray-base, 93.5%) !default; // #eee
+
+$brand-darker: #1C1D21;
+$brand-dark: #31353D;
+$brand-main: #445878;
+$brand-light: #92CDCF;
+$brand-lighter: #EEEFF7;
+
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+	-webkit-box-shadow:$top $left $blur $color #{$inset};
+	-moz-box-shadow:$top $left $blur $color #{$inset};
+	box-shadow:$top $left $blur $color #{$inset};
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+}
+
+html, body {
+	font-family: 'Raleway', sans-serif;
+	background: $gray-lighter;
+	color: $gray-base;
+	margin: 0;
+	padding: 0;
+}
+
+code {
+	font-family: 'Inconsolata', ;
+}
+
+a {
+	color: $brand-dark;
+	text-decoration: none;
+	&:hover {
+		color: $brand-main;
+	}
+}
+
+nav {
+	background: $brand-darker;
+	color: $brand-lighter;
+	padding: 1rem 0;
+
+	h1, h2 {
+		margin-top: 0.25rem;
+		padding: 0.25rem 1rem;
+		width: 100%;
+		text-align: center;
+	}
+
+	h1 {
+		a {
+			text-decoration: none;
+			color: $brand-lighter;
+			&:hover {
+				color: $brand-lighter;
+			}
+		}
+	}
+
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0 0 0 1rem;
+		li {
+			a {
+				padding: 0.25rem 1rem;
+				display: block;
+				color: $brand-light;
+				text-decoration: none;
+
+				&.active {
+					background: $brand-main;
+					color: $brand-lighter;
+				}
+
+				&:hover {
+					color: $brand-main;
+					background: $brand-lighter;
+				}
+			}
+		}
+	}
+
+	>ul {
+		padding: 0;
+	}
+}
+
+header {
+	margin-top: 1rem;
+	padding: 0 1rem;
+
+	h1, h2 {
+		display: inline;
+	}
+}
+
+main {
+	padding: 0 1rem;
+
+	h2, h3 {
+		margin: 0;
+		padding: 0;
+	}
+
+	h2 {
+		border-bottom: 1px solid $gray;
+		margin: 1rem 0 0;
+	}
+
+	>.field-signature {
+		display: block;
+		margin: 2rem 1rem 1rem;
+
+		span.label {
+			margin: 0;
+			padding: 0.25rem 0.5rem;
+			white-space: inherit;
+			display: inline-block;
+			&::before {
+				content: "(";
+			}
+			&::after {
+				content: ")";
+			}
+		}
+
+		code {
+			margin: 0;
+			padding: 0.25rem 0.5rem;
+			white-space: inherit;
+			display: inline-block;
+			border: none;
+			background: $brand-darker;
+			color: $brand-lighter;
+
+			a {
+				color: $brand-light;
+				&:hover {
+					color: $brand-main;
+				}
+			}
+
+			.identifier {
+				font-weight: bold;
+			}
+
+			.type {
+				//font-style: italic;
+				color: $brand-light;
+			}
+		}
+	}
+
+	h3 {
+		font-style: italic;
+		margin: 0 1rem 1rem 3rem;
+	}
+
+	p, pre, ul, ol {
+		margin: 0 1rem 1rem 4rem;
+	}
+
+	p.alert {
+		background: $brand-darker;
+		color: $brand-lighter;
+	}
+
+	pre {
+		border: 1px solid $brand-darker;
+		padding: 0 0.5rem;
+		background: white;
+	}
+
+	div.description {
+		margin-left: -2rem;
+	}
+
+	dl {
+		margin: 0 1rem 1rem 5rem;
+		dt {
+			margin: 0 0.125rem 0.125rem;
+			padding: 0.125rem;
+			&::before {
+				content: "\f0da";
+				font-family: FontAwesome;
+				font-weight: normal;
+				font-style: normal;
+				display: inline-block;
+				text-decoration: inherit;
+				margin-right: 0.25rem;
+				color: $brand-darker;
+			}
+			&::after {
+				content: ": ";
+				color: $brand-darker;
+			}
+			font-family: 'Inconsolata', ;
+			color: $brand-main;
+		}
+		dd {
+			padding: 0 0.25rem 0.25rem 0.5rem;
+			>p, >.description {
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+}
+
+footer {
+	text-align: right;
+	font-size: $scale / 2 * 1rem;
+	a {
+		color: $brand-main;
+		&:hover {
+			color: $brand-light;
+		}
+	}
+}
+
+@media (min-width: 48em) {
+	// make it look as through the nav goes all the way down
+	body {
+	  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, $brand-darker), color-stop(20%, $brand-darker), color-stop(20%, $gray-lighter), color-stop(100%, $gray-lighter));
+	  background-image: -webkit-linear-gradient(left, $brand-darker, $brand-darker 20%, $gray-lighter 20%, $gray-lighter 100%);
+	  background-image: -moz-linear-gradient(left, $brand-darker, $brand-darker 20%, $gray-lighter 20%, $gray-lighter 100%);
+	  background-image: -ms-linear-gradient(left, $brand-darker, $brand-darker 20%, $gray-lighter 20%, $gray-lighter 100%);
+	  background-image: -o-linear-gradient(left, $brand-darker, $brand-darker 20%, $gray-lighter 20%, $gray-lighter 100);
+	}
+
+	nav {
+		background: none;
+		height: 100%;
+		width: 20%;
+		float: left;
+	}
+
+	header {
+		margin-top: 0;
+		p {
+			margin: 0;
+		}
+	}
+
+	header, main {
+		margin-left: 20%;
+		padding: 1rem 1rem 0;
+		max-width: 960px;
+	}
+
+	main {
+		padding-left: 2rem;
+	}
+
+	footer {
+		top: 0;
+		right: 2.5rem;
+		height: 2rem;
+		padding: 0 0.5rem;
+		transform: rotate(-90deg);
+		transform-origin: 100% 0;
+		position: absolute;
+		line-height: 1rem;
+		text-align: center;
+	}
+}

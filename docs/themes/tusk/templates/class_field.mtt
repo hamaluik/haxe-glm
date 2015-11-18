@@ -1,0 +1,11 @@
+::if (field.doc != null && field.doc != "<p></p>") || !field.isOverride::
+
+	<div class="field-signature">
+		<a ::attr name field.name::></a>
+		$$printFieldSignature(::field::,::isStatic::)
+	</div>
+	::if field.doc != null::
+		::raw field.doc::
+	::end::
+
+::end::

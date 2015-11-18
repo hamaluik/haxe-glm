@@ -1,0 +1,21 @@
+<macro name="makeTree(tree,depth)">
+	::switch tree::
+	<li><a href="::api.getTreeUrl(tree)::">::api.getTreeName(tree)::</a></li>
+	::case::
+		::set name = args[0]::
+		::if name.charAt(0) != "_"::
+			<li><a href="#" class="nav-toggle"><i class="fa fa-chevron-right"></i> ::api.getTreeName(tree)::</a>
+				<ul>
+					::foreach sub args[2]::
+						$$makeTree(::sub::,::depth + 1::)
+					::end::
+				</ul>
+			</li>
+		::end::
+	::end::
+</macro>
+var navContent='
+::foreach tree root::
+	$$makeTree(::tree::,::0::)
+::end::
+';

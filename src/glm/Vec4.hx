@@ -1,7 +1,7 @@
 package glm;
 
 /**
- * Utility class for dealing with 3D vectors
+ * Utility class for dealing with 4D vectors
  */
 abstract Vec4(Array<Float>) {
 	/**
@@ -229,6 +229,9 @@ abstract Vec4(Array<Float>) {
 		return cast this;
 	}
 
+	/**
+	 * Allows adding two vectors together
+	 */
 	@:op(A + B)
 	public static inline function addVec4Op(a:Vec4, b:Vec4):Vec4 {
 		return a.clone().add(b);
@@ -247,6 +250,11 @@ abstract Vec4(Array<Float>) {
 		return cast this;
 	}
 
+	/**
+	 * Mutliply this by a scalar
+	 * @param  b The scalar to multiply by
+	 * @return   `this`, scaled by `b`
+	 */
 	public function multiplyScalar(b:Float):Vec4 {
 		this[0] *= b;
 		this[1] *= b;
@@ -255,30 +263,40 @@ abstract Vec4(Array<Float>) {
 		return cast this;
 	}
 
+	/**
+	 * Allows multiplying by a scalar (`this * 5.2`)
+	 */
 	@:op(A * B)
 	public static inline function multiplyScalarOp(a:Vec4, b:Float):Vec4 {
 		return a.clone().multiplyScalar(b);
 	}
 
+	/**
+	 * Allows multiplying by a scalar (`5.2 * this`)
+	 */
 	@:op(A * B)
 	public static inline function multiplyScalarOp2(b:Float, a:Vec4):Vec4 {
 		return a.clone().multiplyScalar(b);
 	}
 
 	/**
-	 * Provides array access in the form of `vector[i]` where `i ∈ [0, 1, 2]`
+	 * Provides array access in the form of `vec[i]` where `i ∈ [0, 1, 2, 3]`
 	 */
 	@:arrayAccess public inline function arrayGet(i:Int):Float {
 		return this[i];
 	}
 
 	/**
-	 * Provides array access in the form of `vector[i] = x` where `i ∈ [0, 1, 2]`
+	 * Provides array access in the form of `vec[i] = x` where `i ∈ [0, 1, 2, 3]`
 	 */
 	@:arrayAccess public inline function arraySet(i:Int, x:Float):Float {
 		return this[i] = x;
 	}
 
+	/**
+	 * Converts `this` to an array of floats
+	 * @return `this`
+	 */
 	public inline function toArray():Array<Float> {
 		return this;
 	}

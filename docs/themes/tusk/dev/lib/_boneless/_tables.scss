@@ -1,0 +1,66 @@
+table {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: $radius;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  tr {
+    padding: 5px;
+    border: 1px solid #ddd;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid $light-grey;
+  }
+
+  th {
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+
+
+// Responsive Table Support
+$bp-tables: 'only screen and (max-width: #{$medium-up})';
+
+@include bp($bp-tables) {
+  table {
+    border: 0;
+
+    thead {
+      display: none;
+    }
+
+    tr {
+      display: block;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tbody td {
+      display: block;
+      font-size: 0.9em;
+      text-align: right;
+      border-bottom: 1px dotted #ccc;
+
+      &::before {
+        float: left;
+        text-align: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        content: attr(data-label);
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+-cmd cd docs
+
+--next 
+--interp
+--macro Clean.run()
+
+--next
+-cp ../src
+-D docgen
+--macro ImportAll.run()
+
+--each
+
+--interp
+-xml haxe.xml
+
+#--next
+#-js all.js
+#-xml js.xml
+#
+#--next
+#-cpp cpp/
+#-xml cpp.xml
+
+--next
+-cmd haxelib run dox -i . -theme ./themes/flambe --title GLM -D version 1.0.0-alpha --toplevel-package glm

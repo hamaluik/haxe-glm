@@ -6,8 +6,7 @@ import glm.Mat4;
 
 class GLM {
 	public static function frustum(left:Float, right:Float, bottom:Float, top:Float, near:Float=-1, far:Float=1):Mat4 {
-		var result:Mat4 = new Mat4();
-		result.fromRows(
+		var result:Mat4 = Mat4.fromRows(
 			new Vec4(2*near/(right-left), 0, (right+left)/(right-left), 0),
 			new Vec4(0, 2*near/(top-bottom), (top+bottom)/(top-bottom), 0),
 			new Vec4(0, 0, -(far+near)/(far-near), -2*far*near/(far-near)),
@@ -33,8 +32,7 @@ class GLM {
 	}
 
 	public static function ortho(left:Float, right:Float, bottom:Float, top:Float, near:Float=-1, far:Float=1):Mat4 {
-		var result:Mat4 = new Mat4();
-		result.fromRows(
+		var result:Mat4 = Mat4.fromRows(
 			new Vec4(2 / (right - left), 0, 0, -(right + left) / (right - left)),
 			new Vec4(0, 2 / (top -bottom), 0, -(top + bottom) / (top - bottom)),
 			new Vec4(0, 0, -2 / (far - near), -(far + near) / (far - near)),
@@ -44,14 +42,14 @@ class GLM {
 	}
 
 	public static function perspective(fovy:Float, aspect:Float, near:Float, far:Float):Mat4 {
-		var tanHalfFovy:Float = Math.Tan(fovy / 2);
+		var tanHalfFovy:Float = Math.tan(fovy / 2);
 		var result:Mat4 = new Mat4();
 		result.identity();
-		result[0][0] = 1.0f / (aspect * tanHalfFovy);
-		result[1][1] = 1.0f / (tanHalfFovy);
-		result[2][2] = -(zFar + zNear) / (zFar - zNear);
-		result[3][2] = -1.0f;
-		result[2][3] = -(2.0f * zFar * zNear) / (zFar - zNear);
+		result[0][0] = 1 / (aspect * tanHalfFovy);
+		result[1][1] = 1 / (tanHalfFovy);
+		result[2][2] = -(far + near) / (far - near);
+		result[3][2] = -1;
+		result[2][3] = -(2 * far * near) / (far - near);
 		return result;
 	}
 }

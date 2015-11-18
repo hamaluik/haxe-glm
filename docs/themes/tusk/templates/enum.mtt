@@ -1,0 +1,16 @@
+::use 'main.mtt'::
+	<header>
+		$$printPackage(::type::)
+		<h2>enum</h2> <h1>::api.currentPageName::$$printTypeParams(::type.params::)</h1>
+		<!-- todo: extends, implements, module, platforms, etc -->
+	</header>
+	<main>
+		::raw type.doc::
+		::if type.constructors.length > 0::
+            <h2>Values</h2>
+            ::foreach ctor type.constructors::
+                ::use "enum_field.mtt"::::end::
+            ::end::
+		::end::
+	</main>
+::end::

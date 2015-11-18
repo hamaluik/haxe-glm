@@ -15,6 +15,11 @@ abstract Mat4(Array<glm.Vec4>) {
 		return cast this;
 	}
 
+	/**
+	 * Construct a Mat4 from a series of Vec4s (representing rows)
+	 * @param  rows<Vec4> the rows
+	 * @return            a Mat4
+	 */
 	public static function fromRowArray(rows:Array<Vec4>):Mat4 {
 		if(rows.length != 4) {
 			throw "You must supply 4 Vec4s to build a Mat4 this way!";
@@ -27,6 +32,14 @@ abstract Mat4(Array<glm.Vec4>) {
 		return m;
 	}
 
+	/**
+	 * Construct a Mat4 from a series of Vec4s (representing rows)
+	 * @param  a row 0
+	 * @param  b row 1
+	 * @param  c row 2
+	 * @param  d row 3
+	 * @return   a Mat4
+	 */
 	public static function fromRows(a:Vec4, b:Vec4, c:Vec4, d:Vec4):Mat4 {
 		var m:Mat4 = new Mat4();
 		m[0] = a;
@@ -36,6 +49,10 @@ abstract Mat4(Array<glm.Vec4>) {
 		return m;
 	}
 
+	/**
+	 * Makes every element in `this` `=0`
+	 * @return `this`
+	 */
 	public function zero():Mat4 {
 		this[0].zero();
 		this[1].zero();
@@ -44,15 +61,22 @@ abstract Mat4(Array<glm.Vec4>) {
 		return cast this;
 	}
 
+	/**
+	 * Creates a new Mat4 where the elements exactly equal the elements of `this`
+	 */
 	public function clone():Mat4 {
 		var copy:Mat4 = new Mat4();
-		copy[0] = this[0];
-		copy[1] = this[1];
-		copy[2] = this[2];
-		copy[3] = this[3];
+		copy[0] = this[0].clone();
+		copy[1] = this[1].clone();
+		copy[2] = this[2].clone();
+		copy[3] = this[3].clone();
 		return copy;
 	}
 
+	/**
+	 * Makes `this` and identity matrix
+	 * @return `this`
+	 */
 	public function identity():Mat4 {
 		this[0].set(1, 0, 0, 0);
 		this[1].set(0, 1, 0, 0);
@@ -61,14 +85,26 @@ abstract Mat4(Array<glm.Vec4>) {
 		return cast this;
 	}
 
+	/**
+	 * Provides array access in the form of `mat[i]` where `i ∈ [0, 1, 2, 3]`
+	 * @return a `Vec4` representing the `i`th row
+	 */
 	@:arrayAccess public inline function arrayGet(i:Int):Vec4 {
 		return this[i];
 	}
 
+	/**
+	 * Provides array access in the form of `mat[i] = x` where `i ∈ [0, 1, 2, 3]`
+	 * @return a `Vec4` representing the `i`th row (which has been set)
+	 */
 	@:arrayAccess public inline function arraySet(i:Int, x:Vec4):Vec4 {
 		return this[i] = x;
 	}
 
+	/**
+	 * Flattens `this` into [Row-major](https://en.wikipedia.org/wiki/Row-major_order) order
+	 * @return An array of floats that can be passed to OpenGL
+	 */
 	public function toArray():Array<Float> {
 		return this[0].toArray().concat(
 			this[1].toArray().concat(
@@ -93,6 +129,9 @@ abstract Mat4(Array<glm.Vec4>) {
 		);
 	}
 
+	/**
+	 * Allows multiplying matrices and vectors
+	 */
 	@:op(A * B)
 	public static inline function multiplyVec4Op(a:Mat4, b:Vec4):Vec4 {
 		return a.multVec4(b);
@@ -114,6 +153,9 @@ abstract Mat4(Array<glm.Vec4>) {
 		return cast this;
 	}
 
+	/**
+	 * Allows multiplying two matrices
+	 */
 	@:op(A * B)
 	public static inline function multiplyMat4Op(a:Mat4, b:Mat4):Mat4 {
 		return a.multMat4(b);

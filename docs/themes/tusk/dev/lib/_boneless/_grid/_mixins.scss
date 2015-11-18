@@ -1,0 +1,63 @@
+////
+/// @group grid
+/// @author Seth Coelen
+/// @access public
+////
+
+
+/// Column mixin
+/// @name gen-cols
+/// @arg {number} $total-columns - total number of columns in grid
+/// @arg {string} $name - name of grid
+/// @example scss
+///   @include gen-cols(12, small);
+///   @include gen-cols($total-columns: 12, $name: medium);
+/// @example scss Mixin usage
+///   @include($bp-grid-small) {
+///   	@include gen-cols($total-columns, $name: small);
+///   }
+
+@mixin gen-cols($total-columns, $name) {
+  @for $i from 1 through $total-columns {
+    .#{$name}-#{$i} {
+      width: _col-width($i, $total-columns);
+    }
+  }
+}
+
+
+/// Column offset/push/pull mixin
+/// @name gen-col-offsets
+/// @arg {number} $total-columns - total number of columns in grid
+/// @arg {string} $prefix - class prefix for offset
+/// @arg {string} $name - name of grid
+/// @example scss Basic mixin usage
+///   @include gen-col-offsets(12, small, offset);
+///   @include gen-cols($total-columns: 12, $name: medium, $prefix: push);
+/// @example scss Realworld mixin usage
+///   @include($bp-grid-medium) {
+///   	// Generate Columns
+///     @include gen-cols($total-columns, $name: medium);
+///
+///   	// Generate Column offsets, pushes and pulls
+///     @include gen-col-offsets($total-columns, $name: medium, $prefix: offset);
+///     @include gen-col-offsets($total-columns, $name: medium, $prefix: push);
+///     @include gen-col-offsets($total-columns, $name: medium, $prefix: pull);
+///   }
+@mixin gen-col-offsets($total-columns, $name, $prefix) {
+  @for $i from 1 through $total-columns {
+    .#{$name}-#{$prefix}-#{$i} {
+      @if $prefix == offset {
+        margin-left: _col-width($i, $total-columns);
+      } @else if $prefix == pull {
+        position: relative;
+        right: _col-width($i, $total-columns);
+        left: auto;
+      } @else if $prefix == push {
+        position: relative;
+        right: auto;
+        left: _col-width($i, $total-columns);
+      }
+    }
+  }
+}

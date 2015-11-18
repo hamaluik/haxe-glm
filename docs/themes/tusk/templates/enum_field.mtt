@@ -1,0 +1,9 @@
+<div class="field-signature">
+	<code><a name="::ctor.name::" href="#::ctor.name::"><span class="identifier">::ctor.name::</span></a>
+	::if ctor.args != null::
+		(::foreach arg ctor.args::::arg.name:::$$printLinkedType(::arg.t::)::if !repeat.arg.last::, ::end::::end::)
+	::end::</code>
+	::if ctor.doc != null::
+		::raw ctor.doc::
+	::end::
+</div>

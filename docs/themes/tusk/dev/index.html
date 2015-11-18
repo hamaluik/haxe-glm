@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>tŭsk API</title>
+	<meta name="description" content="Boneless is a Sass framework built upon Skeleton css."/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"/>
+	<link rel="stylesheet" href="tusk.css"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+	<link rel="icon" type="image/png" href="images/favicon.ico" />
+</head>
+<body>
+	<nav>
+		<h1>tŭsk</h1>
+		<ul>
+			<li><a href="#" class="nav-toggle"><i class="fa fa-chevron-right"></i> events</a>
+				<ul>
+					<li><a href="#">DestroyEvent</a></li>
+					<li><a href="#">EventHandler</a></li>
+					<li><a href="#">EventType</a></li>
+					<li><a href="#">StartEvent</a></li>
+					<li><a href="#">UpdateEvent</a></li>
+				</ul>
+			</li>
+			<li><a href="#" class="nav-toggle"><i class="fa fa-chevron-right"></i> macros</a>
+				<ul>
+					<li><a href="#">GameEvents</a></li>
+				</ul>
+			</li>
+			<li><a href="#" class="active">EventRouter</a></li>
+			<li><a href="#">Exception</a></li>
+			<li><a href="#">Game</a></li>
+			<li><a href="#">Log</a></li>
+			<li><a href="#">LogFunctions</a></li>
+		</ul>
+	</nav>
+	<header>
+		<p>package tusk.events</p>
+		<h2>class</h2> <h1>EventRouter</h1>
+	</header>
+	<main>
+		<h2>Constructor</h2>
+		<code>new()</code>
+
+		<h2>Methods</h2>
+
+		<code><a href="#"><span class="identifier">onEvent</span></a>&lt;<span class="type">T</span>&gt; (type:<a class="type" title="The types of events that can be hooked into." href="#">EventType</a>, ?data:<span class="type">T</span>):<span class="type">Void</span></code>
+		<p>Calling this function will fire events to all connected listeners</p>
+		<h3>Parameters</h3>
+		<dl>
+			<dt>type</dt><dd>what type of event to register the handler for</dd>
+			<dt>data</dt><dd>an Events typedef containing event information</dd>
+		</dl>
+
+		<code><a href="#registerHandler"><span class="identifier">registerHandler</span></a> (type:<a class="type" title="The types of events that can be hooked into." href="#">EventType</a>, handler:<a class="type" title="A callback function which responds to events." href="#">EventHandler</a>):<span class="type">Void</span></code>
+		<p>Use this function to start listening to events</p>
+		<h3>Parameters</h3>
+		<dl>
+			<dt>type</dt><dd>what type of event to register the handler for</dd>
+			<dt>data</dt><dd>an Events typedef containing event information</dd>
+		</dl>
+
+		<code><a href="#unregisterHandler"><span class="identifier">unregisterHandler</span></a> (type:<a class="type" title="The types of events that can be hooked into." href="#">EventType</a>, handler:<a class="type" title="A callback function which responds to events." href="#">EventHandler</a>):<span class="type">Void</span></code>
+		<p>Use this function to stop listening to events</p>
+		<h3>Parameters</h3>
+		<dl>
+			<dt>type</dt><dd>what type of event to register the handler for</dd>
+			<dt>data</dt><dd>an Events typedef containing event information</dd>
+		</dl>
+	</main>
+	<footer>
+		<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br/><a href="http://hamaluik.com">Kenton Hamaluik</a>
+	</footer>
+	<script>
+		(function (window, document) {
+			// toggles for the navigation
+			var navToggles = document.getElementsByClassName("nav-toggle");
+			for (var i = 0; i < navToggles.length; i++) {
+				var uls = navToggles[i].parentElement.getElementsByTagName("ul");
+				for (var n = 0; n < uls.length; n++) {
+					uls[n].style.display = 'none';
+				};
+				navToggles[i].addEventListener("click", function() {
+					var ul = this.parentElement.getElementsByTagName("ul")[0];
+					var icon = this.parentElement.getElementsByTagName("i")[0];
+					ul.style.display = ul.style.display == 'none' ? 'block' : 'none';
+					icon.className = ul.style.display == 'none' ? 'fa fa-chevron-right' : 'fa fa-chevron-down';
+				});
+			};
+		})(this, this.document);
+	</script>
+</body>
+</html>

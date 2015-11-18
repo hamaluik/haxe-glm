@@ -1,0 +1,23 @@
+// Breakpoint mixin
+
+/// Used to create @media rules
+/// @name bp
+/// @arg {string} $breakpoint-name - name of breakpoint variable
+/// @access public
+/// @author Benjamin Hinchley
+/// @group utility
+/// @todo This needs a lot of work to make it more robust
+///
+/// @example scss breakpoint mixin usage
+///   .thing {
+///     color: #f00;
+///     @include bp($bp-large) {
+///       color: #0f0;
+///     }
+///   }
+
+@mixin bp($breakpoint-name) {
+  @media #{$breakpoint-name} {
+    @content;
+  }
+}
