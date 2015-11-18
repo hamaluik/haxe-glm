@@ -1,2 +1,4 @@
 test.each.hxml
+-D coverage
+--macro Coverage.include('TestMain', ['glm.Mat4'])
 --interp

@@ -1,10 +1,40 @@
 package ;
 
-import buddy.*;
-using buddy.Should;
 import glm.*;
 
-class TestMain implements Buddy<[
-	TestVec3, TestVec4,
-	TestMat4
-]>{}
+class TestMain {
+	public static function main() {
+		#if coverage
+		TestMain.initCoverage();
+		#end
+
+		var reporter = new buddy.reporting.ConsoleReporter();
+		var runner = new buddy.SuitesRunner([
+			new TestVec3(),
+			new TestVec4(),
+			new TestMat4()
+		], reporter);
+
+		runner.run();
+
+		#if coverage
+		// calculate the coverage
+		var coverage:Float = Coverage.calculatePercent();
+		var severity:String = 
+			if(coverage == 100) 'brightgreen';
+			else if(coverage >= 75) 'green';
+			else if(coverage >= 50) 'yellow';
+			else if(coverage >= 25) 'orange';
+			else 'red';
+
+		// report!
+		Sys.println('Testing coverage: ${coverage}%');
+
+		// update the README
+		var readme:String = sys.io.File.getContent('README.md');
+		var r:EReg = ~/https:\/\/img\.shields\.io\/badge\/coverage-([0-9]+)%25-([a-z]+)\.svg/g;
+		readme = r.replace(readme, 'https://img.shields.io/badge/coverage-${coverage}%25-${severity}.svg');
+		sys.io.File.saveContent('README.md', readme);
+		#end
+	}
+}
