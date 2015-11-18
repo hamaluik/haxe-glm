@@ -17,21 +17,53 @@ matrix:
   allow_failures:
     - haxe: development
 
-#before_install:
-#  - haxelib git snow https://github.com/underscorediscovery/snow.git
+addons:
+  # This is the preferred way to install apt packages.
+  # However, it only allow some but not all packages.
+  # Alternatively, we can use `sudo apt-get install ...` in the `install:` section.
+  # http://docs.travis-ci.com/user/apt/#Adding-APT-Packages
+  apt:
+    packages:
+      # Python
+      - python3
+      # PHP
+      - php5-cli
+      # C#
+      - mono-devel
+      - mono-mcs
+      # Flash
+      - libgd2-xpm
+      - ia32-libs
+      - ia32-libs-multiarch
 
 install:
   # os-specific config
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
       export DISPLAY=:99.0;
       export AUDIODEV=null;
+    elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+      brew update;
+      brew install mono;
+      brew install phantomjs;
+      brew install python3;
     fi
+  # Download and setup a standalone flash player debugger
+  - haxe flash/install.hxml
   # Install haxelibs
   - haxelib install hxcpp
+  - haxelib install hxjava
+  - haxelib install hxcs
   - haxelib install buddy
   - haxelib list
 
 script:
-  - haxe test.interp.hxml
-  - haxe test.node.hxml         && node bin/TestMain.node.js
-  - haxe test.cpp.hxml          && ./bin/TestMain
+  - haxe build-interp.hxml
+  - haxe build-neko.hxml         && neko bin/TestMain.n
+  - haxe build-js.hxml           && node bin/TestMain.js
+                                 && haxe phantomjs/run.hxml bin/TestMain.js
+  - haxe build-java.hxml         && java -jar bin/TestMain.jar
+  - haxe build-php.hxml          && php bin/index.php
+  - haxe build-cs.hxml           && mono bin/bin/TestMain.exe
+  - haxe build-flash.hxml -D fdb && haxe flash/run.hxml bin/TestMain.swf
+  - haxe build-cpp.hxml          && ./bin/TestMain
+  - haxe build-python.hxml       && python3 bin/TestMain.py
