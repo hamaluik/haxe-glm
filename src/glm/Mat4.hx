@@ -5,27 +5,35 @@ package glm;
  */
 abstract Mat4(Array<glm.Vec4>) {
 	public function new(scale:Float = 1) {
-		this = [
+		var arr:Array<glm.Vec4> = [
 			new Vec4(scale, 0, 0, 0),
 			new Vec4(0, scale, 0, 0),
 			new Vec4(0, 0, scale, 0),
 			new Vec4(0, 0, 0, scale)
 		];
+		this = arr;
+		return cast this;
 	}
 
-	inline public function fromColArray(cols:Array<Vec4>):Mat4 {
-		if(cols.length != 4) {
+	public static function fromRowArray(rows:Array<Vec4>):Mat4 {
+		if(rows.length != 4) {
 			throw "You must supply 4 Vec4s to build a Mat4 this way!";
 		}
-		this = cols;
-		return cast this;
+		var m:Mat4 = new Mat4();
+		m[0] = rows[0];
+		m[1] = rows[1];
+		m[2] = rows[2];
+		m[3] = rows[3];
+		return m;
 	}
 
-	inline public function fromCols(a:Vec4, b:Vec4, c:Vec4, d:Vec4):Mat4 {
-		this = [
-			a, b, c, d
-		];
-		return cast this;
+	public static function fromRows(a:Vec4, b:Vec4, c:Vec4, d:Vec4):Mat4 {
+		var m:Mat4 = new Mat4();
+		m[0] = a;
+		m[1] = b;
+		m[2] = c;
+		m[3] = d;
+		return m;
 	}
 
 	public function zero():Mat4 {
@@ -78,10 +86,10 @@ abstract Mat4(Array<glm.Vec4>) {
 	 */
 	public function multVec4(b:Vec4):Vec4 {
 		return new Vec4(
-			this[0][0] * b[0] + this[1][0] * b[1] + this[2][0] * b[2] + this[3][0] * b[3],
-			this[0][1] * b[0] + this[1][1] * b[1] + this[2][1] * b[2] + this[3][1] * b[3],
-			this[0][2] * b[0] + this[1][2] * b[1] + this[2][2] * b[2] + this[3][2] * b[3],
-			this[0][3] * b[0] + this[1][3] * b[1] + this[2][3] * b[2] + this[3][3] * b[3]
+			this[0][0] * b[0] + this[0][1] * b[1] + this[0][2] * b[2] + this[0][3] * b[3],
+			this[1][0] * b[0] + this[1][1] * b[1] + this[1][2] * b[2] + this[1][3] * b[3],
+			this[2][0] * b[0] + this[2][1] * b[1] + this[2][2] * b[2] + this[2][3] * b[3],
+			this[3][0] * b[0] + this[3][1] * b[1] + this[3][2] * b[2] + this[3][3] * b[3]
 		);
 	}
 
@@ -96,13 +104,13 @@ abstract Mat4(Array<glm.Vec4>) {
 	 * @return   `this` ✕ `b`
 	 */
 	public inline function multMat4(b:Mat4):Mat4 {
-		var cols:Array<Vec4> = [
-			this[0][0] * b[0] + this[1][0] * b[1] + this[2][0] * b[2] + this[3][0] * b[3],
-			this[0][1] * b[0] + this[1][1] * b[1] + this[2][1] * b[2] + this[3][1] * b[3],
-			this[0][2] * b[0] + this[1][2] * b[1] + this[2][2] * b[2] + this[3][2] * b[3],
-			this[0][3] * b[0] + this[1][3] * b[1] + this[2][3] * b[2] + this[3][3] * b[3]
+		var rows:Array<Vec4> = [
+			this[0][0] * b[0] + this[0][1] * b[1] + this[0][2] * b[2] + this[0][3] * b[3],
+			this[1][0] * b[0] + this[1][1] * b[1] + this[1][2] * b[2] + this[1][3] * b[3],
+			this[2][0] * b[0] + this[2][1] * b[1] + this[2][2] * b[2] + this[2][3] * b[3],
+			this[3][0] * b[0] + this[3][1] * b[1] + this[3][2] * b[2] + this[3][3] * b[3]
 		];
-		this = cols;
+		this = rows;
 		return cast this;
 	}
 
