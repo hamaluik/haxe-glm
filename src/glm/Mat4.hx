@@ -4,7 +4,7 @@ package glm;
  * Utility class for dealing with 4x4 matrices
  */
 abstract Mat4(Array<glm.Vec4>) {
-	public function new(scale:Float = 1) {
+	public function new(scale:Float = 0) {
 		var arr:Array<glm.Vec4> = [
 			new Vec4(scale, 0, 0, 0),
 			new Vec4(0, scale, 0, 0),
