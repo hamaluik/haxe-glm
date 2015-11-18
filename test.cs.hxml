@@ -1,2 +1,3 @@
 test.each.hxml
 -cs bin
+-cmd mono bin/bin/TestMain.exe

@@ -66,6 +66,32 @@ class TestMat4 extends BuddySuite {
 					}
 				}
 			});
+			it('should flatten into row-major order', {
+				ma = Mat4.fromRows(
+					new Vec4(1, 2, 3, 4),
+					new Vec4(5, 6, 7, 8),
+					new Vec4(9, 10, 11, 12),
+					new Vec4(13, 14, 15, 16)
+				);
+				var actual:Array<Float> = ma.toArrayRowMajor();
+				var expected:Array<Float> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+				for(i in 0...16) {
+					actual[i].should.beCloseTo(expected[i]);
+				}
+			});
+			it('should flatten into column-major order', {
+				ma = Mat4.fromRows(
+					new Vec4(1, 2, 3, 4),
+					new Vec4(5, 6, 7, 8),
+					new Vec4(9, 10, 11, 12),
+					new Vec4(13, 14, 15, 16)
+				);
+				var actual:Array<Float> = ma.toArrayColMajor();
+				var expected:Array<Float> = [1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15, 4, 8, 12, 16];
+				for(i in 0...16) {
+					actual[i].should.beCloseTo(expected[i]);
+				}
+			});
 			it('should be serializable', {
 				ma = Mat4.fromRowArray([
 					new Vec4(1, 2, 3, 4),

@@ -103,9 +103,8 @@ abstract Mat4(Array<glm.Vec4>) {
 
 	/**
 	 * Flattens `this` into [Row-major](https://en.wikipedia.org/wiki/Row-major_order) order
-	 * @return An array of floats that can be passed to OpenGL
 	 */
-	public function toArray():Array<Float> {
+	public function toArrayRowMajor():Array<Float> {
 		return this[0].toArray().concat(
 			this[1].toArray().concat(
 				this[2].toArray().concat(
@@ -113,6 +112,19 @@ abstract Mat4(Array<glm.Vec4>) {
 				)
 			)
 		);
+	}
+
+	/**
+	 * Flattens `this` into [Column-major](https://en.wikipedia.org/wiki/Column-major_order) order
+	 */
+	public function toArrayColMajor():Array<Float> {
+		var ret:Array<Float> = new Array<Float>();
+		for(j in 0...4) {
+			for(i in 0...4) {
+				ret.push(this[i][j]);
+			}
+		}
+		return ret;
 	}
 
 	/**

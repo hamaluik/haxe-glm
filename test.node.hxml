@@ -1,0 +1,4 @@
+test.each.hxml
+-D nodejs
+-js bin/TestMain.node.js
+-cmd node bin/TestMain.node.js
