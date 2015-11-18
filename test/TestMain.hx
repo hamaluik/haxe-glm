@@ -12,7 +12,8 @@ class TestMain {
 		var runner = new buddy.SuitesRunner([
 			new TestVec3(),
 			new TestVec4(),
-			new TestMat4()
+			new TestMat4(),
+			new TestGLM()
 		], reporter);
 
 		runner.run();
