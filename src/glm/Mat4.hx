@@ -223,6 +223,59 @@ abstract Mat4(Array<glm.Vec4>) {
 	 * @return The inverse of `this`
 	 */
 	public inline function invert():Mat4 {
+		var det:Float = determinant();
+		if(det == 0) {
+			return null;
+		}
+		det = 1.0 / det;
+
+		var t00:Float = this[0][0];
+		var t01:Float = this[0][1];
+		var t02:Float = this[0][2];
+		var t03:Float = this[0][3];
+		var t10:Float = this[1][0];
+		var t11:Float = this[1][1];
+		var t12:Float = this[1][2];
+		var t13:Float = this[1][3];
+		var t20:Float = this[2][0];
+		var t21:Float = this[2][1];
+		var t22:Float = this[2][2];
+		var t23:Float = this[2][3];
+		var t30:Float = this[3][0];
+		var t31:Float = this[3][1];
+		var t32:Float = this[3][2];
+		var t33:Float = this[3][3];
+
+		var b00 = t00 * t11 - t01 * t10;
+		var b01 = t00 * t12 - t02 * t10;
+		var b02 = t00 * t13 - t03 * t10;
+		var b03 = t01 * t12 - t02 * t11;
+		var b04 = t01 * t13 - t03 * t11;
+		var b05 = t02 * t13 - t03 * t12;
+		var b06 = t20 * t31 - t21 * t30;
+		var b07 = t20 * t32 - t22 * t30;
+		var b08 = t20 * t33 - t23 * t30;
+		var b09 = t21 * t32 - t22 * t31;
+		var b10 = t21 * t33 - t23 * t31;
+		var b11 = t22 * t33 - t23 * t32;
+
+		this[0][0] = (t11 * b11 - t12 * b10 + t13 * b09) * det;
+		this[0][1] = (t02 * b10 - t01 * b11 - t03 * b09) * det;
+		this[0][2] = (t31 * b05 - t32 * b04 + t33 * b03) * det;
+		this[0][3] = (t22 * b04 - t21 * b05 - t23 * b03) * det;
+		this[1][0] = (t12 * b08 - t10 * b11 - t13 * b07) * det;
+		this[1][1] = (t00 * b11 - t02 * b08 + t03 * b07) * det;
+		this[1][2] = (t32 * b02 - t30 * b05 - t33 * b01) * det;
+		this[1][3] = (t20 * b05 - t22 * b02 + t23 * b01) * det;
+		this[2][0] = (t10 * b10 - t11 * b08 + t13 * b06) * det;
+		this[2][1] = (t01 * b08 - t00 * b10 - t03 * b06) * det;
+		this[2][2] = (t30 * b04 - t31 * b02 + t33 * b00) * det;
+		this[2][3] = (t21 * b02 - t20 * b04 - t23 * b00) * det;
+		this[3][0] = (t11 * b07 - t10 * b09 - t12 * b06) * det;
+		this[3][1] = (t00 * b09 - t01 * b07 + t02 * b06) * det;
+		this[3][2] = (t31 * b01 - t30 * b03 - t32 * b00) * det;
+		this[3][3] = (t20 * b03 - t21 * b01 + t22 * b00) * det;
+
 		return cast this;
 	}
 

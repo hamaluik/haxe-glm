@@ -182,6 +182,19 @@ abstract Mat2(Array<glm.Vec2>) {
 	 * @return The inverse of `this`
 	 */
 	public inline function invert():Mat2 {
+		var det:Float = determinant();
+		if(det == 0) {
+			return null;
+		}
+		det = 1.0 / det;
+
+		var t00:Float = this[0][0];
+
+		this[0][0] = this[1][1] * det;
+		this[0][1] *= -det;
+		this[1][0] *= -det;
+		this[1][1] = t00 * det;
+
 		return cast this;
 	}
 

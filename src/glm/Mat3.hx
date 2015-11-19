@@ -203,6 +203,32 @@ abstract Mat3(Array<glm.Vec3>) {
 	 * @return The inverse of `this`
 	 */
 	public inline function invert():Mat3 {
+		var det:Float = determinant();
+		if(det == 0) {
+			return null;
+		}
+		det = 1.0 / det;
+
+		var t00:Float = this[0][0];
+		var t01:Float = this[0][1];
+		var t02:Float = this[0][2];
+		var t10:Float = this[1][0];
+		var t11:Float = this[1][1];
+		var t12:Float = this[1][2];
+		var t20:Float = this[2][0];
+		var t21:Float = this[2][1];
+		var t22:Float = this[2][2];
+
+		this[0][0] = (t22 * t11 - t12 * t21) * det;
+		this[0][1] = (-t22 * t01 + t02 * t21) * det;
+		this[0][2] = (t12 * t01 - t02 * t11) * det;
+		this[1][0] = (-t22 * t10 + t12 * t20) * det;
+		this[1][1] = (t22 * t00 - t02 * t20) * det;
+		this[1][2] = (-t12 * t00 + t02 * t10) * det;
+		this[2][0] = (t21 * t10 - t11 * t20) * det;
+		this[2][1] = (-t21 * t00 + t01 * t20) * det;
+		this[2][2] = (t11 * t00 - t01 * t10) * det;
+
 		return cast this;
 	}
 

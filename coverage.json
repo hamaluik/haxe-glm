@@ -20,7 +20,7 @@
 		"toArrayColMajor": 1,
 		"multiplyVec2Op": 1,
 		"fromRows": 10,
-		"determinant": 1,
+		"determinant": 2,
 		"identity": 1,
 		"_new": 28
 	},
@@ -41,7 +41,7 @@
 		"toArrayColMajor": 1,
 		"multiplyVec3Op": 1,
 		"fromRows": 10,
-		"determinant": 1,
+		"determinant": 2,
 		"identity": 1,
 		"_new": 28
 	},
@@ -63,7 +63,7 @@
 		"multiplyVec4Op": 5,
 		"fromQuat": 0,
 		"fromRows": 10,
-		"determinant": 1,
+		"determinant": 2,
 		"identity": 1,
 		"_new": 33
 	},
@@ -75,8 +75,8 @@
 		"sqrLength": 3,
 		"subtractScalar": 1,
 		"divideScalar": 2,
-		"arrayGet": 110,
-		"arraySet": 45,
+		"arrayGet": 118,
+		"arraySet": 49,
 		"toArray": 3,
 		"subtractVec2": 1,
 		"addScalar": 3,
