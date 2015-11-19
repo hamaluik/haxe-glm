@@ -92,6 +92,12 @@ class TestVec2 extends BuddySuite {
 					res[i].should.beCloseTo(v[i]);
 				}
 			});
+			it('should calculate the dot product of two vectors', {
+				v.set(1, 2);
+				var b:Vec2 = v.clone();
+				var d:Float = Vec2.dot(v, b);
+				d.should.beCloseTo(5);
+			});
 			it('should be upgradeable to a Vec3', {
 				v.set(1, 2);
 				var b:Vec3 = v.toVec3();

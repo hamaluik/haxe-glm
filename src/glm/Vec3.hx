@@ -351,4 +351,23 @@ abstract Vec3(Array<Float>) {
 	public inline function toVec4():Vec4 {
 		return new Vec4(x, y, z, 0);
 	}
+
+	/**
+	 * Calculates the dot product between two Vec3s
+	 */
+	public static inline function dot(a:Vec3, b:Vec3):Float {
+		return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
+	}
+
+	/**
+	 * Calculates the cross product between two Vec3s
+	 * @return   `a ✕ b`
+	 */
+	public static inline function cross(a:Vec3, b:Vec3):Vec3 {
+		return new Vec3(
+			a.y * b.z - b.y * a.z,
+			a.z * b.x - b.z * a.x,
+			a.x * b.y - b.x * a.y
+		);
+	}
 }

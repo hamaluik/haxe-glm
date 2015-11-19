@@ -387,4 +387,11 @@ abstract Vec4(Array<Float>) {
 	public inline function toArray():Array<Float> {
 		return this;
 	}
+
+	/**
+	 * Calculates the dot product between two Vec4s
+	 */
+	public static inline function dot(a:Vec4, b:Vec4):Float {
+		return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3]);
+	}
 }

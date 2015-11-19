@@ -130,6 +130,12 @@ class TestVec4 extends BuddySuite {
 					res[i].should.beCloseTo(v[i]);
 				}
 			});
+			it('should calculate the dot product of two vectors', {
+				v.set(1, 2, 3, 4);
+				var b:Vec4 = v.clone();
+				var d:Float = Vec4.dot(v, b);
+				d.should.beCloseTo(30);
+			});
 			it('should be serializable', {
 				v.set(1, 2, 3, 4);
 

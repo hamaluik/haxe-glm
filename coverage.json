@@ -55,14 +55,14 @@
 	},
 	"glm.Vec2": {
 		"multiplyScalar": 7,
-		"clone": 18,
+		"clone": 19,
 		"addVec2Op": 3,
 		"zero": 5,
 		"sqrLength": 3,
 		"subtractScalar": 1,
 		"divideScalar": 2,
-		"arrayGet": 84,
-		"arraySet": 37,
+		"arrayGet": 88,
+		"arraySet": 39,
 		"toArray": 3,
 		"subtractVec2": 1,
 		"addScalar": 3,
@@ -72,7 +72,8 @@
 		"set_x": 1,
 		"set_y": 1,
 		"divideScalarOp": 2,
-		"set": 10,
+		"dot": 1,
+		"set": 11,
 		"toVec3": 1,
 		"toVec4": 1,
 		"addVec2": 3,
@@ -88,6 +89,6 @@
 		"normalize": 2,
 		"addScalarOp": 1,
 		"subtractVec2Op": 1,
-		"_new": 84
+		"_new": 86
 	}
 }
