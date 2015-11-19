@@ -210,7 +210,19 @@ abstract Mat4(Array<glm.Vec4>) {
 	 * Calculates the determinant of `this`
 	 */
 	public inline function determinant():Float {
-		return 0;
+		var b00:Float = this[0][0] * this[1][1] - this[0][1] * this[1][0];
+		var b01:Float = this[0][0] * this[1][2] - this[0][2] * this[1][0];
+		var b02:Float = this[0][0] * this[1][3] - this[0][3] * this[1][0];
+		var b03:Float = this[0][1] * this[1][2] - this[0][2] * this[1][1];
+		var b04:Float = this[0][1] * this[1][3] - this[0][3] * this[1][1];
+		var b05:Float = this[0][2] * this[1][3] - this[0][3] * this[1][2];
+		var b06:Float = this[2][0] * this[3][1] - this[2][1] * this[3][0];
+		var b07:Float = this[2][0] * this[3][2] - this[2][2] * this[3][0];
+		var b08:Float = this[2][0] * this[3][3] - this[2][3] * this[3][0];
+		var b09:Float = this[2][1] * this[3][2] - this[2][2] * this[3][1];
+		var b10:Float = this[2][1] * this[3][3] - this[2][3] * this[3][1];
+		var b11:Float = this[2][2] * this[3][3] - this[2][3] * this[3][2];
+		return b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
 	}
 
 	/**
