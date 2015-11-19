@@ -53,12 +53,21 @@ abstract Mat4(Array<glm.Vec4>) {
 	 * Makes every element in `this` `=0`
 	 * @return `this`
 	 */
-	public function zero():Mat4 {
+	public function setZero():Mat4 {
 		this[0].zero();
 		this[1].zero();
 		this[2].zero();
 		this[3].zero();
 		return cast this;
+	}
+
+	/**
+	 * Spawns a new mat4 where all elements = 0
+	 */
+	public static function zero():Mat4 {
+		var m:Mat4 = new Mat4();
+		m.setZero();
+		return m;
 	}
 
 	/**
@@ -77,12 +86,21 @@ abstract Mat4(Array<glm.Vec4>) {
 	 * Makes `this` and identity matrix
 	 * @return `this`
 	 */
-	public function identity():Mat4 {
+	public function setIdentity():Mat4 {
 		this[0].set(1, 0, 0, 0);
 		this[1].set(0, 1, 0, 0);
 		this[2].set(0, 0, 1, 0);
 		this[3].set(0, 0, 0, 1);
 		return cast this;
+	}
+
+	/**
+	 * Spawns a new mat4 representing an identity matrix
+	 */
+	public static function identity():Mat4 {
+		var m:Mat4 = new Mat4();
+		m.setIdentity();
+		return m;
 	}
 
 	/**

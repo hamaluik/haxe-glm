@@ -370,4 +370,20 @@ abstract Vec3(Array<Float>) {
 			a.x * b.y - b.x * a.y
 		);
 	}
+
+	/**
+	 * Converts from Vec2s to Vec3s using standard casting
+	 */
+	@:from
+	public static inline function fromVec2(v:Vec2):Vec3 {
+		return new Vec3(v.x, v.y, 0);
+	}
+
+	/**
+	 * Converts from Vec4s to Vec3s using standard casting
+	 */
+	@:from
+	public static inline function fromVec4(v:Vec4):Vec3 {
+		return new Vec3(v.x, v.y, v.z);
+	}
 }

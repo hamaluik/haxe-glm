@@ -98,20 +98,17 @@ class TestVec2 extends BuddySuite {
 				var d:Float = Vec2.dot(v, b);
 				d.should.beCloseTo(5);
 			});
-			it('should be upgradeable to a Vec3', {
-				v.set(1, 2);
-				var b:Vec3 = v.toVec3();
-				b.x.should.be(1);
-				b.y.should.be(2);
-				b.z.should.be(0);
-			});
-			it('should be upgradeable to a Vec4', {
-				v.set(1, 2);
-				var b:Vec4 = v.toVec4();
-				b.x.should.be(1);
-				b.y.should.be(2);
-				b.z.should.be(0);
-				b.w.should.be(0);
+			it('should cast itself from Vec3s and Vec4s', {
+				var v3:Vec3 = new Vec3(1, 2, 3);
+				var v4:Vec4 = new Vec4(4, 5, 6, 7);
+				
+				v = v3;
+				v.x.should.beCloseTo(1);
+				v.y.should.beCloseTo(2);
+				
+				v = v4;
+				v.x.should.beCloseTo(4);
+				v.y.should.beCloseTo(5);
 			});
 			it('should be serializable', {
 				v.set(1, 2);

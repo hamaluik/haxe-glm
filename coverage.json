@@ -1,57 +1,77 @@
 {
 	"glm.GLM": {
-		"perspective": 0,
-		"frustum": 0,
-		"infinitePerspective": 0,
-		"ortho": 0
+		"translate": 2,
+		"scale": 2
 	},
 	"glm.Mat2": {
 		"multiplyMat2Op": 1,
 		"clone": 1,
 		"zero": 1,
 		"toArrayRowMajor": 1,
+		"setIdentity": 1,
 		"fromRowArray": 1,
 		"arrayGet": 35,
 		"arraySet": 16,
 		"multMat2": 1,
 		"multVec2": 1,
+		"setZero": 1,
 		"toArrayColMajor": 1,
 		"multiplyVec2Op": 1,
 		"fromRows": 6,
 		"identity": 1,
-		"_new": 18
+		"_new": 20
 	},
 	"glm.Mat3": {
 		"multiplyMat3Op": 1,
 		"clone": 1,
 		"zero": 1,
 		"toArrayRowMajor": 1,
+		"setIdentity": 1,
 		"fromRowArray": 1,
 		"arrayGet": 75,
 		"arraySet": 24,
 		"multMat3": 1,
 		"multVec3": 1,
+		"setZero": 1,
 		"toArrayColMajor": 1,
 		"multiplyVec3Op": 1,
 		"fromRows": 6,
 		"identity": 1,
-		"_new": 18
+		"_new": 20
 	},
 	"glm.Mat4": {
 		"multiplyMat4Op": 1,
 		"clone": 1,
 		"zero": 1,
 		"toArrayRowMajor": 1,
+		"setIdentity": 1,
 		"fromRowArray": 1,
-		"arrayGet": 131,
+		"arrayGet": 143,
 		"arraySet": 32,
 		"multMat4": 1,
-		"multVec4": 1,
+		"multVec4": 5,
+		"setZero": 1,
 		"toArrayColMajor": 1,
-		"multiplyVec4Op": 1,
+		"multiplyVec4Op": 5,
 		"fromRows": 6,
 		"identity": 1,
-		"_new": 18
+		"_new": 24
+	},
+	"glm.Quat": {
+		"clone": 0,
+		"arrayGet": 12,
+		"arraySet": 0,
+		"toArray": 1,
+		"set_w": 1,
+		"set_x": 1,
+		"set_y": 1,
+		"set_z": 1,
+		"set": 2,
+		"get_w": 1,
+		"get_x": 1,
+		"get_y": 1,
+		"get_z": 1,
+		"_new": 3
 	},
 	"glm.Vec2": {
 		"multiplyScalar": 7,
@@ -73,22 +93,28 @@
 		"set_y": 1,
 		"divideScalarOp": 2,
 		"dot": 1,
-		"set": 11,
-		"toVec3": 1,
-		"toVec4": 1,
+		"set": 9,
 		"addVec2": 3,
 		"get_s": 1,
 		"get_t": 1,
-		"get_x": 3,
-		"get_y": 3,
+		"get_x": 6,
+		"get_y": 6,
 		"multiplyScalarOp2": 5,
 		"subtractScalarOp": 1,
 		"length": 3,
 		"subtractScalarOp2": 1,
 		"multiplyScalarOp": 1,
 		"normalize": 2,
+		"fromVec3": 1,
+		"fromVec4": 1,
 		"addScalarOp": 1,
 		"subtractVec2Op": 1,
-		"_new": 86
+		"_new": 94
+	},
+	"glm.Projection": {
+		"perspective": 0,
+		"frustum": 0,
+		"infinitePerspective": 0,
+		"ortho": 0
 	}
 }

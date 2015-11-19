@@ -45,10 +45,19 @@ abstract Mat2(Array<glm.Vec2>) {
 	 * Makes every element in `this` `=0`
 	 * @return `this`
 	 */
-	public function zero():Mat2 {
+	public function setZero():Mat2 {
 		this[0].zero();
 		this[1].zero();
 		return cast this;
+	}
+
+	/**
+	 * Spawns a new mat2 where all elements = 0
+	 */
+	public static function zero():Mat2 {
+		var m:Mat2 = new Mat2();
+		m.setZero();
+		return m;
 	}
 
 	/**
@@ -65,10 +74,19 @@ abstract Mat2(Array<glm.Vec2>) {
 	 * Makes `this` and identity matrix
 	 * @return `this`
 	 */
-	public function identity():Mat2 {
+	public function setIdentity():Mat2 {
 		this[0].set(1, 0);
 		this[1].set(0, 1);
 		return cast this;
+	}
+
+	/**
+	 * Spawns a new mat3 representing an identity matrix
+	 */
+	public static function identity():Mat2 {
+		var m:Mat2 = new Mat2();
+		m.setIdentity();
+		return m;
 	}
 
 	/**

@@ -394,4 +394,20 @@ abstract Vec4(Array<Float>) {
 	public static inline function dot(a:Vec4, b:Vec4):Float {
 		return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3]);
 	}
+
+	/**
+	 * Converts from Vec2s to Vec4s using standard casting
+	 */
+	@:from
+	public static inline function fromVec2(v:Vec2):Vec4 {
+		return new Vec4(v.x, v.y, 0, 1);
+	}
+
+	/**
+	 * Converts from Vec3s to Vec4s using standard casting
+	 */
+	@:from
+	public static inline function fromVec3(v:Vec3):Vec4 {
+		return new Vec4(v.x, v.y, v.z, 1);
+	}
 }

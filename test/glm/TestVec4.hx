@@ -136,6 +136,22 @@ class TestVec4 extends BuddySuite {
 				var d:Float = Vec4.dot(v, b);
 				d.should.beCloseTo(30);
 			});
+			it('should cast itself from Vec2s and Vec3s', {
+				var v2:Vec2 = new Vec2(1, 2);
+				var v3:Vec3 = new Vec3(3, 4, 5);
+				
+				v = v2;
+				v.x.should.beCloseTo(1);
+				v.y.should.beCloseTo(2);
+				v.z.should.beCloseTo(0);
+				v.w.should.beCloseTo(1);
+				
+				v = v3;
+				v.x.should.beCloseTo(3);
+				v.y.should.beCloseTo(4);
+				v.z.should.beCloseTo(5);
+				v.w.should.beCloseTo(1);
+			});
 			it('should be serializable', {
 				v.set(1, 2, 3, 4);
 

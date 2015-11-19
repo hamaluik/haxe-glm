@@ -49,11 +49,20 @@ abstract Mat3(Array<glm.Vec3>) {
 	 * Makes every element in `this` `=0`
 	 * @return `this`
 	 */
-	public function zero():Mat3 {
+	public function setZero():Mat3 {
 		this[0].zero();
 		this[1].zero();
 		this[2].zero();
 		return cast this;
+	}
+
+	/**
+	 * Spawns a new mat3 where all elements = 0
+	 */
+	public static function zero():Mat3 {
+		var m:Mat3 = new Mat3();
+		m.setZero();
+		return m;
 	}
 
 	/**
@@ -71,11 +80,20 @@ abstract Mat3(Array<glm.Vec3>) {
 	 * Makes `this` and identity matrix
 	 * @return `this`
 	 */
-	public function identity():Mat3 {
+	public function setIdentity():Mat3 {
 		this[0].set(1, 0, 0);
 		this[1].set(0, 1, 0);
 		this[2].set(0, 0, 1);
 		return cast this;
+	}
+
+	/**
+	 * Spawns a new mat3 representing an identity matrix
+	 */
+	public static function identity():Mat3 {
+		var m:Mat3 = new Mat3();
+		m.setIdentity();
+		return m;
 	}
 
 	/**

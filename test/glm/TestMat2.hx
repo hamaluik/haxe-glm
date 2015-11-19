@@ -27,7 +27,7 @@ class TestMat2 extends BuddySuite {
 				mb[0][0].should.beCloseTo(1);
 			});
 			it('should be able to create a zero matrix', {
-				ma.zero();
+				ma = Mat2.zero();
 				for(i in 0...2) {
 					for(j in 0...2) {
 						ma[i][j].should.beCloseTo(0);
@@ -35,7 +35,7 @@ class TestMat2 extends BuddySuite {
 				}
 			});
 			it('should be able to create an identity matrix', {
-				ma.identity();
+				ma = Mat2.identity();
 				for(i in 0...2) {
 					for(j in 0...2) {
 						ma[i][j].should.beCloseTo(i == j ? 1 : 0);

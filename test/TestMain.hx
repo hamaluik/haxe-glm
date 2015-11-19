@@ -16,7 +16,9 @@ class TestMain {
 			new TestMat2(),
 			new TestMat3(),
 			new TestMat4(),
-			new TestGLM()
+			new TestQuat(),
+			new TestGLM(),
+			new TestProjection()
 		], reporter);
 
 		runner.run();
