@@ -1,7 +1,7 @@
 package glm;
 
 /**
- * Utility class for dealing with 4x4 matrices
+ * Utility class for dealing with 3x3 matrices
  */
 abstract Mat3(Array<glm.Vec3>) {
 	public function new(scale:Float = 0) {
