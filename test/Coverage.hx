@@ -5,6 +5,7 @@ import haxe.ds.StringMap;
 
 class Coverage {
 	macro public static function include(mainType:String, types:Array<String>) {
+		//trace(types);
 		for(type in types) {
 			Compiler.addMetadata("@:build(Coverage.index())", type);
 
@@ -20,7 +21,7 @@ class Coverage {
 	private static var specifiers:Array<String> = new Array<String>();
 
 	macro public static function index():Array<Field> {
-		trace('Indexing ' + Context.getLocalModule() + '...');
+		//trace('Indexing ' + Context.getLocalModule() + '...');
 
 		// loop through all the fields
 		var fields:Array<Field> = Context.getBuildFields();
@@ -93,5 +94,27 @@ class Coverage {
 		}
 
 		return Math.floor(100 * called / total);
+	}
+
+	public static function toJson():String {
+		// dirty D:
+		var coverage:Dynamic = {};
+
+		for(specifier in calls.keys()) {
+			var count:Int = calls.get(specifier);
+			var parts:Array<String> = specifier.split('.');
+			var className:String = parts.slice(0, parts.length - 1).join('.');
+			var functionName:String = parts[parts.length - 1];
+
+			// ensure the class exists
+			if(!Reflect.hasField(coverage, className)) {
+				Reflect.setField(coverage, className, {});
+			}
+
+			// set the function
+			Reflect.setField(Reflect.field(coverage, className), functionName, count);
+		}
+
+		return haxe.Json.stringify(coverage, '\t');
 	}
 }

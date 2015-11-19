@@ -31,6 +31,11 @@ class TestMain {
 		// report!
 		Sys.println('Testing coverage: ${coverage}%');
 
+		// report the details as JSON!
+		var json:String = Coverage.toJson();
+		sys.io.File.saveContent('coverage.json', json);
+		Sys.println('Details saved in \'coverage.json\'');
+
 		// update the README
 		var readme:String = sys.io.File.getContent('README.md');
 		var r:EReg = ~/https:\/\/img\.shields\.io\/badge\/coverage-([0-9]+)%25-([a-z]+)\.svg/g;

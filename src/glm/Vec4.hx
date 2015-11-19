@@ -131,7 +131,7 @@ abstract Vec4(Array<Float>) {
 	 */
 	public var q(get, set):Float;
 	function get_q():Float {
-		return this[2];
+		return this[3];
 	}
 	function set_q(v:Float) {
 		return this[3] = v;
@@ -221,7 +221,7 @@ abstract Vec4(Array<Float>) {
 	 * @param  b The vector to add to `this`
 	 * @return   `this.x + b.x`, etc
 	 */
-	public function add(b:Vec4):Vec4 {
+	public function addVec4(b:Vec4):Vec4 {
 		this[0] += b[0];
 		this[1] += b[1];
 		this[2] += b[2];
@@ -234,7 +234,7 @@ abstract Vec4(Array<Float>) {
 	 */
 	@:op(A + B)
 	public static inline function addVec4Op(a:Vec4, b:Vec4):Vec4 {
-		return a.clone().add(b);
+		return a.clone().addVec4(b);
 	}
 
 	/**
@@ -242,12 +242,78 @@ abstract Vec4(Array<Float>) {
 	 * @param  b The vector to subtract from `this`
 	 * @return   `this.x - b.x`, etc
 	 */
-	public function subtract(b:Vec4):Vec4 {
+	public function subtractVec4(b:Vec4):Vec4 {
 		this[0] -= b[0];
 		this[1] -= b[1];
 		this[2] -= b[2];
 		this[3] -= b[3];
 		return cast this;
+	}
+
+	/**
+	 * Allows subtracting two vectors
+	 */
+	@:op(A - B)
+	public static inline function subtractVec4Op(a:Vec4, b:Vec4):Vec4 {
+		return a.clone().subtractVec4(b);
+	}
+
+	/**
+	 * Add a scalar to this
+	 * @param  b The scalar to add
+	 * @return   `b` added to `this`
+	 */
+	public function addScalar(b:Float):Vec4 {
+		this[0] += b;
+		this[1] += b;
+		this[2] += b;
+		this[3] += b;
+		return cast this;
+	}
+
+	/**
+	 * Allows adding by a scalar (`this + 4.2`)
+	 */
+	@:op(A + B)
+	public static inline function addScalarOp(a:Vec4, b:Float):Vec4 {
+		return a.clone().addScalar(b);
+	}
+
+	/**
+	 * Allows adding by a scalar (`4.2 + this`)
+	 */
+	@:op(A + B)
+	public static inline function addScalarOp2(b:Float, a:Vec4):Vec4 {
+		return a.clone().addScalar(b);
+	}
+
+	/**
+	 * Subtract a scalar from this
+	 * @param  b The scalar to subtract
+	 * @return   `b` subtracted from `this`
+	 */
+	public function subtractScalar(b:Float):Vec4 {
+		this[0] -= b;
+		this[1] -= b;
+		this[2] -= b;
+		this[3] -= b;
+		return cast this;
+	}
+
+	/**
+	 * Allows subtracting by a scalar (`this + 4.2`)
+	 */
+	@:op(A - B)
+	public static inline function subtractScalarOp(a:Vec4, b:Float):Vec4 {
+		return a.clone().subtractScalar(b);
+	}
+
+	/**
+	 * Allows subtracting by a scalar (`4.2 + this`)
+	 */
+	@:op(A - B)
+	public static inline function subtractScalarOp2(a:Float, b:Vec4):Vec4 {
+		return b.clone().multiplyScalar(-1).addScalar(a);
 	}
 
 	/**
@@ -264,7 +330,7 @@ abstract Vec4(Array<Float>) {
 	}
 
 	/**
-	 * Allows multiplying by a scalar (`this * 5.2`)
+	 * Allows multiplying by a scalar (`this * 4.2`)
 	 */
 	@:op(A * B)
 	public static inline function multiplyScalarOp(a:Vec4, b:Float):Vec4 {
@@ -272,11 +338,32 @@ abstract Vec4(Array<Float>) {
 	}
 
 	/**
-	 * Allows multiplying by a scalar (`5.2 * this`)
+	 * Allows multiplying by a scalar (`4.2 * this`)
 	 */
 	@:op(A * B)
 	public static inline function multiplyScalarOp2(b:Float, a:Vec4):Vec4 {
 		return a.clone().multiplyScalar(b);
+	}
+
+	/**
+	 * Dividy this by a scalar
+	 * @param  b The scalar to divide by
+	 * @return   `this`, divided by `b`
+	 */
+	public function divideScalar(b:Float):Vec4 {
+		this[0] /= b;
+		this[1] /= b;
+		this[2] /= b;
+		this[3] /= b;
+		return cast this;
+	}
+
+	/**
+	 * Allows dividing by a scalar (`this / 4.2`)
+	 */
+	@:op(A / B)
+	public static inline function divideScalarOp(a:Vec4, b:Float):Vec4 {
+		return a.clone().divideScalar(b);
 	}
 
 	/**

@@ -12,6 +12,22 @@ class TestMat4 extends BuddySuite {
 				ma = new Mat4();
 			});
 
+			it('should be able to clone itself', {
+				ma = Mat4.fromRows(
+					new Vec4(1, 2, 3, 4),
+					new Vec4(5, 6, 7, 8),
+					new Vec4(9, 10, 11, 12),
+					new Vec4(13, 14, 15, 16)
+				);
+				var mb:Mat4 = ma.clone();
+				for(i in 0...4) {
+					for(j in 0...4) {
+						mb[i][j].should.beCloseTo(ma[i][j]);
+					}
+				}
+				ma[0][0] = 7;
+				mb[0][0].should.beCloseTo(1);
+			});
 			it('should be able to create a zero matrix', {
 				ma.zero();
 				for(i in 0...4) {

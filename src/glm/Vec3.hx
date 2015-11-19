@@ -59,8 +59,7 @@ abstract Vec3(Array<Float>) {
 	function set_g(v:Float) {
 		return this[1] = v;
 	}
-
-
+	
 	/**
 	 * Utility accessor for the third element
 	 */
@@ -128,9 +127,9 @@ abstract Vec3(Array<Float>) {
 	 * @return `this`
 	 */
 	public function zero():Vec3 {
-		for(i in 0...3) {
-			this[i] = 0;
-		}
+		this[0] = 0;
+		this[1] = 0;
+		this[2] = 0;
 		return cast this;
 	}
 
@@ -173,19 +172,18 @@ abstract Vec3(Array<Float>) {
 	 */
 	public function clone():Vec3 {
 		var copy:Vec3 = new Vec3();
-		for(i in 0...3) {
-			copy[i] = this[i];
-		}
+		copy[0] = this[0];
+		copy[1] = this[1];
+		copy[2] = this[2];
 		return copy;
 	}
-
 
 	/**
 	 * Element-based addition
 	 * @param  b The vector to add to `this`
 	 * @return   `this.x + b.x`, etc
 	 */
-	public function add(b:Vec3):Vec3 {
+	public function addVec3(b:Vec3):Vec3 {
 		this[0] += b[0];
 		this[1] += b[1];
 		this[2] += b[2];
@@ -193,11 +191,19 @@ abstract Vec3(Array<Float>) {
 	}
 
 	/**
+	 * Allows adding two vectors together
+	 */
+	@:op(A + B)
+	public static inline function addVec3Op(a:Vec3, b:Vec3):Vec3 {
+		return a.clone().addVec3(b);
+	}
+
+	/**
 	 * Element-based subtraction
 	 * @param  b The vector to subtract from `this`
 	 * @return   `this.x - b.x`, etc
 	 */
-	public function subtract(b:Vec3):Vec3 {
+	public function subtractVec3(b:Vec3):Vec3 {
 		this[0] -= b[0];
 		this[1] -= b[1];
 		this[2] -= b[2];
@@ -205,49 +211,144 @@ abstract Vec3(Array<Float>) {
 	}
 
 	/**
-	 * Calculates the cross product of `this` and `b`
-	 * @param  b the input vector
-	 * @return   `this` ✕ `b` <= this
+	 * Allows subtracting two vectors
 	 */
-	public function cross(b:Vec3):Vec3 {
-		// cache ourself
-		var x:Float = this[0];
-		var y:Float = this[1];
-		var z:Float = this[2];
+	@:op(A - B)
+	public static inline function subtractVec3Op(a:Vec3, b:Vec3):Vec3 {
+		return a.clone().subtractVec3(b);
+	}
 
-		this[0] = (y * b[2]) - (z * b[1]);
-		this[1] = (z * b[0]) - (x * b[2]);
-		this[2] = (x * b[1]) - (y * b[0]);
-
+	/**
+	 * Add a scalar to this
+	 * @param  b The scalar to add
+	 * @return   `b` added to `this`
+	 */
+	public function addScalar(b:Float):Vec3 {
+		this[0] += b;
+		this[1] += b;
+		this[2] += b;
 		return cast this;
 	}
 
 	/**
-	 * Calculates the dot product
-	 * @param  b the vector to dot with
-	 * @return   `this · b`
+	 * Allows adding by a scalar (`this + 4.2`)
 	 */
-	public function dot(b:Vec3):Float {
-		return (this[0] * b[0]) + (this[1] * b[1]) + (this[2] * b[2]);
+	@:op(A + B)
+	public static inline function addScalarOp(a:Vec3, b:Float):Vec3 {
+		return a.clone().addScalar(b);
 	}
 
 	/**
-	 * Provides array access in the form of `vector[i]` where `i ∈ [0, 1, 2]`
+	 * Allows adding by a scalar (`4.2 + this`)
+	 */
+	@:op(A + B)
+	public static inline function addScalarOp2(b:Float, a:Vec3):Vec3 {
+		return a.clone().addScalar(b);
+	}
+
+	/**
+	 * Subtract a scalar from this
+	 * @param  b The scalar to subtract
+	 * @return   `b` subtracted from `this`
+	 */
+	public function subtractScalar(b:Float):Vec3 {
+		this[0] -= b;
+		this[1] -= b;
+		this[2] -= b;
+		return cast this;
+	}
+
+	/**
+	 * Allows subtracting by a scalar (`this + 4.2`)
+	 */
+	@:op(A - B)
+	public static inline function subtractScalarOp(a:Vec3, b:Float):Vec3 {
+		return a.clone().subtractScalar(b);
+	}
+
+	/**
+	 * Allows subtracting by a scalar (`4.2 + this`)
+	 */
+	@:op(A - B)
+	public static inline function subtractScalarOp2(a:Float, b:Vec3):Vec3 {
+		return b.clone().multiplyScalar(-1).addScalar(a);
+	}
+
+	/**
+	 * Mutliply this by a scalar
+	 * @param  b The scalar to multiply by
+	 * @return   `this`, scaled by `b`
+	 */
+	public function multiplyScalar(b:Float):Vec3 {
+		this[0] *= b;
+		this[1] *= b;
+		this[2] *= b;
+		return cast this;
+	}
+
+	/**
+	 * Allows multiplying by a scalar (`this * 4.2`)
+	 */
+	@:op(A * B)
+	public static inline function multiplyScalarOp(a:Vec3, b:Float):Vec3 {
+		return a.clone().multiplyScalar(b);
+	}
+
+	/**
+	 * Allows multiplying by a scalar (`4.2 * this`)
+	 */
+	@:op(A * B)
+	public static inline function multiplyScalarOp2(b:Float, a:Vec3):Vec3 {
+		return a.clone().multiplyScalar(b);
+	}
+
+	/**
+	 * Dividy this by a scalar
+	 * @param  b The scalar to divide by
+	 * @return   `this`, divided by `b`
+	 */
+	public function divideScalar(b:Float):Vec3 {
+		this[0] /= b;
+		this[1] /= b;
+		this[2] /= b;
+		return cast this;
+	}
+
+	/**
+	 * Allows dividing by a scalar (`this / 4.2`)
+	 */
+	@:op(A / B)
+	public static inline function divideScalarOp(a:Vec3, b:Float):Vec3 {
+		return a.clone().divideScalar(b);
+	}
+
+	/**
+	 * Provides array access in the form of `vec[i]` where `i ∈ [0, 1, 2, 3]`
 	 */
 	@:arrayAccess public inline function arrayGet(i:Int):Float {
 		return this[i];
 	}
 
 	/**
-	 * Provides array access in the form of `vector[i] = x` where `i ∈ [0, 1, 2]`
+	 * Provides array access in the form of `vec[i] = x` where `i ∈ [0, 1, 2, 3]`
 	 */
 	@:arrayAccess public inline function arraySet(i:Int, x:Float):Float {
 		return this[i] = x;
 	}
 
-	#if snow
-	public inline function toFloat32Array():snow.api.buffers.Float32Array {
-		return new snow.api.buffers.Float32Array(this);
+	/**
+	 * Converts `this` to an array of floats
+	 * @return `this`
+	 */
+	public inline function toArray():Array<Float> {
+		return this;
 	}
-	#end
+
+	/**
+	 * Up-converts `this` to a Vec4 by padding the `w` component
+	 * of the result to be `0`
+	 */
+	public inline function toVec4():Vec4 {
+		return new Vec4(x, y, z, 0);
+	}
 }
