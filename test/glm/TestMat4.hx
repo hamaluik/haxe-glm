@@ -129,6 +129,49 @@ class TestMat4 extends BuddySuite {
 					}
 				}
 			});
+			it('should calculate its transpose', {
+				ma = Mat4.fromRows(
+					new Vec4(1, 2, 3, 4),
+					new Vec4(5, 6, 7, 8),
+					new Vec4(9, 10, 11, 12),
+					new Vec4(13, 14, 15, 16)
+				);
+				var mb:Mat4 = ma.clone().transpose();
+				for(i in 0...4) {
+					for(j in 0...4) {
+						mb[i][j].should.beCloseTo(ma[j][i]);
+					}
+				}
+			});
+			it('should calculate its inverse', {
+				ma = Mat4.fromRows(
+					new Vec4(1, 2, 3, 4),
+					new Vec4(0, 5, 6, 7),
+					new Vec4(0, 0, 8, 9),
+					new Vec4(0, 0, 0, 10)
+				);
+				ma.invert();
+				var expected:Mat4 = Mat4.fromRows(
+					new Vec4(1.0000, -0.4000, -0.0750, -0.0525),
+					new Vec4(0, 0.2000, -0.1500, -0.0050),
+					new Vec4(0, 0, 0.1250, -0.1125),
+					new Vec4(0, 0, 0, 0.1000)
+				);
+				for(i in 0...4) {
+					for(j in 0...4) {
+						ma[i][j].should.beCloseTo(expected[i][j]);
+					}
+				}});
+			it('should calculate its determinant', {
+				ma = Mat4.fromRows(
+					new Vec4(1, 2, 3, 4),
+					new Vec4(0, 5, 6, 7),
+					new Vec4(0, 0, 8, 9),
+					new Vec4(0, 0, 0, 10)
+				);
+				ma.determinant().should.beCloseTo(400);
+			});
+			it('should be able to construct itself from a quaternion', {});
 
 			after({
 				ma = null;

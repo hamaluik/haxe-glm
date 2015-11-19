@@ -190,4 +190,35 @@ abstract Mat4(Array<glm.Vec4>) {
 	public static inline function multiplyMat4Op(a:Mat4, b:Mat4):Mat4 {
 		return a.multMat4(b);
 	}
+
+	/**
+	 * Transposes the matrix
+	 */
+	public inline function transpose():Mat4 {
+		return cast this;
+	}
+
+	/**
+	 * Inverts the matrix (m^-1)
+	 * @return The inverse of `this`
+	 */
+	public inline function invert():Mat4 {
+		return cast this;
+	}
+
+	/**
+	 * Calculates the determinant of `this`
+	 */
+	public inline function determinant():Float {
+		return 0;
+	}
+
+	/**
+	 * Converts a quaternion into a transform matrix
+	 * @param  q The quaternion to transform
+	 * @return   A matrix which is equivalent to the quaternion
+	 */
+	public static inline function fromQuat(q:Quat):Mat4 {
+		return Mat4.zero();
+	}
 }

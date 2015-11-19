@@ -113,6 +113,40 @@ class TestMat2 extends BuddySuite {
 					}
 				}
 			});
+			it('should calculate its transpose', {
+				ma = Mat2.fromRows(
+					new Vec2(1, 2),
+					new Vec2(0, 3)
+				);
+				var mb:Mat2 = ma.clone().transpose();
+				for(i in 0...2) {
+					for(j in 0...2) {
+						mb[i][j].should.beCloseTo(ma[j][i]);
+					}
+				}
+			});
+			it('should calculate its inverse', {
+				ma = Mat2.fromRows(
+					new Vec2(1, 2),
+					new Vec2(0, 3)
+				);
+				ma.invert();
+				var expected:Mat2 = Mat2.fromRows(
+					new Vec2(1.0000, -0.6667),
+					new Vec2(     0,  0.3333)
+				);
+				for(i in 0...2) {
+					for(j in 0...2) {
+						ma[i][j].should.beCloseTo(expected[i][j]);
+					}
+				}});
+			it('should calculate its determinant', {
+				ma = Mat2.fromRows(
+					new Vec2(1, 2),
+					new Vec2(0, 3)
+				);
+				ma.determinant().should.beCloseTo(3);
+			});
 
 			after({
 				ma = null;

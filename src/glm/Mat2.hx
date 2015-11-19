@@ -166,4 +166,26 @@ abstract Mat2(Array<glm.Vec2>) {
 	public static inline function multiplyMat2Op(a:Mat2, b:Mat2):Mat2 {
 		return a.multMat2(b);
 	}
+
+	/**
+	 * Transposes the matrix
+	 */
+	public inline function transpose():Mat2 {
+		return cast this;
+	}
+
+	/**
+	 * Inverts the matrix (m^-1)
+	 * @return The inverse of `this`
+	 */
+	public inline function invert():Mat2 {
+		return cast this;
+	}
+
+	/**
+	 * Calculates the determinant of `this`
+	 */
+	public inline function determinant():Float {
+		return 0;
+	}
 }

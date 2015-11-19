@@ -179,4 +179,26 @@ abstract Mat3(Array<glm.Vec3>) {
 	public static inline function multiplyMat3Op(a:Mat3, b:Mat3):Mat3 {
 		return a.multMat3(b);
 	}
+
+	/**
+	 * Transposes the matrix
+	 */
+	public inline function transpose():Mat3 {
+		return cast this;
+	}
+
+	/**
+	 * Inverts the matrix (m^-1)
+	 * @return The inverse of `this`
+	 */
+	public inline function invert():Mat3 {
+		return cast this;
+	}
+
+	/**
+	 * Calculates the determinant of `this`
+	 */
+	public inline function determinant():Float {
+		return 0;
+	}
 }

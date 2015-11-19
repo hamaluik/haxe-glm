@@ -121,6 +121,44 @@ class TestMat3 extends BuddySuite {
 					}
 				}
 			});
+			it('should calculate its transpose', {
+				ma = Mat3.fromRows(
+					new Vec3(1, 2, 3),
+					new Vec3(4, 5, 6),
+					new Vec3(7, 8, 9)
+				);
+				var mb:Mat3 = ma.clone().transpose();
+				for(i in 0...3) {
+					for(j in 0...3) {
+						mb[i][j].should.beCloseTo(ma[j][i]);
+					}
+				}
+			});
+			it('should calculate its inverse', {
+				ma = Mat3.fromRows(
+					new Vec3(1, 2, 3),
+					new Vec3(0, 4, 5),
+					new Vec3(0, 0, 6)
+				);
+				ma.invert();
+				var expected:Mat3 = Mat3.fromRows(
+					new Vec3(1.0000, -0.5000, -0.0833),
+					new Vec3(     0,  0.2500, -0.2083),
+					new Vec3(     0,       0,  0.1667)
+				);
+				for(i in 0...3) {
+					for(j in 0...3) {
+						ma[i][j].should.beCloseTo(expected[i][j]);
+					}
+				}});
+			it('should calculate its determinant', {
+				ma = Mat3.fromRows(
+					new Vec3(1, 2, 3),
+					new Vec3(0, 4, 5),
+					new Vec3(0, 0, 6)
+				);
+				ma.determinant().should.beCloseTo(24);
+			});
 
 			after({
 				ma = null;
