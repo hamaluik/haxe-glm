@@ -184,6 +184,17 @@ abstract Mat3(Array<glm.Vec3>) {
 	 * Transposes the matrix
 	 */
 	public inline function transpose():Mat3 {
+		var t01 = this[0][1];
+		var t02 = this[0][2];
+		var t12 = this[1][2];
+
+		this[0][1] = this[1][0];
+		this[0][2] = this[2][0];
+		this[1][2] = this[2][1];
+		this[1][0] = t01;
+		this[2][0] = t02;
+		this[2][1] = t12;
+
 		return cast this;
 	}
 

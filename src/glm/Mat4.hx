@@ -195,6 +195,26 @@ abstract Mat4(Array<glm.Vec4>) {
 	 * Transposes the matrix
 	 */
 	public inline function transpose():Mat4 {
+		var t01 = this[0][1];
+		var t02 = this[0][2];
+		var t03 = this[0][3];
+		var t12 = this[1][2];
+		var t13 = this[1][3];
+		var t23 = this[2][3];
+
+		this[0][1] = this[1][0];
+		this[0][2] = this[2][0];
+		this[0][3] = this[3][0];
+		this[1][2] = this[2][1];
+		this[1][3] = this[3][1];
+		this[2][3] = this[3][2];
+		this[1][0] = t01;
+		this[2][0] = t02;
+		this[3][0] = t03;
+		this[2][1] = t12;
+		this[3][1] = t13;
+		this[3][2] = t23;
+
 		return cast this;
 	}
 

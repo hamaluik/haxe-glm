@@ -171,6 +171,9 @@ abstract Mat2(Array<glm.Vec2>) {
 	 * Transposes the matrix
 	 */
 	public inline function transpose():Mat2 {
+		var t01:Float = this[0][1];
+		this[0][1] = this[1][0];
+		this[1][0] = t01;
 		return cast this;
 	}
 
