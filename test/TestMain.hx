@@ -10,6 +10,7 @@ class TestMain {
 
 		var reporter = new buddy.reporting.ConsoleReporter();
 		var runner = new buddy.SuitesRunner([
+			new TestVec2(),
 			new TestVec3(),
 			new TestVec4(),
 			new TestMat4(),

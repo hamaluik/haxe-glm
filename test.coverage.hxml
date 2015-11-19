@@ -1,4 +1,4 @@
 test.each.hxml
 -D coverage
---macro Coverage.include('TestMain', ['glm.Vec3', 'glm.Vec4', 'glm.Mat4', 'glm.GLM'])
+--macro Coverage.include('TestMain', ['glm.Vec2', 'glm.Vec3', 'glm.Vec4', 'glm.Mat4', 'glm.GLM'])
 --interp

@@ -1,9 +1,9 @@
 package glm;
 
 /**
- * Utility class for dealing with 3D vectors
+ * Utility class for dealing with 2D vectors
  */
-abstract Vec3(Array<Float>) {
+abstract Vec2(Array<Float>) {
 	/**
 	 * Utility accessor for the first element
 	 */
@@ -24,51 +24,6 @@ abstract Vec3(Array<Float>) {
 	}
 	function set_y(v:Float) {
 		return this[1] = v;
-	}
-
-	/**
-	 * Utility accessor for the third element
-	 */
-	public var z(get, set):Float;
-	function get_z():Float {
-		return this[2];
-	}
-	function set_z(v:Float) {
-		return this[2] = v;
-	}
-
-	/**
-	 * Utility accessor for the first element
-	 */
-	public var r(get, set):Float;
-	function get_r():Float {
-		return this[0];
-	}
-	function set_r(v:Float) {
-		return this[0] = v;
-	}
-
-
-	/**
-	 * Utility accessor for the second element
-	 */
-	public var g(get, set):Float;
-	function get_g():Float {
-		return this[1];
-	}
-	function set_g(v:Float) {
-		return this[1] = v;
-	}
-	
-	/**
-	 * Utility accessor for the third element
-	 */
-	public var b(get, set):Float;
-	function get_b():Float {
-		return this[2];
-	}
-	function set_b(v:Float) {
-		return this[2] = v;
 	}
 
 	/**
@@ -93,32 +48,19 @@ abstract Vec3(Array<Float>) {
 		return this[1] = v;
 	}
 
-	/**
-	 * Utility accessor for the third element
-	 */
-	public var p(get, set):Float;
-	function get_p():Float {
-		return this[2];
-	}
-	function set_p(v:Float) {
-		return this[2] = v;
-	}
-
-	public function new(x:Float=0, y:Float=0, z:Float=0) {
+	public function new(x:Float=0, y:Float=0) {
 		var arr:Array<Float> = new Array<Float>();
 		arr.push(x);
 		arr.push(y);
-		arr.push(z);
 		this = arr;
 	}
 
 	/**
 	 * Utility function to set the components
 	 */
-	public function set(?x:Float, ?y:Float, ?z:Float):Vec3 {
+	public function set(?x:Float, ?y:Float):Vec2 {
 		if(x != null) this[0] = x;
 		if(y != null) this[1] = y;
-		if(z != null) this[2] = z;
 		return cast this;
 	}
 
@@ -126,19 +68,18 @@ abstract Vec3(Array<Float>) {
 	 * Sets all the values to be 0
 	 * @return `this`
 	 */
-	public function zero():Vec3 {
+	public function zero():Vec2 {
 		this[0] = 0;
 		this[1] = 0;
-		this[2] = 0;
 		return cast this;
 	}
 
 	/**
 	 * Calculates the square of the L2-norm of the vector, `sqrt` it to get the length.
-	 * @return `x^2 + y^2 + z^2`
+	 * @return `x^2 + y^2`
 	 */
 	public function sqrLength():Float {
-		return (this[0] * this[0]) + (this[1] * this[1]) + (this[2] * this[2]);
+		return (this[0] * this[0]) + (this[1] * this[1]);
 	}
 
 	/**
@@ -153,12 +94,11 @@ abstract Vec3(Array<Float>) {
 	 * Normalizes the vector such that its `length == 1` while maintaining direction
 	 * @return `this`, normalized
 	 */
-	public function normalize():Vec3 {
+	public function normalize():Vec2 {
 		var l:Float = length();
 		if(l != 0) {
 			this[0] /= l;
 			this[1] /= l;
-			this[2] /= l;
 		}
 		else {
 			zero();
@@ -168,13 +108,12 @@ abstract Vec3(Array<Float>) {
 
 	/**
 	 * Photocopies `this`
-	 * @return A new `Vec3` who's elements are the same as `this`
+	 * @return A new `Vec2` who's elements are the same as `this`
 	 */
-	public function clone():Vec3 {
-		var copy:Vec3 = new Vec3();
+	public function clone():Vec2 {
+		var copy:Vec2 = new Vec2();
 		copy[0] = this[0];
 		copy[1] = this[1];
-		copy[2] = this[2];
 		return copy;
 	}
 
@@ -183,10 +122,9 @@ abstract Vec3(Array<Float>) {
 	 * @param  b The vector to add to `this`
 	 * @return   `this.x + b.x`, etc
 	 */
-	public function addVec3(b:Vec3):Vec3 {
+	public function addVec2(b:Vec2):Vec2 {
 		this[0] += b[0];
 		this[1] += b[1];
-		this[2] += b[2];
 		return cast this;
 	}
 
@@ -194,8 +132,8 @@ abstract Vec3(Array<Float>) {
 	 * Allows adding two vectors together
 	 */
 	@:op(A + B)
-	public static inline function addVec3Op(a:Vec3, b:Vec3):Vec3 {
-		return a.clone().addVec3(b);
+	public static inline function addVec2Op(a:Vec2, b:Vec2):Vec2 {
+		return a.clone().addVec2(b);
 	}
 
 	/**
@@ -203,10 +141,9 @@ abstract Vec3(Array<Float>) {
 	 * @param  b The vector to subtract from `this`
 	 * @return   `this.x - b.x`, etc
 	 */
-	public function subtractVec3(b:Vec3):Vec3 {
+	public function subtractVec2(b:Vec2):Vec2 {
 		this[0] -= b[0];
 		this[1] -= b[1];
-		this[2] -= b[2];
 		return cast this;
 	}
 
@@ -214,8 +151,8 @@ abstract Vec3(Array<Float>) {
 	 * Allows subtracting two vectors
 	 */
 	@:op(A - B)
-	public static inline function subtractVec3Op(a:Vec3, b:Vec3):Vec3 {
-		return a.clone().subtractVec3(b);
+	public static inline function subtractVec2Op(a:Vec2, b:Vec2):Vec2 {
+		return a.clone().subtractVec2(b);
 	}
 
 	/**
@@ -223,10 +160,9 @@ abstract Vec3(Array<Float>) {
 	 * @param  b The scalar to add
 	 * @return   `b` added to `this`
 	 */
-	public function addScalar(b:Float):Vec3 {
+	public function addScalar(b:Float):Vec2 {
 		this[0] += b;
 		this[1] += b;
-		this[2] += b;
 		return cast this;
 	}
 
@@ -234,7 +170,7 @@ abstract Vec3(Array<Float>) {
 	 * Allows adding by a scalar (`this + 4.2`)
 	 */
 	@:op(A + B)
-	public static inline function addScalarOp(a:Vec3, b:Float):Vec3 {
+	public static inline function addScalarOp(a:Vec2, b:Float):Vec2 {
 		return a.clone().addScalar(b);
 	}
 
@@ -242,7 +178,7 @@ abstract Vec3(Array<Float>) {
 	 * Allows adding by a scalar (`4.2 + this`)
 	 */
 	@:op(A + B)
-	public static inline function addScalarOp2(b:Float, a:Vec3):Vec3 {
+	public static inline function addScalarOp2(b:Float, a:Vec2):Vec2 {
 		return a.clone().addScalar(b);
 	}
 
@@ -251,10 +187,9 @@ abstract Vec3(Array<Float>) {
 	 * @param  b The scalar to subtract
 	 * @return   `b` subtracted from `this`
 	 */
-	public function subtractScalar(b:Float):Vec3 {
+	public function subtractScalar(b:Float):Vec2 {
 		this[0] -= b;
 		this[1] -= b;
-		this[2] -= b;
 		return cast this;
 	}
 
@@ -262,7 +197,7 @@ abstract Vec3(Array<Float>) {
 	 * Allows subtracting by a scalar (`this + 4.2`)
 	 */
 	@:op(A - B)
-	public static inline function subtractScalarOp(a:Vec3, b:Float):Vec3 {
+	public static inline function subtractScalarOp(a:Vec2, b:Float):Vec2 {
 		return a.clone().subtractScalar(b);
 	}
 
@@ -270,7 +205,7 @@ abstract Vec3(Array<Float>) {
 	 * Allows subtracting by a scalar (`4.2 + this`)
 	 */
 	@:op(A - B)
-	public static inline function subtractScalarOp2(a:Float, b:Vec3):Vec3 {
+	public static inline function subtractScalarOp2(a:Float, b:Vec2):Vec2 {
 		return b.clone().multiplyScalar(-1).addScalar(a);
 	}
 
@@ -279,10 +214,9 @@ abstract Vec3(Array<Float>) {
 	 * @param  b The scalar to multiply by
 	 * @return   `this`, scaled by `b`
 	 */
-	public function multiplyScalar(b:Float):Vec3 {
+	public function multiplyScalar(b:Float):Vec2 {
 		this[0] *= b;
 		this[1] *= b;
-		this[2] *= b;
 		return cast this;
 	}
 
@@ -290,7 +224,7 @@ abstract Vec3(Array<Float>) {
 	 * Allows multiplying by a scalar (`this * 4.2`)
 	 */
 	@:op(A * B)
-	public static inline function multiplyScalarOp(a:Vec3, b:Float):Vec3 {
+	public static inline function multiplyScalarOp(a:Vec2, b:Float):Vec2 {
 		return a.clone().multiplyScalar(b);
 	}
 
@@ -298,7 +232,7 @@ abstract Vec3(Array<Float>) {
 	 * Allows multiplying by a scalar (`4.2 * this`)
 	 */
 	@:op(A * B)
-	public static inline function multiplyScalarOp2(b:Float, a:Vec3):Vec3 {
+	public static inline function multiplyScalarOp2(b:Float, a:Vec2):Vec2 {
 		return a.clone().multiplyScalar(b);
 	}
 
@@ -307,10 +241,9 @@ abstract Vec3(Array<Float>) {
 	 * @param  b The scalar to divide by
 	 * @return   `this`, divided by `b`
 	 */
-	public function divideScalar(b:Float):Vec3 {
+	public function divideScalar(b:Float):Vec2 {
 		this[0] /= b;
 		this[1] /= b;
-		this[2] /= b;
 		return cast this;
 	}
 
@@ -318,19 +251,19 @@ abstract Vec3(Array<Float>) {
 	 * Allows dividing by a scalar (`this / 4.2`)
 	 */
 	@:op(A / B)
-	public static inline function divideScalarOp(a:Vec3, b:Float):Vec3 {
+	public static inline function divideScalarOp(a:Vec2, b:Float):Vec2 {
 		return a.clone().divideScalar(b);
 	}
 
 	/**
-	 * Provides array access in the form of `vec[i]` where `i ∈ [0, 1, 2]`
+	 * Provides array access in the form of `vec[i]` where `i ∈ [0, 1]`
 	 */
 	@:arrayAccess public inline function arrayGet(i:Int):Float {
 		return this[i];
 	}
 
 	/**
-	 * Provides array access in the form of `vec[i] = x` where `i ∈ [0, 1, 2]`
+	 * Provides array access in the form of `vec[i] = x` where `i ∈ [0, 1]`
 	 */
 	@:arrayAccess public inline function arraySet(i:Int, x:Float):Float {
 		return this[i] = x;
@@ -345,10 +278,18 @@ abstract Vec3(Array<Float>) {
 	}
 
 	/**
-	 * Up-converts `this` to a Vec4 by padding the `w` component
+	 * Up-converts `this` to a Vec3 by padding the `w` component
+	 * of the result to be `0`
+	 */
+	public inline function toVec3():Vec3 {
+		return new Vec3(x, y, 0);
+	}
+
+	/**
+	 * Up-converts `this` to a Vec4 by padding the `z` and `w` components
 	 * of the result to be `0`
 	 */
 	public inline function toVec4():Vec4 {
-		return new Vec4(x, y, z, 0);
+		return new Vec4(x, y, 0, 0);
 	}
 }
