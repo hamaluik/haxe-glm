@@ -5,6 +5,22 @@
 		"infinitePerspective": 0,
 		"ortho": 0
 	},
+	"glm.Mat3": {
+		"multiplyMat3Op": 1,
+		"clone": 1,
+		"zero": 1,
+		"toArrayRowMajor": 1,
+		"fromRowArray": 1,
+		"arrayGet": 75,
+		"arraySet": 24,
+		"multMat3": 1,
+		"multVec3": 1,
+		"toArrayColMajor": 1,
+		"multiplyVec3Op": 1,
+		"fromRows": 6,
+		"identity": 1,
+		"_new": 18
+	},
 	"glm.Mat4": {
 		"multiplyMat4Op": 1,
 		"clone": 1,
