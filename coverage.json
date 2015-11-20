@@ -1,7 +1,8 @@
 {
 	"glm.GLM": {
 		"translate": 2,
-		"scale": 2
+		"scale": 2,
+		"axisAngle": 0
 	},
 	"glm.Mat2": {
 		"multiplyMat2Op": 1,

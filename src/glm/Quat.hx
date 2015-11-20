@@ -184,9 +184,9 @@ abstract Quat(Array<Float>) {
 	 * this function is faster than Quat.invert and produces the same result.
 	 */
 	public inline function conjugate():Quat {
-		this.x *= -1;
-		this.y *= -1;
-		this.z *= -1;
+		this[1] *= -1;
+		this[2] *= -1;
+		this[3] *= -1;
 		return cast this;
 	}
 

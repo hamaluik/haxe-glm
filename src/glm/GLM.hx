@@ -44,10 +44,12 @@ class GLM {
 	public static function axisAngle(axis:Vec3, angle:Float):Quat {
 		angle /= 2;
 		var s:Float = Math.sin(angle);
-		this[0] = Math.cos(angle);
-		this[1] = s * angle.x;
-		this[2] = s * angle.y;
-		this[3] = s * angle.z;
-		return cast this;
+		var q:Quat = new glm.Quat(
+			Math.cos(angle),
+			s * axis.x,
+			s * axis.y,
+			s * axis.z
+		);
+		return q;
 	}
 }
