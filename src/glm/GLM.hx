@@ -33,4 +33,21 @@ class GLM {
 		if(m == null) return t;
 		return t * m;
 	}
+
+	/**
+	 * Constructs a quaternion which represents a rotation of `angle`
+	 * around the axis `axis`.
+	 * @param  axis  The axis to rotate about
+	 * @param  angle The angle to rotate by (in radians)
+	 * @return       A quaternion which can be used to rotate vectors in 3D
+	 */
+	public static function axisAngle(axis:Vec3, angle:Float):Quat {
+		angle /= 2;
+		var s:Float = Math.sin(angle);
+		this[0] = Math.cos(angle);
+		this[1] = s * angle.x;
+		this[2] = s * angle.y;
+		this[3] = s * angle.z;
+		return cast this;
+	}
 }

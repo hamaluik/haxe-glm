@@ -29,6 +29,13 @@ class TestQuat extends BuddySuite {
 					res[i].should.beCloseTo(q[i]);
 				}
 			});
+			it('should be able to create an identity quaternion', {
+				q = Quat.identity();
+				q.w.should.beCloseTo(1);
+				q.x.should.beCloseTo(0);
+				q.y.should.beCloseTo(0);
+				q.z.should.beCloseTo(0);
+			});
 			it('should be serializable', {
 				q.set(1, 2, 3, 4);
 

@@ -83,7 +83,7 @@ abstract Mat4(Array<glm.Vec4>) {
 	}
 
 	/**
-	 * Makes `this` and identity matrix
+	 * Makes `this` an identity matrix
 	 * @return `this`
 	 */
 	public function setIdentity():Mat4 {

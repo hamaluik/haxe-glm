@@ -71,7 +71,7 @@ abstract Mat2(Array<glm.Vec2>) {
 	}
 
 	/**
-	 * Makes `this` and identity matrix
+	 * Makes `this` an identity matrix
 	 * @return `this`
 	 */
 	public function setIdentity():Mat2 {
