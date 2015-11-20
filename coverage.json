@@ -53,8 +53,8 @@
 		"toArrayRowMajor": 1,
 		"setIdentity": 1,
 		"fromRowArray": 1,
-		"arrayGet": 207,
-		"arraySet": 52,
+		"arrayGet": 271,
+		"arraySet": 68,
 		"multMat4": 1,
 		"multVec4": 5,
 		"setZero": 1,
@@ -62,10 +62,10 @@
 		"toArrayColMajor": 1,
 		"multiplyVec4Op": 5,
 		"fromQuat": 0,
-		"fromRows": 10,
+		"fromRows": 14,
 		"determinant": 2,
 		"identity": 1,
-		"_new": 33
+		"_new": 37
 	},
 	"glm.Vec2": {
 		"multiplyScalar": 7,
@@ -107,8 +107,8 @@
 	},
 	"glm.Projection": {
 		"perspective": 0,
-		"frustum": 0,
+		"frustum": 1,
 		"infinitePerspective": 0,
-		"ortho": 0
+		"ortho": 1
 	}
 }
