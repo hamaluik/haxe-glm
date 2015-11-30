@@ -299,15 +299,6 @@ abstract Mat4(Array<glm.Vec4>) {
 	}
 
 	/**
-	 * Converts a quaternion into a transform matrix
-	 * @param  q The quaternion to transform
-	 * @return   A matrix which is equivalent to the quaternion
-	 */
-	public static inline function fromQuat(q:Quat):Mat4 {
-		return Mat4.zero();
-	}
-
-	/**
 	 * Converts from Mat3s to Mat4s using standard casting
 	 */
 	@:from

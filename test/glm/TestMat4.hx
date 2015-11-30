@@ -171,6 +171,15 @@ class TestMat4 extends BuddySuite {
 				);
 				ma.determinant().should.beCloseTo(400);
 			});
+			it('should cast itself from Mat3s', {
+				var m3:Mat3 = new Mat3(4);
+				var m4:Mat4 = m3;
+				for(i in 0...3) {
+					for(j in 0...4) {
+						m4[i][j].should.beCloseTo(i == j ? (i == 3 ? 1 : 4) : 0);
+					}
+				}
+			});
 
 			after({
 				ma = null;

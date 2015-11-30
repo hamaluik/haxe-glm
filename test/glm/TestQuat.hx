@@ -55,9 +55,19 @@ class TestQuat extends BuddySuite {
 				var q2:Quat = new Quat(4, 3, 2, 1);
 				var r:Quat = q * q2;
 				r.w.should.beCloseTo(-12);
-				r.x.should.beCloseTo(-16);
-				r.y.should.beCloseTo(-24);
-				r.z.should.beCloseTo(-28);
+				r.x.should.beCloseTo(6);
+				r.y.should.beCloseTo(24);
+				r.z.should.beCloseTo(12);
+			});
+			it('should give the same value for inverted quaternions and conjugated normalized quaternions', {
+				q.set(1, 2, 3, 4);
+				q.normalize();
+				var qc:Quat = q.clone().conjugate();
+				var qi:Quat = q.clone().invert();
+				qi.w.should.beCloseTo(qc.w);
+				qi.x.should.beCloseTo(qc.x);
+				qi.y.should.beCloseTo(qc.y);
+				qi.z.should.beCloseTo(qc.z);
 			});
 
 			after({

@@ -218,16 +218,12 @@ abstract Quat(Array<Float>) {
 	 * @return   `this * b`
 	 */
 	public inline function multQuat(b:Quat):Quat {
-		var arr:Array<Float> = [
-			(this[0] * b.w) - (this[1] * b.x) - (this[2] * b.y) - (this[3] * b.z),
-			(this[0] * b.x) - (this[1] * b.w) - (this[2] * b.z) - (this[3] * b.y),
-			(this[0] * b.y) - (this[1] * b.z) - (this[2] * b.w) - (this[3] * b.x),
-			(this[0] * b.z) - (this[1] * b.y) - (this[2] * b.x) - (this[3] * b.w)
-		];
-		this[0] = arr[0];
-		this[1] = arr[1];
-		this[2] = arr[2];
-		this[3] = arr[3];
+	    var ax = x, ay = y, az = z, aw = w,
+	        bx = b.x, by = b.y, bz = b.z, bw = b.w;
+		x = ax * bw + aw * bx + ay * bz - az * by;
+		y = ay * bw + aw * by + az * bx - ax * bz;
+		z = az * bw + aw * bz + ax * by - ay * bx;
+		w = aw * bw - ax * bx - ay * by - az * bz;
 		return cast this;
 	}
 
@@ -237,5 +233,13 @@ abstract Quat(Array<Float>) {
 	@:op(A * B)
 	public static inline function multQuatOp(a:Quat, b:Quat):Quat {
 		return a.clone().multQuat(b);
+	}
+
+	/**
+	 * Converts from Vec4s to Quats using standard casting
+	 */
+	@:from
+	public static inline function fromVec4(v:Vec4):Quat {
+		return new Quat(v.w, v.x, v.y, v.z);
 	}
 }

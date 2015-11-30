@@ -18,7 +18,11 @@ class TestGLM extends BuddySuite {
 				v3.y.should.beCloseTo(4);
 				v3.z.should.beCloseTo(3);
 			});
-			it('should be able to apply rotation matrices to mat4s', {
+			it('should be able to apply rotations to Vec3s', {
+				var r:Vec3 = GLM.rotate(GLM.axisAngle(new Vec3(1, 0, 0), Math.PI / 2), new Vec3(0, 1, 0));
+				r.x.should.beCloseTo(0);
+				r.y.should.beCloseTo(0);
+				r.z.should.beCloseTo(1);
 			});
 			it('should be able to apply scale matrices to mat4s', {
 				var v:Vec3 = new Vec3(0, 0, 0);

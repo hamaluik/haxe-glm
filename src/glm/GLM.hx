@@ -52,4 +52,18 @@ class GLM {
 		);
 		return q;
 	}
+
+	/**
+	 * Rotates the vector `v` by the quaternion `q` (typically constructed using
+	 * `axisAngle`). Applies `q * v * q^-1`
+	 * @param  q The quaternion to rotate with
+	 * @param  v The vector to rotate
+	 * @return   `v`, rotated by `q`
+	 */
+	public static function rotate(q:Quat, v:Vec3):Vec3 {
+		q.normalize();
+		var qv:Quat = new Quat(0, v.x, v.y, v.z);
+		var r:Quat = (q * qv) * q.conjugate();
+		return new Vec3(r.x, r.y, r.z);
+	}
 }
