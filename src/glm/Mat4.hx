@@ -306,4 +306,18 @@ abstract Mat4(Array<glm.Vec4>) {
 	public static inline function fromQuat(q:Quat):Mat4 {
 		return Mat4.zero();
 	}
+
+	/**
+	 * Converts from Mat3s to Mat4s using standard casting
+	 */
+	@:from
+	public static inline function fromMat3(v:Mat3):Mat4 {
+		var r:Mat4 = Mat4.fromRows(
+			new Vec4(v[0][0], v[0][1], v[0][2], 0),
+			new Vec4(v[1][0], v[1][1], v[1][2], 0),
+			new Vec4(v[2][0], v[2][1], v[2][2], 0),
+			new Vec4(0, 0, 0, 1)
+		);
+		return r;
+	}
 }

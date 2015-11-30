@@ -2,7 +2,7 @@
 	"glm.GLM": {
 		"translate": 2,
 		"scale": 2,
-		"axisAngle": 0
+		"axisAngle": 1
 	},
 	"glm.Mat2": {
 		"multiplyMat2Op": 1,
@@ -34,17 +34,18 @@
 		"setIdentity": 1,
 		"fromRowArray": 1,
 		"arrayGet": 111,
-		"arraySet": 39,
+		"arraySet": 42,
 		"multMat3": 1,
-		"multVec3": 1,
+		"multVec3": 2,
 		"setZero": 1,
 		"invert": 1,
 		"toArrayColMajor": 1,
-		"multiplyVec3Op": 1,
-		"fromRows": 10,
+		"multiplyVec3Op": 2,
+		"fromQuat": 1,
+		"fromRows": 11,
 		"determinant": 2,
 		"identity": 1,
-		"_new": 28
+		"_new": 30
 	},
 	"glm.Mat4": {
 		"multiplyMat4Op": 1,
@@ -62,11 +63,12 @@
 		"invert": 1,
 		"toArrayColMajor": 1,
 		"multiplyVec4Op": 5,
+		"fromMat3": 0,
 		"fromQuat": 0,
 		"fromRows": 15,
 		"determinant": 2,
 		"identity": 2,
-		"_new": 39
+		"_new": 38
 	},
 	"glm.Vec2": {
 		"multiplyScalar": 7,

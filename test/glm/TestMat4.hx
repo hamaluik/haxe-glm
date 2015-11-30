@@ -171,7 +171,6 @@ class TestMat4 extends BuddySuite {
 				);
 				ma.determinant().should.beCloseTo(400);
 			});
-			it('should be able to construct itself from a quaternion', {});
 
 			after({
 				ma = null;

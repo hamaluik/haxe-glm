@@ -46,6 +46,23 @@ abstract Mat3(Array<glm.Vec3>) {
 	}
 
 	/**
+	 * Construct a Mat3 from a quaternion
+	 * @param  q The quaternion to build from
+	 * @return   a new `Mat3`
+	 */
+	public static function fromQuat(q:Quat):Mat3 {
+		var qx2:Float = Math.pow(q.x, 2);
+		var qy2:Float = Math.pow(q.y, 2);
+		var qz2:Float = Math.pow(q.z, 2);
+		var m:Mat3 = Mat3.fromRows(
+			new Vec3(1 - 2*qy2 - 2*qz2, 2*q.x*q.y - 2*q.z*q.w, 2*q.x*q.z + 2*q.y*q.w),
+			new Vec3(2*q.x*q.y + 2*q.z*q.w, 1 - 2*qx2 - 2*qz2, 2*q.y*q.z - 2*q.x*q.w),
+			new Vec3(2*q.x*q.z - 2*q.y*q.w, 2*q.y*q.z + 2*q.x*q.w, 1 - 2*qx2 - 2*qy2)
+		);
+		return m;
+	}
+
+	/**
 	 * Makes every element in `this` `=0`
 	 * @return `this`
 	 */

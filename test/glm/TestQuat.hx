@@ -50,6 +50,15 @@ class TestQuat extends BuddySuite {
 					q2[i].should.beCloseTo(q[i]);
 				}
 			});
+			it('should be possible to multiply two quaternions together', {
+				q.set(1, 2, 3, 4);
+				var q2:Quat = new Quat(4, 3, 2, 1);
+				var r:Quat = q * q2;
+				r.w.should.beCloseTo(-12);
+				r.x.should.beCloseTo(-16);
+				r.y.should.beCloseTo(-24);
+				r.z.should.beCloseTo(-28);
+			});
 
 			after({
 				q = null;

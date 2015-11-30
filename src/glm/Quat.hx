@@ -211,4 +211,31 @@ abstract Quat(Array<Float>) {
 		this[3] = -a[3] * invDot;
 		return cast this;
 	}
+
+	/**
+	 * Multiplies `b` by `this`, storing the result in `this`
+	 * @param  b The quat to multiply by
+	 * @return   `this * b`
+	 */
+	public inline function multQuat(b:Quat):Quat {
+		var arr:Array<Float> = [
+			(this[0] * b.w) - (this[1] * b.x) - (this[2] * b.y) - (this[3] * b.z),
+			(this[0] * b.x) - (this[1] * b.w) - (this[2] * b.z) - (this[3] * b.y),
+			(this[0] * b.y) - (this[1] * b.z) - (this[2] * b.w) - (this[3] * b.x),
+			(this[0] * b.z) - (this[1] * b.y) - (this[2] * b.x) - (this[3] * b.w)
+		];
+		this[0] = arr[0];
+		this[1] = arr[1];
+		this[2] = arr[2];
+		this[3] = arr[3];
+		return cast this;
+	}
+
+	/**
+	 * Allows multiplying two quaternions
+	 */
+	@:op(A * B)
+	public static inline function multQuatOp(a:Quat, b:Quat):Quat {
+		return a.clone().multQuat(b);
+	}
 }

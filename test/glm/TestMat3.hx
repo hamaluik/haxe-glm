@@ -159,6 +159,14 @@ class TestMat3 extends BuddySuite {
 				);
 				ma.determinant().should.beCloseTo(24);
 			});
+			it('should be able to construct itself from a quaternion', {
+				var q:Quat = GLM.axisAngle(new Vec3(1, 0, 0), Math.PI / 2);
+				ma = Mat3.fromQuat(q);
+				var r:Vec3 = ma * new Vec3(0, 1, 0);
+				r.x.should.beCloseTo(0);
+				r.y.should.beCloseTo(0);
+				r.z.should.beCloseTo(1);
+			});
 
 			after({
 				ma = null;
