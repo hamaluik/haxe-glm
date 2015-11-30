@@ -52,10 +52,10 @@
 		"transpose": 1,
 		"zero": 1,
 		"toArrayRowMajor": 1,
-		"setIdentity": 1,
+		"setIdentity": 2,
 		"fromRowArray": 1,
-		"arrayGet": 271,
-		"arraySet": 68,
+		"arrayGet": 308,
+		"arraySet": 72,
 		"multMat4": 1,
 		"multVec4": 5,
 		"setZero": 1,
@@ -63,10 +63,10 @@
 		"toArrayColMajor": 1,
 		"multiplyVec4Op": 5,
 		"fromQuat": 0,
-		"fromRows": 14,
+		"fromRows": 15,
 		"determinant": 2,
-		"identity": 1,
-		"_new": 37
+		"identity": 2,
+		"_new": 39
 	},
 	"glm.Vec2": {
 		"multiplyScalar": 7,
@@ -107,9 +107,8 @@
 		"_new": 120
 	},
 	"glm.Projection": {
-		"perspective": 0,
+		"perspective": 1,
 		"frustum": 1,
-		"infinitePerspective": 0,
 		"ortho": 1
 	}
 }
