@@ -242,4 +242,50 @@ abstract Quat(Array<Float>) {
 	public static inline function fromVec4(v:Vec4):Quat {
 		return new Quat(v.w, v.x, v.y, v.z);
 	}
+
+	/**
+	 * Perform a spherical linear interpolation between `this` and the target.
+	 * @param  target The target endpoint
+	 * @param  t      a number in the range `[0, 1]` which describes how far
+	 *                along to interpolate.
+	 * @return        `this`
+	 */
+	public inline function slerp(target:Quat, t:Float):Quat {
+		var b:Quat = target.clone();
+
+		// calculate cosine
+		var cosom:Float = x * b.x + y * b.y + z * b.z + w * b.w;
+		// adjust coefficients if necessary
+		if(cosom < 0) {
+			cosom *= -1;
+			b.w *= -1;
+			b.x *= -1;
+			b.y *= -1;
+			b.z *= -1;
+		}
+
+		// calculate coefficients
+		var scale0:Float;
+		var scale1:Float;
+		if((1.0 - cosom) > 0.000001) {
+			// standard case
+			var omega:Float = Math.acos(cosom);
+			var sinom:Float = Math.sin(omega);
+			scale0 = Math.sin((1.0 - t) * omega) / sinom;
+			scale1 = Math.sin(t * omega) / sinom;
+		}
+		else {
+			// base and target are very close,
+			// just do linear
+			scale0 = 1.0 - t;
+			scale1 = t;
+		}
+
+		// calculate the final values!
+		this[0] = scale0 * this[0] + b[0] * scale1;
+		this[1] = scale0 * this[1] + b[1] * scale1;
+		this[2] = scale0 * this[2] + b[2] * scale1;
+		this[3] = scale0 * this[3] + b[3] * scale1;
+		return cast this;
+	}
 }

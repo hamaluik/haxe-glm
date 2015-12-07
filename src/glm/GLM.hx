@@ -66,4 +66,15 @@ class GLM {
 		var r:Quat = (q * qv) * q.conjugate();
 		return new Vec3(r.x, r.y, r.z);
 	}
+
+	/**
+	 * Linearly interpolate a float between two values
+	 * @param a the "starting" value
+	 * @param b the "ending" value
+	 * @param t a number in the range `[0, 1]` which describes how far along to
+	 * interpolate.
+	 */
+	public static function lerp(a:Float, b:Float, t:Float):Float {
+		return a + t * (b - a);
+	}
 }

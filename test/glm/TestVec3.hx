@@ -164,6 +164,13 @@ class TestVec3 extends BuddySuite {
 					v2[i].should.beCloseTo(v[i]);
 				}
 			});
+			it('should provide linear interpolation', {
+				v.set(1, 2, 3);
+				var b:Vec3 = v.clone().lerp(v.clone() * 4, 0.75);
+				for(i in 0...3) {
+					b[i].should.beCloseTo(0.75 * (v[i] * 3) + v[i]);
+				}
+			});
 
 			after({
 				v = null;

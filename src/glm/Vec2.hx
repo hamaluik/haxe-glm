@@ -278,6 +278,19 @@ abstract Vec2(Array<Float>) {
 	}
 
 	/**
+	 * Linearly interpolate `this` from its current value to the target
+	 * @param  target The target endpoint
+	 * @param  t      a number in the range `[0, 1]` which describes how far
+	 *                along to interpolate.
+	 * @return        `this`
+	 */
+	public inline function lerp(target:Vec2, t:Float):Vec2 {
+		this[0] = GLM.lerp(this[0], target[0], t);
+		this[1] = GLM.lerp(this[1], target[1], t);
+		return cast this;
+	}
+
+	/**
 	 * Calculates the dot product between two Vec2s
 	 */
 	public static inline function dot(a:Vec2, b:Vec2):Float {
@@ -291,7 +304,6 @@ abstract Vec2(Array<Float>) {
 	public static inline function fromVec3(v:Vec3):Vec2 {
 		return new Vec2(v.x, v.y);
 	}
-
 
 	/**
 	 * Converts from Vec4s to Vec2s using standard casting

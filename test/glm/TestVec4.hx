@@ -152,6 +152,13 @@ class TestVec4 extends BuddySuite {
 				v.z.should.beCloseTo(5);
 				v.w.should.beCloseTo(1);
 			});
+			it('should provide linear interpolation', {
+				v.set(1, 2, 3, 4);
+				var b:Vec4 = v.clone().lerp(v.clone() * 4, 0.75);
+				for(i in 0...4) {
+					b[i].should.beCloseTo(0.75 * (v[i] * 3) + v[i]);
+				}
+			});
 			it('should be serializable', {
 				v.set(1, 2, 3, 4);
 
