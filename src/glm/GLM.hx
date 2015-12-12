@@ -5,6 +5,15 @@ import glm.Mat4;
 
 class GLM {
 	/**
+	 * Efficient and convenient access to Math.PI / 180.0
+	 */
+	public static inline var degToRad:Float = 0.017453292519943295;
+	/**
+	 * Efficient and convenient access to 180.0 / Math.PI
+	 */
+	public static inline var radToDeg:Float = 57.29577951308232;
+	
+	/**
 	 * Translates a matrix by the 3D translation vector
 	 * @param  ?m          A matrix to apply the transformation on. If `m == null`,
 	 *                     an identity matrix will be used.
