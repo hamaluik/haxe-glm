@@ -69,6 +69,16 @@ abstract Mat2(Array<glm.Vec2>) {
 		copy[1] = this[1].clone();
 		return copy;
 	}
+	
+	/**
+	 * Copies the values of m into this matrix
+	 * @return `this`
+	 */
+	public function copy(m:Mat2):Mat2 {
+		this[0].copy(m[0]);
+		this[1].copy(m[1]);
+		return this;
+	}
 
 	/**
 	 * Makes `this` an identity matrix

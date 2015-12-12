@@ -80,6 +80,19 @@ abstract Quat(Array<Float>) {
 		copy[3] = this[3];
 		return copy;
 	}
+	
+	/**
+	 * Copies the values of `q` into `this`
+	 * @param q The quat to copy from
+	 * @return `this`
+	 */
+	public function copy(q:Quat):Quat {
+		this[0] = q[0];
+		this[1] = q[1];
+		this[2] = q[2];
+		this[3] = q[3];
+		return this;
+	}
 
 	/**
 	 * Provides array access in the form of `vec[i]` where `i ∈ [0, 1, 2, 3]`
