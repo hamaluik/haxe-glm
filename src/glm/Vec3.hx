@@ -177,6 +177,18 @@ abstract Vec3(Array<Float>) {
 		copy[2] = this[2];
 		return copy;
 	}
+	
+	/**
+	 * Copies the values of `v` into `this`
+	 * @param v The vector to copy from
+	 * @return `this`
+	 */
+	public function copy(v:Vec3):Vec3 {
+		this[0] = v[0];
+		this[1] = v[1];
+		this[2] = v[2];
+		return cast this;
+	}
 
 	/**
 	 * Element-based addition

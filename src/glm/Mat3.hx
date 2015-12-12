@@ -92,6 +92,17 @@ abstract Mat3(Array<glm.Vec3>) {
 		copy[2] = this[2].clone();
 		return copy;
 	}
+	
+	/**
+	 * Copies the values of m into this matrix
+	 * @return `this`
+	 */
+	public function copy(m:Mat3):Mat3 {
+		this[0].copy(m[0]);
+		this[1].copy(m[1]);
+		this[1].copy(m[2]);
+		return cast this;
+	}
 
 	/**
 	 * Makes `this` an identity matrix
