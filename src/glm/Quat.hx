@@ -91,7 +91,7 @@ abstract Quat(Array<Float>) {
 		this[1] = q[1];
 		this[2] = q[2];
 		this[3] = q[3];
-		return this;
+		return cast this;
 	}
 
 	/**

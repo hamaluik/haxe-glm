@@ -77,7 +77,7 @@ abstract Mat2(Array<glm.Vec2>) {
 	public function copy(m:Mat2):Mat2 {
 		this[0].copy(m[0]);
 		this[1].copy(m[1]);
-		return this;
+		return cast this;
 	}
 
 	/**

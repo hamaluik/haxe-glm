@@ -187,7 +187,7 @@ abstract Vec3(Array<Float>) {
 		this[0] = v[0];
 		this[1] = v[1];
 		this[2] = v[2];
-		return this;
+		return cast this;
 	}
 
 	/**

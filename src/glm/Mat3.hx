@@ -101,7 +101,7 @@ abstract Mat3(Array<glm.Vec3>) {
 		this[0].copy(m[0]);
 		this[1].copy(m[1]);
 		this[1].copy(m[2]);
-		return this;
+		return cast this;
 	}
 
 	/**

@@ -226,7 +226,7 @@ abstract Vec4(Array<Float>) {
 		this[1] = v[1];
 		this[2] = v[2];
 		this[3] = v[3];
-		return this;
+		return cast this;
 	}
 
 	/**

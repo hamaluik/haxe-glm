@@ -91,7 +91,7 @@ abstract Mat4(Array<glm.Vec4>) {
 		this[1].copy(m[1]);
 		this[2].copy(m[2]);
 		this[3].copy(m[3]);
-		return this;
+		return cast this;
 	}
 
 	/**

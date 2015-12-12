@@ -125,7 +125,7 @@ abstract Vec2(Array<Float>) {
 	public function copy(v:Vec2):Vec2 {
 		this[0] = v[0];
 		this[1] = v[1];
-		return this;
+		return cast this;
 	}
 
 	/**
