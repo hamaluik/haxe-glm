@@ -81,6 +81,18 @@ abstract Mat4(Array<glm.Vec4>) {
 		copy[3] = this[3].clone();
 		return copy;
 	}
+	
+	/**
+	 * Copies the values of m into this matrix
+	 * @return `this`
+	 */
+	public function copy(m:Mat4):Mat4 {
+		this[0].copy(m[0]);
+		this[1].copy(m[1]);
+		this[2].copy(m[2]);
+		this[3].copy(m[3]);
+		return cast this;
+	}
 
 	/**
 	 * Makes `this` an identity matrix
