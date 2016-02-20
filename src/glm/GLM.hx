@@ -42,6 +42,37 @@ class GLM {
 		if(m == null) return t;
 		return t * m;
 	}
+	
+	public static function lookAt(eye:Vec3, center:Vec3, up:Vec3):Mat4 {
+		var f:Vec3 = (center - eye).normalize();
+		
+		var s:Vec3 = Vec3.cross(f, up).normalize();
+		var u:Vec3 = Vec3.cross(s, f);
+		
+		var result:Mat4 = new Mat4(1.0);
+		
+		result[0][0] = s.x;
+		result[0][1] = s.y;
+		result[0][2] = s.z;
+		
+		result[1][0] = u.x;
+		result[1][1] = u.y;
+		result[1][2] = u.z;
+		
+		result[2][0] = -f.x;
+		result[2][1] = -f.y;
+		result[2][2] = -f.z;
+		
+		result[3][0] = 0.0;
+		result[3][1] = 0.0;
+		result[3][2] = 0.0;
+		
+		result[0][3] =-Vec3.dot(s, eye);
+		result[1][3] =-Vec3.dot(u, eye);
+		result[2][3] = Vec3.dot(f, eye);
+		
+		return result;
+	}
 
 	/**
 	 * Constructs a quaternion which represents a rotation of `angle`
