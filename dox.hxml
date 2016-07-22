@@ -23,4 +23,5 @@
 #-xml cpp.xml
 
 --next
--cmd haxelib run dox -i . -theme ./themes/flambe --title GLM -D version 1.0.0-alpha --toplevel-package glm
+#-cmd haxelib run dox -i . -theme ./themes/flambe --title GLM -D version 1.0.0-alpha --toplevel-package glm
+-cmd haxelib run dox -i . --title GLM -D version 2.0.0

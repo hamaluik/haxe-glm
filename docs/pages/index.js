@@ -14,11 +14,11 @@ function toggleInherited(el) {
 	} else {
 		$("img", toggle).attr("src", dox.rootPath + "triangle-closed.png");
 	}
-    return false;
 }
 
 function toggleCollapsed(el) {
 	var toggle = $(el).closest(".expando");
+	// console.log(toggle);
 	toggle.toggleClass("expanded");
 
 	if (toggle.hasClass("expanded")) {
@@ -27,7 +27,6 @@ function toggleCollapsed(el) {
 		$("img", toggle).first().attr("src", dox.rootPath + "triangle-closed.png");
 	}
 	updateTreeState();
-    return false;
 }
 
 function updateTreeState(){
@@ -101,15 +100,15 @@ function selectItem(filter, value)
 $(document).ready(function(){
 	$("#nav").html(navContent);
 	var treeState = readCookie("treeState");
-
+	
 	$("#nav .expando").each(function(i, e){
 		$("img", e).first().attr("src", dox.rootPath + "triangle-closed.png");
 	});
-
+	
 	$(".treeLink").each(function() {
 		this.href = this.href.replace("::rootPath::", dox.rootPath);
 	});
-
+		
 	if (treeState != null)
 	{
 		var states = JSON.parse(treeState);
@@ -120,23 +119,16 @@ $(document).ready(function(){
 			}
 		});
 	}
+	$("#select-platform li a").on("click", selectPlatform);
+	$("#select-version li a").on("click", selectVersion);
 	$("head").append("<style id='dynamicStylesheet'></style>");
 
 	setPlatform(readCookie("platform") == null ? "all" : readCookie("platform"));
 	setVersion(readCookie("version") == null ? "3_0" : readCookie("version"));
 
-	$("#search").on("input", function(e){
+	$("#search").on("keyup", function(e){
 		searchQuery(e.target.value);
 	});
-
-	$("#nav a").each(function () {
-		if (this.href == location.href) {
-			$(this.parentElement).addClass("active");
-		}
-	});
-
-    // Because there is no CSS parent selector
-    $("code.prettyprint").parents("pre").addClass("example");
 });
 
 function searchQuery(query) {
@@ -162,7 +154,7 @@ function searchQuery(query) {
 			var content = e.attr("data_path").toLowerCase();
 			var match = searchMatch(content, query);
 			if (match && !searchSet) {
-				var url = dox.rootPath + e.attr("data_path").split(".").join("/") + ".html";
+				var url = dox.rootPath + "/" + e.attr("data_path").split(".").join("/") + ".html";
 				$("#searchForm").attr("action", url);
 				searchSet = true;
 			}
