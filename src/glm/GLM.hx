@@ -43,6 +43,17 @@ class GLM {
 		return t * m;
 	}
 	
+	/**
+	 * @brief      creates a camera view matrix which starts from `eye`,
+	 *             looks towards `centre`, with `up` orienting the camera
+	 *
+	 * @param      eye     the position the 'camera' should be placed at
+	 * @param      center  where the camera will focus on / look toward
+	 * @param      up      a vector describing the orientation of the camera
+	 *
+	 * @return     A matrix representing a camera's view matrix set up as per
+	 *             the parameters
+	 */
 	public static function lookAt(eye:Vec3, center:Vec3, up:Vec3):Mat4 {
 		var f:Vec3 = (center - eye).normalize();
 		
