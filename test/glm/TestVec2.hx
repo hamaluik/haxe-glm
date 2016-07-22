@@ -8,7 +8,7 @@ class TestVec2 extends BuddySuite {
 	public function new() {
 		describe('Using Vec2s', {
 			var v:Vec2;
-			before({
+			beforeEach({
 				v = new Vec2();
 			});
 
@@ -114,11 +114,12 @@ class TestVec2 extends BuddySuite {
 				v.set(1, 2);
 
 				var s:haxe.Serializer = new haxe.Serializer();
-				s.serialize(v);
+				v.serialize(s);
 				var serialized:String = s.toString();
 
 				var u:haxe.Unserializer = new haxe.Unserializer(serialized);
-				var v2:Vec2 = u.unserialize();
+				var v2:Vec2 = new Vec2();
+				v2.unserialize(u);
 				
 				for(i in 0...2) {
 					v2[i].should.beCloseTo(v[i]);
@@ -132,7 +133,7 @@ class TestVec2 extends BuddySuite {
 				}
 			});
 
-			after({
+			afterEach({
 				v = null;
 			});
 		});

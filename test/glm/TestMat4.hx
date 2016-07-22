@@ -8,7 +8,7 @@ class TestMat4 extends BuddySuite {
 	public function new() {
 		describe('Using Mat4', {
 			var ma:Mat4;
-			before({
+			beforeEach({
 				ma = new Mat4();
 			});
 
@@ -181,7 +181,7 @@ class TestMat4 extends BuddySuite {
 				}
 			});
 
-			after({
+			afterEach({
 				ma = null;
 			});
 		});

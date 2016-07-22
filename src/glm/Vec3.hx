@@ -1,9 +1,11 @@
 package glm;
 
+import haxe.ds.Vector;
+
 /**
  * Utility class for dealing with 3D vectors
  */
-abstract Vec3(Array<Float>) {
+abstract Vec3(Vector<Float>) {
 	/**
 	 * Utility accessor for the first element
 	 */
@@ -105,10 +107,10 @@ abstract Vec3(Array<Float>) {
 	}
 
 	public function new(x:Float=0, y:Float=0, z:Float=0) {
-		var arr:Array<Float> = new Array<Float>();
-		arr.push(x);
-		arr.push(y);
-		arr.push(z);
+		var arr:Vector<Float> = new Vector<Float>(3);
+		arr[0] = x;
+		arr[1] = y;
+		arr[2] = z;
 		this = arr;
 	}
 
@@ -353,7 +355,15 @@ abstract Vec3(Array<Float>) {
 	 * @return `this`
 	 */
 	public inline function toArray():Array<Float> {
-		return this;
+		return this.toArray();
+	}
+
+	/**
+	 * Converts `this` to the internal representation type
+	 * @return `this.toData()`
+	 */
+	public inline function toData() {
+		return this.toData();
 	}
 
 	/**
@@ -411,5 +421,27 @@ abstract Vec3(Array<Float>) {
 	@:from
 	public static inline function fromVec4(v:Vec4):Vec3 {
 		return new Vec3(v.x, v.y, v.z);
+	}
+
+	/**
+	 * @brief      serializes `this` using `s`
+	 *
+	 * @param      s     the serializer stream
+	 */
+	public function serialize(s:haxe.Serializer) {
+		s.serialize(this[0]);
+		s.serialize(this[1]);
+		s.serialize(this[2]);
+	}
+
+	/**
+	 * @brief      unserializes from `u` into `this`
+	 *
+	 * @param      u     the unserializer stream
+	 */
+	public function unserialize(u:haxe.Unserializer) {
+		this[0] = u.unserialize();
+		this[1] = u.unserialize();
+		this[2] = u.unserialize();
 	}
 }

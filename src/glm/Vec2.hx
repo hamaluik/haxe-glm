@@ -1,9 +1,11 @@
 package glm;
 
+import haxe.ds.Vector;
+
 /**
  * Utility class for dealing with 2D vectors
  */
-abstract Vec2(Array<Float>) {
+abstract Vec2(Vector<Float>) {
 	/**
 	 * Utility accessor for the first element
 	 */
@@ -49,10 +51,11 @@ abstract Vec2(Array<Float>) {
 	}
 
 	public function new(x:Float=0, y:Float=0) {
-		var arr:Array<Float> = new Array<Float>();
-		arr.push(x);
-		arr.push(y);
+		var arr:Vector<Float> = new Vector<Float>(2);
+		arr.set(0, x);
+		arr.set(1, y);
 		this = arr;
+		return cast this;
 	}
 
 	/**
@@ -282,10 +285,18 @@ abstract Vec2(Array<Float>) {
 
 	/**
 	 * Converts `this` to an array of floats
-	 * @return `this`
+	 * @return `this.toArray()`
 	 */
 	public inline function toArray():Array<Float> {
-		return this;
+		return this.toArray();
+	}
+
+	/**
+	 * Converts `this` to the internal representation type
+	 * @return `this.toData()`
+	 */
+	public inline function toData() {
+		return this.toData();
 	}
 
 	/**
@@ -322,5 +333,25 @@ abstract Vec2(Array<Float>) {
 	@:from
 	public static inline function fromVec4(v:Vec4):Vec2 {
 		return new Vec2(v.x, v.y);
+	}
+
+	/**
+	 * @brief      serializes `this` using `s`
+	 *
+	 * @param      s     the serializer stream
+	 */
+	public function serialize(s:haxe.Serializer) {
+		s.serialize(this[0]);
+		s.serialize(this[1]);
+	}
+
+	/**
+	 * @brief      unserializes from `u` into `this`
+	 *
+	 * @param      u     the unserializer stream
+	 */
+	public function unserialize(u:haxe.Unserializer) {
+		this[0] = u.unserialize();
+		this[1] = u.unserialize();
 	}
 }
