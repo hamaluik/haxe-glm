@@ -21,17 +21,17 @@ class TestMat3 extends BuddySuite {
 				var mb:Mat3 = ma.clone();
 				for(i in 0...3) {
 					for(j in 0...3) {
-						mb[i][j].should.beCloseTo(ma[i][j]);
+						mb.get(i, j).should.beCloseTo(ma.get(i, j));
 					}
 				}
-				ma[0][0] = 7;
-				mb[0][0].should.beCloseTo(1);
+				ma.set(0, 0, 7);
+				ma.get(0, 0).should.beCloseTo(1);
 			});
 			it('should be able to create a zero matrix', {
 				ma = Mat3.zero();
 				for(i in 0...3) {
 					for(j in 0...3) {
-						ma[i][j].should.beCloseTo(0);
+						ma.get(i, j).should.beCloseTo(0);
 					}
 				}
 			});
@@ -39,14 +39,14 @@ class TestMat3 extends BuddySuite {
 				ma = Mat3.identity();
 				for(i in 0...3) {
 					for(j in 0...3) {
-						ma[i][j].should.beCloseTo(i == j ? 1 : 0);
+						ma.get(i, j).should.beCloseTo(i == j ? 1 : 0);
 					}
 				}
 			});
-			it('should allow array access', {
+			/*it('should allow array access', {
 				ma = new Mat3(4.2);
 				ma[0][0].should.beCloseTo(4.2);
-			});
+			});*/
 			it('should be able to multliply vec3s with itself', {
 				ma = Mat3.fromRows(
 					new Vec3(1, 2, 3),
@@ -73,7 +73,7 @@ class TestMat3 extends BuddySuite {
 				var values:Array<Float> = [18, 24, 30, 54, 69, 84, 90, 114, 138];
 				for(i in 0...3) {
 					for(j in 0...3) {
-						mc[i][j].should.beCloseTo(values[(i * 3) + j]);
+						mc.get(i, j).should.beCloseTo(values[(i * 3) + j]);
 					}
 				}
 			});
@@ -117,7 +117,7 @@ class TestMat3 extends BuddySuite {
 				
 				for(i in 0...3) {
 					for(j in 0...3) {
-						mb[i][j].should.beCloseTo(ma[i][j]);
+						mb.get(i, j).should.beCloseTo(ma.get(i, j));
 					}
 				}
 			});
@@ -130,7 +130,7 @@ class TestMat3 extends BuddySuite {
 				var mb:Mat3 = ma.clone().transpose();
 				for(i in 0...3) {
 					for(j in 0...3) {
-						mb[i][j].should.beCloseTo(ma[j][i]);
+						mb.get(i, j).should.beCloseTo(ma.get(j, i));
 					}
 				}
 			});
@@ -148,7 +148,7 @@ class TestMat3 extends BuddySuite {
 				);
 				for(i in 0...3) {
 					for(j in 0...3) {
-						ma[i][j].should.beCloseTo(expected[i][j]);
+						ma.get(i, j).should.beCloseTo(expected.get(i, j));
 					}
 				}});
 			it('should calculate its determinant', {

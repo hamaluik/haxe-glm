@@ -316,9 +316,9 @@ abstract Mat4(Array<glm.Vec4>) {
 	@:from
 	public static inline function fromMat3(v:Mat3):Mat4 {
 		var r:Mat4 = Mat4.fromRows(
-			new Vec4(v[0][0], v[0][1], v[0][2], 0),
-			new Vec4(v[1][0], v[1][1], v[1][2], 0),
-			new Vec4(v[2][0], v[2][1], v[2][2], 0),
+			new Vec4(v.r0c0, v.r0c1, v.r0c2, 0),
+			new Vec4(v.r1c0, v.r1c1, v.r1c2, 0),
+			new Vec4(v.r2c0, v.r2c1, v.r2c2, 0),
 			new Vec4(0, 0, 0, 1)
 		);
 		return r;
