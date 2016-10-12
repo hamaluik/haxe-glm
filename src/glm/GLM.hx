@@ -43,6 +43,12 @@ class GLM {
 		return t * m;
 	}
 
+	/**
+	 * Rotates a matrix by the quaternion vector
+	 * @param  ?m    A matrix to apply the transformation on. If `m == null`,
+	 *               an identity matrix will be used.
+	 * @param rotation A vector describing the rotation
+	 */
 	public static function rotation(?m:Mat4, rotation:Quat):Mat4 {
 		var xs:Float = rotation.x * 2;
 		var ys:Float = rotation.y * 2;
