@@ -301,4 +301,23 @@ abstract Quat(Array<Float>) {
 		this[3] = scale0 * this[3] + b[3] * scale1;
 		return cast this;
 	}
+
+	/**
+	 * @brief      creates a quaternion from an angular rotation about an axis
+	 *
+	 * @param      axis   The axis to rotate around (**MUST** be normalized!)
+	 * @param      angle  The angle to rotate by (in **radians**)
+	 *
+	 * @return     A quaternion describing the rotation
+	 */
+	public inline function fromAxisAngle(axis:Vec3, angle:Float):Quat {
+		var c:Float = Math.cos(angle / 2);
+		var s:Float = Math.sin(angle / 2);
+
+		var q:Quat = new Quat(c, s, s, s);
+		q.x *= axis.x;
+		q.y *= axis.y;
+		q.z *= axis.z;
+		return q;
+	}
 }

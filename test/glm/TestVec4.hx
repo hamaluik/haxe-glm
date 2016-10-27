@@ -8,7 +8,7 @@ class TestVec4 extends BuddySuite {
 	public function new() {
 		describe('Using Vec4s', {
 			var v:Vec4;
-			before({
+			beforeEach({
 				v = new Vec4();
 			});
 
@@ -174,7 +174,7 @@ class TestVec4 extends BuddySuite {
 				}
 			});
 
-			after({
+			afterEach({
 				v = null;
 			});
 		});

@@ -8,7 +8,7 @@ class TestMat2 extends BuddySuite {
 	public function new() {
 		describe('Using Mat2', {
 			var ma:Mat2;
-			before({
+			beforeEach({
 				ma = new Mat2();
 			});
 
@@ -148,7 +148,7 @@ class TestMat2 extends BuddySuite {
 				ma.determinant().should.beCloseTo(3);
 			});
 
-			after({
+			afterEach({
 				ma = null;
 			});
 		});
