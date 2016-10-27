@@ -11,7 +11,7 @@ Issues, forks, and pull requests are gladly welcomed! This library is meant for 
 
 ### API
 
-API documentation is available here: http://hamaluik.com/haxe-glm/
+API documentation is available here: http://fuzzywuzzie.github.io/haxe-glm/
 
 ### Samples
 
