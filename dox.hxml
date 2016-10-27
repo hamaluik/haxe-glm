@@ -1,4 +1,4 @@
--cmd cd docs
+-cmd cd dox
 
 --next 
 --interp
@@ -14,14 +14,5 @@
 --interp
 -xml haxe.xml
 
-#--next
-#-js all.js
-#-xml js.xml
-#
-#--next
-#-cpp cpp/
-#-xml cpp.xml
-
 --next
-#-cmd haxelib run dox -i . -theme ./themes/flambe --title GLM -D version 1.0.0-alpha --toplevel-package glm
--cmd haxelib run dox -i . --title GLM -D version 2.0.0
+-cmd haxelib run dox -i . -o ../docs --title "GLM" --toplevel-package "glm" -D version "1.2.0" -D source-path "https://github.com/FuzzyWuzzie/haxe-glm/tree/master/src/glm"
