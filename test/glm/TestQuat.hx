@@ -69,6 +69,13 @@ class TestQuat extends BuddySuite {
 				qi.y.should.beCloseTo(qc.y);
 				qi.z.should.beCloseTo(qc.z);
 			});
+			it('should be constructable from an axis and angle', {
+				q = Quat.fromAxisAngle(new Vec3(0, 1, 0), Math.PI / 4);
+				q.w.should.beCloseTo(Math.cos(Math.PI / 8));
+				q.x.should.beCloseTo(0);
+				q.y.should.beCloseTo(Math.sin(Math.PI / 8));
+				q.z.should.beCloseTo(0);
+			});
 
 			after({
 				q = null;
