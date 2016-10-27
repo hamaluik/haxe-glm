@@ -3,7 +3,19 @@ package glm;
 import glm.Vec3;
 import glm.Mat4;
 
+#if !thx_semver
+/**
+ * If [thx.semver](http://lib.haxe.org/p/thx.semver/) is installed, this will be a thx.semver class. Otherwise, it is just a String.
+ */
+typedef Version = String;
+#end
+
 class GLM {
+	/**
+	 * The current semantic version of the library
+	 */
+	public static var version:Version = '1.2.0';
+
 	/**
 	 * Efficient and convenient access to Math.PI / 180.0
 	 */
