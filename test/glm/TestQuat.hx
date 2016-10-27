@@ -8,7 +8,7 @@ class TestQuat extends BuddySuite {
 	public function new() {
 		describe('Using Quats', {
 			var q:Quat;
-			before({
+			beforeEach({
 				q = new Quat();
 			});
 
@@ -77,7 +77,7 @@ class TestQuat extends BuddySuite {
 				q.z.should.beCloseTo(0);
 			});
 
-			after({
+			afterEach({
 				q = null;
 			});
 		});

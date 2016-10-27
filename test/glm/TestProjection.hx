@@ -64,7 +64,7 @@ class TestProjection extends BuddySuite {
 				}
 			});
 
-			after({
+			afterEach({
 				m = null;
 			});
 		});

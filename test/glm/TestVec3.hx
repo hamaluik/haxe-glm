@@ -8,7 +8,7 @@ class TestVec3 extends BuddySuite {
 	public function new() {
 		describe('Using Vec3s', {
 			var v:Vec3;
-			before({
+			beforeEach({
 				v = new Vec3();
 			});
 
@@ -172,7 +172,7 @@ class TestVec3 extends BuddySuite {
 				}
 			});
 
-			after({
+			afterEach({
 				v = null;
 			});
 		});
