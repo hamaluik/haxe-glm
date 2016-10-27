@@ -78,6 +78,13 @@ class GLM {
 		return t * m;
 	}
 	
+	/**
+	 * Look at the vector at another point in space
+	 * @param  eye A vector describing the position of your view.
+	 * @param  center A vector describing where you want to look at.
+	 * @param up A vector describing position of view from a 
+	 *          "bird-eyes" perspective.
+	 */
 	public static function lookAt(eye:Vec3, center:Vec3, up:Vec3):Mat4 {
 		var f:Vec3 = (center - eye).normalize();
 		
