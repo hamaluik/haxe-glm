@@ -17,11 +17,29 @@ class Projection {
 
 	public static function perspective(fovy:Float, aspect:Float, near:Float, far:Float):Mat4 {
 		var result:Mat4 = Mat4.identity();
-		result[0][0] = 1 / (aspect * Math.tan(fovy / 2));
+		/*var depth:Float = far - near;
+		var oneOverDepth:Float = 1.0 / depth;
+		result[1][1] = 1 / Math.tan(0.5 * fovy);
+		result[0][0] = result[1][1] / aspect;
+		result[2][2] = far * oneOverDepth;
+		result[3][2] = (-far * near) * oneOverDepth;
+		result[2][3] = 1;
+		result[3][3] = 0;*/
+		/*result[0][0] = 1 / (aspect * Math.tan(fovy / 2));
 		result[1][1] = 1 / (Math.tan(fovy / 2));
 		result[2][2] = -(far + near) / (far - near);
 		result[3][2] = -1;
-		result[2][3] = -(2 * far * near) / (far - near);
+		result[2][3] = -(2 * far * near) / (far - near);*/
+
+		var fovx:Float = aspect * fovy;
+		
+		result[0][0] = 1 / Math.tan(0.5 * fovx);
+		result[1][1] = 1 / Math.tan(0.5 * fovy);
+		result[2][2] = -(far + near) / (far - near);
+		result[2][3] = -2 * (near * far) / (far - near);
+		result[2][3] = -1;
+		result[3][3] = 0;
+
 		return result;
 	}
 
