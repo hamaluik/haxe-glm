@@ -2,4 +2,5 @@
 -cp test
 -cp src
 -D testing
+-D reporter=buddy.reporting.ConsoleFileReporter
 -main TestMain
