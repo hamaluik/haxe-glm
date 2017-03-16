@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["cross", "utility"],
   "description": "Native Haxe version of the fantastic GLM library.",
-  "version": "1.1.0",
-  "releasenote": "Added lerp and slerp functions.",
+  "version": "2.0.0",
+  "releasenote": "",
   "contributors": ["FuzzyWuzzie"],
   "dependencies": {}
 }
