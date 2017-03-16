@@ -23,6 +23,16 @@ class TestGLM extends BuddySuite {
 				r.x.should.beCloseTo(0);
 				r.y.should.beCloseTo(0);
 				r.z.should.beCloseTo(1);
+
+				r = GLM.rotate(GLM.axisAngle(new Vec3(1, 0, 0), -Math.PI / 2), new Vec3(0, 1, 0));
+				r.x.should.beCloseTo(0);
+				r.y.should.beCloseTo(0);
+				r.z.should.beCloseTo(-1);
+
+				r = GLM.rotate(GLM.axisAngle(new Vec3(0, 1, 0), Math.PI / 2), new Vec3(1, 0, 0));
+				r.x.should.beCloseTo(0);
+				r.y.should.beCloseTo(0);
+				r.z.should.beCloseTo(-1);
 			});
 			it('should be able to apply scale matrices to mat4s', {
 				var v:Vec3 = new Vec3(0, 0, 0);

@@ -8,7 +8,7 @@ class TestMain {
 		TestMain.initCoverage();
 		#end
 
-		var reporter = new buddy.reporting.ConsoleReporter();
+		var reporter = new buddy.reporting.ConsoleFileReporter();
 		var runner = new buddy.SuitesRunner([
 			new TestVec2(),
 			new TestVec3(),

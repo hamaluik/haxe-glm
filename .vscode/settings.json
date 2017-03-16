@@ -1,0 +1,16 @@
+{
+    "haxe.displayConfigurations": [
+        ["test.interp.hxml"],
+        ["dox.hxml"],
+        ["sample/build.js.hxml"],
+        ["test.coverage.hxml"],
+        ["test.cpp.hxml"],
+        ["test.cs.hxml"],
+        ["test.each.hxml"],
+        ["test.java.hxml"],
+        ["test.neko.hxml"],
+        ["test.node.hxml"],
+        ["test.php.hxml"],
+        ["test.python.hxml"]
+    ]
+}

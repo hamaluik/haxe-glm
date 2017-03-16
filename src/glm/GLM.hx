@@ -62,29 +62,29 @@ class GLM {
 	 * @param rotation A vector describing the rotation
 	 */
 	public static function rotation(?m:Mat4, rotation:Quat):Mat4 {
-		var xs:Float = rotation.x * 2;
-		var ys:Float = rotation.y * 2;
-		var zs:Float = rotation.z * 2;
+		var qxx:Float = rotation.x * rotation.x;
+		var qyy:Float = rotation.y * rotation.y;
+		var qzz:Float = rotation.z * rotation.z;
+		var qxz:Float = rotation.x * rotation.z;
+		var qxy:Float = rotation.x * rotation.y;
+		var qyz:Float = rotation.y * rotation.z;
+		var qwx:Float = rotation.w * rotation.x;
+		var qwy:Float = rotation.w * rotation.y;
+		var qwz:Float = rotation.w * rotation.z;
 
-		var wx:Float = rotation.w * xs;
-		var wy:Float = rotation.w * ys;
-		var wz:Float = rotation.w * zs;
+		var t:Mat4 = new Mat4(1.0);
 
-		var xx:Float = rotation.x * xs;
-		var xy:Float = rotation.x * ys;
-		var xz:Float = rotation.x * zs;
+		t[0][0] = 1 - 2 * (qyy +  qzz);
+		t[1][0] = 2 * (qxy + qwz);
+		t[2][0] = 2 * (qxz - qwy);
 
-		var yy:Float = rotation.y * ys;
-		var yz:Float = rotation.y * zs;
+		t[0][1] = 2 * (qxy - qwz);
+		t[1][1] = 1 - 2 * (qxx +  qzz);
+		t[2][1] = 2 * (qyz + qwx);
 
-		var zz:Float = rotation.z * zs;
-
-		var t:Mat4 = Mat4.fromRows(
-			new Vec4(1 - (yy + zz), xy - wz, xz + wy, 0),
-			new Vec4(xy + wz, 1 - (xx + zz), yz - wx, 0),
-			new Vec4(xz - wy, yz + wx, 1 - (xx + yy), 0),
-			new Vec4(0, 0, 0, 1)
-		);
+		t[0][1] = 2 * (qxz + qwy);
+		t[1][1] = 2 * (qyz - qwx);
+		t[2][1] = 1 - 2 * (qxx +  qyy);
 
 		if(m == null) return t;
 		return t * m;
