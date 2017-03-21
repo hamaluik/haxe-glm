@@ -7,6 +7,8 @@ typedef FloatArray = haxe.io.Float32Array;
 #end
 
 class GLM {
+    public static var EPSILON:Float = 0.0000001;
+
     /**
      *  Utility for linearly interpolating between two values
      *  @param a - The value when `t == 0`
