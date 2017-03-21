@@ -1,28 +1,24 @@
 bin/
 
-### Windows ###
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# Created by https://www.gitignore.io/api/windows,osx,linux,visualstudiocode
 
-# Folder config file
-Desktop.ini
+### Linux ###
+*~
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# KDE directory preferences
+.directory
 
-# Windows shortcuts
-*.lnk
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
 
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
 
 ### OSX ###
-.DS_Store
+*.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -40,6 +36,7 @@ Icon
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -48,12 +45,32 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-### Linux ###
-*~
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
 
-# KDE directory preferences
-.directory
+# Folder config file
+Desktop.ini
 
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.gitignore.io/api/windows,osx,linux,visualstudiocode

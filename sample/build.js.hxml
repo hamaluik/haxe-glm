@@ -1,4 +1,0 @@
--lib glm
--main Sample
--dce full
--js output/glm.js
