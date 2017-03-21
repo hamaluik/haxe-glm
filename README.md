@@ -17,9 +17,11 @@ API documentation is available here: http://fuzzywuzzie.github.io/haxe-glm/
 
 ### Manual
 
+The library includes [static extensions](docs/static_extensions.md) and gives you the flexibility to instantiate or reuse objects as desired using [destination arguments](docs/destination_arguments.md).
+
 #### Introduction
 
-This library provides 7 classes (actually, abstracts) which enable vector, matrix, and quaternion mathematical operations (`Vec2`, `Vec3`, `Vec4`, `Mat2`, `Mat3`, `Mat4`, and `Quat`). The vector and quaternion classes are defined as abstracts over arrays of floats, while the matrices are defined as abstracts over arrays of vectors which makes the library work across every target and platform. The library also includes static utilities for generating transformation matrices (`GLM`) and projection matrices (`Projection`).
+This library provides 7 classes (actually, abstracts) which enable vector, matrix, and quaternion mathematical operations (`Vec2`, `Vec3`, `Vec4`, `Mat2`, `Mat3`, `Mat4`, and `Quat`). The library also includes static utilities for generating transformation matrices (`GLM`) and projection matrices (`Projection`).
 
 #### Motivation
 
