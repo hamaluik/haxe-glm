@@ -140,6 +140,43 @@ abstract Vec4(FloatArray) {
     }
 
     /**
+     *  Subtracts `b` from `a` on an element-by-element basis
+     *  @param a - 
+     *  @param b - 
+     *  @param dest - The vector to store the result in
+     *  @return Vec4
+     */
+    public inline static function subtractVec(a:Vec4, b:Vec4, dest:Vec4):Vec4 {
+        dest[0] = a[0] - b[0];
+        dest[1] = a[1] - b[1];
+        dest[2] = a[2] - b[2];
+        dest[3] = a[3] - b[3];
+        return dest;
+    }
+
+    /**
+     *  Shortcut operator for `addVec(a, b, new Vec4())`
+     *  @param a - 
+     *  @param b - 
+     *  @return Vec4
+     */
+    @:op(A + B)
+    public inline static function addVecOp(a:Vec4, b:Vec4):Vec4 {
+        return addVec(a, b, new Vec4());
+    }
+
+    /**
+     *  Shortcut operator for `subtractVec(a, b, new Vec4())`
+     *  @param a - 
+     *  @param b - 
+     *  @return Vec4
+     */
+    @:op(A - B)
+    public inline static function subtractVecOp(a:Vec4, b:Vec4):Vec4 {
+        return subtractVec(a, b, new Vec4());
+    }
+
+    /**
      *  Adds a scalar to a vector
      *  @param a - The vector to add a scalar to
      *  @param s - A scalar to add
@@ -155,26 +192,62 @@ abstract Vec4(FloatArray) {
     }
 
     /**
-     *  Subtracts `b` from `a` on an element-by-element basis
+     *  Multiplies the elements of `a` by `s`, storing the result in `dest`
      *  @param a - 
-     *  @param b - 
-     *  @param dest - The vector to store the result in
+     *  @param s - 
+     *  @param dest - 
      *  @return Vec4
      */
-    public inline static function subtractVec(a:Vec4, b:Vec4, dest:Vec4):Vec4 {
-        dest[0] = a[0] - b[0];
-        dest[1] = a[1] - b[1];
-        dest[2] = a[2] - b[2];
-        dest[3] = a[3] - b[3];
-        return dest;
-    }
-
     public inline static function multiplyScalar(a:Vec4, s:Float, dest:Vec4):Vec4 {
         dest[0] = a[0] * s;
         dest[1] = a[1] * s;
         dest[2] = a[2] * s;
         dest[3] = a[3] * s;
         return dest;
+    }
+
+    /**
+     *  Shortcut operator for `addScalar(a, s, new Vec4())`
+     *  @param a - 
+     *  @param s - 
+     *  @return Vec4
+     */
+    @:op(A + B)
+    public inline static function addScalarOp(a:Vec4, s:Float):Vec4 {
+        return addScalar(a, s, new Vec4());
+    }
+
+    /**
+     *  Shortcut operator for `addScalar(a, -s, new Vec4())`
+     *  @param a - 
+     *  @param s - 
+     *  @return Vec4
+     */
+    @:op(A - B)
+    public inline static function subtractScalarOp(a:Vec4, s:Float):Vec4 {
+        return addScalar(a, -s, new Vec4());
+    }
+
+    /**
+     *  Shortcut operator for `multiplyScalar(a, s, new Vec4())`
+     *  @param a - 
+     *  @param s - 
+     *  @return Vec4
+     */
+    @:op(A * B)
+    public inline static function multiplyScalarOp(a:Vec4, s:Float):Vec4 {
+        return multiplyScalar(a, s, new Vec4());
+    }
+
+    /**
+     *  Shortcut operator for `multiplyScalar(a, 1/s, new Vec4())`
+     *  @param a - 
+     *  @param s - 
+     *  @return Vec4
+     */
+    @:op(A / B)
+    public inline static function divideScalarOp(a:Vec4, s:Float):Vec4 {
+        return multiplyScalar(a, 1/s, new Vec4());
     }
 
     /**

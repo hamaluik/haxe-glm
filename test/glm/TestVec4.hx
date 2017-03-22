@@ -38,6 +38,12 @@ class TestVec4 extends BuddySuite {
 
 				vb.subtractVec(new Vec4(1, 1, 1, 1), vb);
 				vb.equals(va).should.be(true);
+
+				var vc:Vec4 = va + new Vec4(1, 1, 1, 1);
+				vc.equals(new Vec4(2, 3, 4, 2)).should.be(true);
+
+				vc = va - new Vec4(1, 2, 3, 1);
+				vc.equals(new Vec4()).should.be(true);
 			});
 
 			it("should provide scalar math", {
@@ -45,6 +51,15 @@ class TestVec4 extends BuddySuite {
 				vb.equals(new Vec4(2, 3, 4, 2)).should.be(true);
 				va.multiplyScalar(0.5, vb);
 				vb.equals(new Vec4(0.5, 1, 1.5, 0.5)).should.be(true);
+
+				var vc:Vec4 = va * 3;
+				vc.equals(new Vec4(3, 6, 9, 3)).should.be(true);
+
+				vc = va + 3;
+				vc.equals(new Vec4(4, 5, 6, 4)).should.be(true);
+
+				vc = va - 1;
+				vc.equals(new Vec4(0, 1, 2, 0)).should.be(true);
 			});
 
 			it("should calculate distance between vectors", {
