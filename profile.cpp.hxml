@@ -1,0 +1,4 @@
+profile.each.hxml
+-cpp bin
+-cmd bin/ProfileMain
+-D HXCPP_M64

@@ -1,0 +1,4 @@
+-cp src
+-cp test
+-dce full
+-main ProfileMain

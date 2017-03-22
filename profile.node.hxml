@@ -1,0 +1,4 @@
+profile.each.hxml
+-D nodejs
+-js bin/ProfileMain.node.js
+-cmd node bin/ProfileMain.node.js
