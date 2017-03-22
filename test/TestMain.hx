@@ -4,7 +4,7 @@ import glm.*;
 
 class TestMain {
 	public static function main() {
-		var reporter = new buddy.reporting.ConsoleFileReporter();
+		var reporter = new buddy.reporting.ConsoleFileReporter(true);
 		var runner = new buddy.SuitesRunner([
 			new TestGLM(),
 			new TestMat4(),
