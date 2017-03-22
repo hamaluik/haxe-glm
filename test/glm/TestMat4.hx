@@ -112,11 +112,17 @@ class TestMat4 extends BuddySuite {
 				);
 				ma.multMat(mono, mc);
 				target.equals(mc).should.be(true);
+
+				mc = ma * mono;
+				mc.equals(target).should.be(true);
 			});
 
 			it("should multiply vectors", {
 				var p:Vec4 = new Vec4(0, 0, 0, 1);
 				var t:Vec4 = ma.multVec(p, new Vec4());
+				t.equals(new Vec4(1, 2, 3, 1)).should.be(true);
+
+				t = ma * p;
 				t.equals(new Vec4(1, 2, 3, 1)).should.be(true);
 			});
 		});

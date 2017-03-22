@@ -388,6 +388,17 @@ abstract Mat4(FloatArray) {
 	}
 
 	/**
+	 *  Shortcut operator for `multMat(a, b, new Mat4())`
+	 *  @param a - 
+	 *  @param b - 
+	 *  @return Mat4
+	 */
+	@:op(A * B)
+	public inline static function multMatOp(a:Mat4, b:Mat4):Mat4 {
+		return multMat(a, b, new Mat4());
+	}
+
+	/**
 	 *  Multiplies a vector `v` by a matrix `m`, storing the result in `dest`. Caches so `v == dest` is valid.
 	 *  @param m - The transforming matrix
 	 *  @param v - The vector to multiply with
@@ -401,5 +412,16 @@ abstract Mat4(FloatArray) {
 		dest.z = m.r2c0*x + m.r2c1*y + m.r2c2*z + m.r2c3*w;
 		dest.w = m.r3c0*x + m.r3c1*y + m.r3c2*z + m.r3c3*w;
 		return dest;
+	}
+
+	/**
+	 *  Shortcut for `multVec(m, v, new Vec4())`
+	 *  @param m - 
+	 *  @param v - 
+	 *  @return Vec4
+	 */
+	@:op(A * B)
+	public inline static function multVecOp(m:Mat4, v:Vec4):Vec4 {
+		return multVec(m, v, new Vec4());
 	}
 }
