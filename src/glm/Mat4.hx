@@ -303,10 +303,10 @@ abstract Mat4(FloatArray) {
 	 *  @return Mat4
 	 */
 	public inline static function invert(src:Mat4, dest:Mat4):Mat4 {
-		var a00:Float = src[0], a01:Float = src[1], a02:Float = src[2], a03:Float = src[3],
-		    a10:Float = src[4], a11:Float = src[5], a12:Float = src[6], a13:Float = src[7],
-		    a20:Float = src[8], a21:Float = src[9], a22:Float = src[10], a23:Float = src[11],
-		    a30:Float = src[12], a31:Float = src[13], a32:Float = src[14], a33:Float = src[15];
+		var a00:Float = src[0], a01:Float = src[4], a02:Float = src[8], a03:Float = src[12],
+		    a10:Float = src[1], a11:Float = src[5], a12:Float = src[9], a13:Float = src[13],
+		    a20:Float = src[2], a21:Float = src[6], a22:Float = src[10], a23:Float = src[14],
+		    a30:Float = src[3], a31:Float = src[7], a32:Float = src[11], a33:Float = src[15];
 
 		var b00:Float = a00 * a11 - a01 * a10,
 		    b01:Float = a00 * a12 - a02 * a10,
@@ -396,10 +396,10 @@ abstract Mat4(FloatArray) {
 	 */
 	public inline static function multVec(m:Mat4, v:Vec4, dest:Vec4):Vec4 {
 		var x:Float = v.x, y:Float = v.y, z:Float = v.z, w:Float = v.w;
-		dest.x = m[0] * x + m[1] * y + m[2] * z + m[3] * w;
-		dest.y = m[4] * x + m[5] * y + m[6] * z + m[7] * w;
-		dest.z = m[8] * x + m[9] * y + m[10] * z + m[11] * w;
-		dest.w = m[12] * x + m[13] * y + m[14] * z + m[15] * w;
+		dest.x = m.r0c0*x + m.r0c1*y + m.r0c2*z + m.r0c3*w;
+		dest.y = m.r1c0*x + m.r1c1*y + m.r1c2*z + m.r1c3*w;
+		dest.z = m.r2c0*x + m.r2c1*y + m.r2c2*z + m.r2c3*w;
+		dest.w = m.r3c0*x + m.r3c1*y + m.r3c2*z + m.r3c3*w;
 		return dest;
 	}
 }
