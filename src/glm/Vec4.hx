@@ -220,10 +220,10 @@ abstract Vec4(FloatArray) {
      *  @return Vec4
      */
     public inline static function normalize(v:Vec4, dest:Vec4):Vec4 {
-        var lengthSquared:Float = v.lengthSquared();
+        var length:Float = v.length();
         var mult:Float = 0;
-        if(lengthSquared >= glm.GLM.EPSILON) {
-            mult = 1 / lengthSquared;
+        if(length >= glm.GLM.EPSILON) {
+            mult = 1 / length;
         }
         return Vec4.multiplyScalar(v, mult, dest);
     }
