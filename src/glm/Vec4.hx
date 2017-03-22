@@ -3,85 +3,53 @@ package glm;
 import glm.GLM.FloatArray;
 
 /**
- *  Custom iterator for the elements of a `Vec4`
- */
-class Vec4Iterator {
-    var i:Int;
-    var v:Vec4;
-
-    public function new(v:Vec4) {
-        this.v = v;
-        this.i = 0;
-    }
-
-    public function hasNext():Bool {
-        return this.i < 4;
-    }
-
-    public function next():Float {
-        return v.e[i++];
-    }
-}
-
-/**
  *  A four-element vector
  */
-class Vec4 {
-	/**
-	 *  The data stored in the vector
-	 */
-	public var e:FloatArray;
-
+abstract Vec4(FloatArray) {
     /**
      *  Accessor utility for the first element of the vector
      */
     public var x(get, set):Float;
-    private function get_x():Float {
-        return e[0];
-    }
-    private function set_x(v:Float):Float {
-        return e[0] = v;
-    }
+    private inline function get_x():Float return this[0];
+    private inline function set_x(v:Float):Float return this[0] = v;
 
     /**
      *  Accessor utility for the second element of the vector
      */
     public var y(get, set):Float;
-    private function get_y():Float {
-        return e[1];
-    }
-    private function set_y(v:Float):Float {
-        return e[1] = v;
-    }
+    private inline function get_y():Float return this[1];
+    private inline function set_y(v:Float):Float return this[1] = v;
 
     /**
      *  Accessor utility for the third element of the vector
      */
     public var z(get, set):Float;
-    private function get_z():Float {
-        return e[2];
-    }
-    private function set_z(v:Float):Float {
-        return e[2] = v;
-    }
+    private inline function get_z():Float return this[2];
+    private inline function set_z(v:Float):Float return this[2] = v;
 
     /**
      *  Accessor utility for the fourth element of the vector
      */
     public var w(get, set):Float;
-    private function get_w():Float {
-        return e[3];
-    }
-    private function set_w(v:Float):Float {
-        return e[3] = v;
-    }
+    private inline function get_w():Float return this[3];
+    private inline function set_w(v:Float):Float return this[3] = v;
 
-    public function new(x:Float = 0, y:Float = 0, z:Float = 0, w:Float = 0) {
-        e = new FloatArray(4);
-        e[0] = x;
-        e[1] = y;
-        e[2] = z;
-        e[3] = w;
+	@:arrayAccess
+	public inline function get(key:Int) {
+		return this[key];
+	}
+
+	@:arrayAccess
+	public inline function arrayWrite(key:Int, value:Float):Float {
+		return this[key] = value;
+	}
+
+    public inline function new(x:Float = 0, y:Float = 0, z:Float = 0, w:Float = 0) {
+        this = new FloatArray(4);
+        this[0] = x;
+        this[1] = y;
+        this[2] = z;
+        this[3] = w;
     }
 
 	/**
@@ -89,29 +57,31 @@ class Vec4 {
 	 *  @param v - The vector to check against
 	 *  @return Bool
 	 */
-	public function equals(v:Vec4):Bool {
+	public inline function equals(b:Vec4):Bool {
+		var equal:Bool = true;
 		for(i in 0...4) {
-			if(Math.abs(e[i] - v.e[i]) >= 0.000000001) {
-				return false;
+			if(Math.abs(this[i] - b[i]) >= glm.GLM.EPSILON) {
+				equal = false;
+				break;
 			}
 		}
-		return true;
+		return equal;
 	}
 
 	/**
 	 *  Creates a string reprentation of `this`
 	 *  @return String
 	 */
-	public function toString():String {
+	public inline function toString():String {
 		return
-			'<${e[0]}, ${e[1]}, ${e[2]}, ${e[3]}>';
+			'<${this[0]}, ${this[1]}, ${this[2]}, ${this[3]}>';
 	}
 
     /**
      *  Calculates the square of the magnitude of the vector, to save calculation time if the actual magnitude isn't needed
      *  @return Float
      */
-    public function lengthSquared():Float {
+    public inline function lengthSquared():Float {
         return x*x + y*y + z*z + w*w;
     }
 
@@ -119,7 +89,7 @@ class Vec4 {
      *  Calculates the magnitude of the vector
      *  @return Float
      */
-    public function length():Float {
+    public inline function length():Float {
         return Math.sqrt(lengthSquared());
     }
 
@@ -129,11 +99,11 @@ class Vec4 {
 	 *  @param dest - The vector to copy into
 	 *  @return Vec4
 	 */
-	public static function copy(src:Vec4, dest:Vec4):Vec4 {
-        dest.e[0] = src.e[0];
-        dest.e[1] = src.e[1];
-        dest.e[2] = src.e[2];
-        dest.e[3] = src.e[3];
+	public inline static function copy(src:Vec4, dest:Vec4):Vec4 {
+        dest[0] = src[0];
+        dest[1] = src[1];
+        dest[2] = src[2];
+        dest[3] = src[3];
         return dest;
     }
 
@@ -146,7 +116,7 @@ class Vec4 {
      *  @param w - 
      *  @return Vec4
      */
-    public static function set(dest:Vec4, x:Float = 0, y:Float = 0, z:Float = 0, w:Float = 0):Vec4 {
+    public inline static function set(dest:Vec4, x:Float = 0, y:Float = 0, z:Float = 0, w:Float = 0):Vec4 {
         dest.x = x;
         dest.y = y;
         dest.z = z;
@@ -161,11 +131,11 @@ class Vec4 {
      *  @param dest - The vector to store the result in
      *  @return Vec4
      */
-    public static function addVec(a:Vec4, b:Vec4, dest:Vec4):Vec4 {
-        dest.e[0] = a.e[0] + b.e[0];
-        dest.e[1] = a.e[1] + b.e[1];
-        dest.e[2] = a.e[2] + b.e[2];
-        dest.e[3] = a.e[3] + b.e[3];
+    public inline static function addVec(a:Vec4, b:Vec4, dest:Vec4):Vec4 {
+        dest[0] = a[0] + b[0];
+        dest[1] = a[1] + b[1];
+        dest[2] = a[2] + b[2];
+        dest[3] = a[3] + b[3];
         return dest;
     }
 
@@ -176,11 +146,11 @@ class Vec4 {
      *  @param dest - The vector to store the result in
      *  @return Vec4
      */
-    public static function addScalar(a:Vec4, s:Float, dest:Vec4):Vec4 {
-        dest.e[0] = a.e[0] + s;
-        dest.e[1] = a.e[1] + s;
-        dest.e[2] = a.e[2] + s;
-        dest.e[3] = a.e[3] + s;
+    public inline static function addScalar(a:Vec4, s:Float, dest:Vec4):Vec4 {
+        dest[0] = a[0] + s;
+        dest[1] = a[1] + s;
+        dest[2] = a[2] + s;
+        dest[3] = a[3] + s;
         return dest;
     }
 
@@ -191,19 +161,19 @@ class Vec4 {
      *  @param dest - The vector to store the result in
      *  @return Vec4
      */
-    public static function subtractVec(a:Vec4, b:Vec4, dest:Vec4):Vec4 {
-        dest.e[0] = a.e[0] - b.e[0];
-        dest.e[1] = a.e[1] - b.e[1];
-        dest.e[2] = a.e[2] - b.e[2];
-        dest.e[3] = a.e[3] - b.e[3];
+    public inline static function subtractVec(a:Vec4, b:Vec4, dest:Vec4):Vec4 {
+        dest[0] = a[0] - b[0];
+        dest[1] = a[1] - b[1];
+        dest[2] = a[2] - b[2];
+        dest[3] = a[3] - b[3];
         return dest;
     }
 
-    public static function multiplyScalar(a:Vec4, s:Float, dest:Vec4):Vec4 {
-        dest.e[0] = a.e[0] * s;
-        dest.e[1] = a.e[1] * s;
-        dest.e[2] = a.e[2] * s;
-        dest.e[3] = a.e[3] * s;
+    public inline static function multiplyScalar(a:Vec4, s:Float, dest:Vec4):Vec4 {
+        dest[0] = a[0] * s;
+        dest[1] = a[1] * s;
+        dest[2] = a[2] * s;
+        dest[3] = a[3] * s;
         return dest;
     }
 
@@ -213,7 +183,7 @@ class Vec4 {
      *  @param b - 
      *  @return Float
      */
-    public static function distanceSquared(a:Vec4, b:Vec4):Float {
+    public inline static function distanceSquared(a:Vec4, b:Vec4):Float {
         return (a.x - b.x) * (a.x - b.x) +
             (a.y - b.y) * (a.y - b.y) +
             (a.z - b.z) * (a.z - b.z) +
@@ -226,7 +196,7 @@ class Vec4 {
      *  @param b - 
      *  @return Float
      */
-    public static function distance(a:Vec4, b:Vec4):Float {
+    public inline static function distance(a:Vec4, b:Vec4):Float {
         return Math.sqrt(distanceSquared(a, b));
     }
 
@@ -236,7 +206,7 @@ class Vec4 {
      *  @param b - 
      *  @return Float
      */
-    public static function dot(a:Vec4, b:Vec4):Float {
+    public inline static function dot(a:Vec4, b:Vec4):Float {
         return a.x * b.x +
             a.y * b.y +
             a.z * b.z +
@@ -249,7 +219,7 @@ class Vec4 {
      *  @param dest - 
      *  @return Vec4
      */
-    public static function normalize(v:Vec4, dest:Vec4):Vec4 {
+    public inline static function normalize(v:Vec4, dest:Vec4):Vec4 {
         var lengthSquared:Float = v.lengthSquared();
         var mult:Float = 0;
         if(lengthSquared >= glm.GLM.EPSILON) {
@@ -266,19 +236,11 @@ class Vec4 {
      *  @param dest - The vector to store the result in
      *  @return Vec4
      */
-    public static function lerp(a:Vec4, b:Vec4, t:Float, dest:Vec4):Vec4 {
+    public inline static function lerp(a:Vec4, b:Vec4, t:Float, dest:Vec4):Vec4 {
         dest.x = glm.GLM.lerp(a.x, b.x, t);
         dest.y = glm.GLM.lerp(a.y, b.y, t);
         dest.z = glm.GLM.lerp(a.z, b.z, t);
         dest.w = glm.GLM.lerp(a.w, b.w, t);
         return dest;
-    }
-
-    /**
-     *  Iterator for read-only access of the elements of `this`
-     *  @return Vec4Iterator
-     */
-    public function iterator():Vec4Iterator {
-        return new Vec4Iterator(this);
     }
 }
