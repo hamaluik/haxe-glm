@@ -70,4 +70,118 @@ class GLM {
         dest.r2c2 = z;
         return dest;
     }
+
+    /**
+     *  Constructs a perspective projection matrix
+     *  Taken from https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js#L1788
+     *  @param fovy - The vertical field of view in radians
+     *  @param aspectRatio - The aspect ratio of the view
+     *  @param near - The near clipping plane
+     *  @param far - The far clipping plane
+     *  @param dest - Where to store the result
+     *  @return Mat4
+     */
+    public inline static function perspective(fovy:Float, aspectRatio:Float, near:Float, far:Float, dest:Mat4):Mat4 {
+        var f:Float = 1 / Math.tan(fovy / 2);
+        var nf:Float = 1 / (near - far);
+
+        dest.r0c0 = f / aspectRatio;
+        dest.r1c0 = 0;
+        dest.r2c0 = 0;
+        dest.r3c0 = 0;
+
+        dest.r0c1 = 0;
+        dest.r1c1 = f;
+        dest.r2c1 = 0;
+        dest.r3c1 = 0;
+        
+        dest.r0c2 = 0;
+        dest.r1c2 = 0;
+        dest.r2c2 = (far + near) * nf;
+        dest.r3c2 = -1;
+
+        dest.r0c3 = 0;
+        dest.r1c3 = 0;
+        dest.r2c3 = (2 * far * near) * nf;
+        dest.r3c3 = 0;
+        return dest;
+    }
+
+    /**
+     *  Constructs an orthographic projection matrix
+     *  Taken from: https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js#L1860
+     *  @param left - 
+     *  @param right - 
+     *  @param bottom - 
+     *  @param top - 
+     *  @param near - 
+     *  @param far - 
+     *  @param dest - Where to store the result
+     *  @return Mat4
+     */
+    public inline static function orthographic(left:Float, right:Float, bottom:Float, top:Float, near:Float=-1, far:Float=1, dest:Mat4):Mat4 {
+        var lr:Float = 1 / (left - right);
+        var bt:Float = 1 / (bottom - top);
+        var nf:Float = 1 / (near - far);
+
+        dest.r0c0 = -2 * lr;
+        dest.r1c0 = 0;
+        dest.r2c0 = 0;
+        dest.r3c0 = 0;
+
+        dest.r0c1 = 0;
+        dest.r1c1 = -2 * bt;
+        dest.r2c1 = 0;
+        dest.r3c1 = 0;
+        
+        dest.r0c2 = 0;
+        dest.r1c2 = 0;
+        dest.r2c2 = 2 * nf;
+        dest.r3c2 = 0;
+
+        dest.r0c3 = (left + right) * lr;
+        dest.r1c3 = (top + bottom) * bt;
+        dest.r2c3 = (far + near) * nf;
+        dest.r3c3 = 1;
+        return dest;
+    }
+
+    /**
+     *  Constructs an orthographic projection matrix
+     *  Taken from: https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js#L1755
+     *  @param left - 
+     *  @param right - 
+     *  @param bottom - 
+     *  @param top - 
+     *  @param near - 
+     *  @param far - 
+     *  @param dest - Where to store the result
+     *  @return Mat4
+     */
+    public inline static function frustum(left:Float, right:Float, bottom:Float, top:Float, near:Float=-1, far:Float=1, dest:Mat4):Mat4 {
+        var rl:Float = 1 / (right - left);
+        var tb:Float = 1 / (top - bottom);
+        var nf:Float = 1 / (near - far);
+
+        dest.r0c0 = (near * 2) * rl;
+        dest.r1c0 = 0;
+        dest.r2c0 = 0;
+        dest.r3c0 = 0;
+
+        dest.r0c1 = 0;
+        dest.r1c1 = (near * 2) * tb;
+        dest.r2c1 = 0;
+        dest.r3c1 = 0;
+        
+        dest.r0c2 = (right + left) * tb;
+        dest.r1c2 = (top + bottom) * tb;
+        dest.r2c2 = (far + near) * nf;
+        dest.r3c2 = -1;
+
+        dest.r0c3 = 0;
+        dest.r1c3 = 0;
+        dest.r2c3 = (far * near * 2) * nf;
+        dest.r3c3 = 0;
+        return dest;
+    }
 }
