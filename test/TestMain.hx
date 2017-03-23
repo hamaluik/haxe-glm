@@ -8,7 +8,8 @@ class TestMain {
 		var runner = new buddy.SuitesRunner([
 			new TestGLM(),
 			new TestMat4(),
-			new TestVec4()
+			new TestVec4(),
+			new TestQuat()
 		], reporter);
 
 		runner.run();
