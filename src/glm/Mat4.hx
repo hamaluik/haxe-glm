@@ -316,47 +316,41 @@ abstract Mat4(FloatArray) {
 	 *  @return Mat4
 	 */
 	public inline static function invert(src:Mat4, dest:Mat4):Mat4 {
-		var a00:Float = src[0], a01:Float = src[4], a02:Float = src[8], a03:Float = src[12],
-		    a10:Float = src[1], a11:Float = src[5], a12:Float = src[9], a13:Float = src[13],
-		    a20:Float = src[2], a21:Float = src[6], a22:Float = src[10], a23:Float = src[14],
-		    a30:Float = src[3], a31:Float = src[7], a32:Float = src[11], a33:Float = src[15];
+		var a00:Float = src[0], a01:Float = src[4], a02:Float = src[8], a03:Float = src[12];
+		var a10:Float = src[1], a11:Float = src[5], a12:Float = src[9], a13:Float = src[13];
+		var a20:Float = src[2], a21:Float = src[6], a22:Float = src[10], a23:Float = src[14];
+		var a30:Float = src[3], a31:Float = src[7], a32:Float = src[11], a33:Float = src[15];
 
-		var b00:Float = a00 * a11 - a01 * a10,
-		    b01:Float = a00 * a12 - a02 * a10,
-		    b02:Float = a00 * a13 - a03 * a10,
-		    b03:Float = a01 * a12 - a02 * a11,
-		    b04:Float = a01 * a13 - a03 * a11,
-		    b05:Float = a02 * a13 - a03 * a12,
-		    b06:Float = a20 * a31 - a21 * a30,
-		    b07:Float = a20 * a32 - a22 * a30,
-		    b08:Float = a20 * a33 - a23 * a30,
-		    b09:Float = a21 * a32 - a22 * a31,
-		    b10:Float = a21 * a33 - a23 * a31,
-		    b11:Float = a22 * a33 - a23 * a32;
+		var t00:Float = a12 * a23 * a31 - a13 * a22 * a31 + a13 * a21 * a32 - a11 * a23 * a32 - a12 * a21 * a33 + a11 * a22 * a33;
+		var t01:Float = a03 * a22 * a31 - a02 * a23 * a31 - a03 * a21 * a32 + a01 * a23 * a32 + a02 * a21 * a33 - a01 * a22 * a33;
+		var t02:Float = a02 * a13 * a31 - a03 * a12 * a31 + a03 * a11 * a32 - a01 * a13 * a32 - a02 * a11 * a33 + a01 * a12 * a33;
+		var t03:Float = a03 * a12 * a21 - a02 * a13 * a21 - a03 * a11 * a22 + a01 * a13 * a22 + a02 * a11 * a23 - a01 * a12 * a23;
 
-		var det:Float = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
-		if (Math.abs(det) <= 0.0000001) {
+		var det:Float = a00 * t00 + a10 * t01 + a20 * t02 + a30 * t03;
+		if (Math.abs(det) <= glm.GLM.EPSILON) {
 			throw 'Can\'t invert matrix, det (${det}) is too small!';
 		}
-		det = 1.0 / det;
+		var idet:Float = 1 / det;
 
-		dest[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;
-		dest[1] = (a02 * b10 - a01 * b11 - a03 * b09) * det;
-		dest[2] = (a31 * b05 - a32 * b04 + a33 * b03) * det;
-		dest[3] = (a22 * b04 - a21 * b05 - a23 * b03) * det;
-		dest[4] = (a12 * b08 - a10 * b11 - a13 * b07) * det;
-		dest[5] = (a00 * b11 - a02 * b08 + a03 * b07) * det;
-		dest[6] = (a32 * b02 - a30 * b05 - a33 * b01) * det;
-		dest[7] = (a20 * b05 - a22 * b02 + a23 * b01) * det;
-		dest[8] = (a10 * b10 - a11 * b08 + a13 * b06) * det;
-		dest[9] = (a01 * b08 - a00 * b10 - a03 * b06) * det;
-		dest[10] = (a30 * b04 - a31 * b02 + a33 * b00) * det;
-		dest[11] = (a21 * b02 - a20 * b04 - a23 * b00) * det;
-		dest[12] = (a11 * b07 - a10 * b09 - a12 * b06) * det;
-		dest[13] = (a00 * b09 - a01 * b07 + a02 * b06) * det;
-		dest[14] = (a31 * b01 - a30 * b03 - a32 * b00) * det;
-		dest[15] = (a20 * b03 - a21 * b01 + a22 * b00) * det;
+		dest.r0c0 = t00 * idet;
+		dest.r1c0 = (a13 * a22 * a30 - a12 * a23 * a30 - a13 * a20 * a32 + a10 * a23 * a32 + a12 * a20 * a33 - a10 * a22 * a33) * idet;
+		dest.r2c0 = (a11 * a23 * a30 - a13 * a21 * a30 + a13 * a20 * a31 - a10 * a23 * a31 - a11 * a20 * a33 + a10 * a21 * a33) * idet;
+		dest.r3c0 = (a12 * a21 * a30 - a11 * a22 * a30 - a12 * a20 * a31 + a10 * a22 * a31 + a11 * a20 * a32 - a10 * a21 * a32) * idet;
 
+		dest.r0c1 = t01 * idet;
+		dest.r1c1 = (a02 * a23 * a30 - a03 * a22 * a30 + a03 * a20 * a32 - a00 * a23 * a32 - a02 * a20 * a33 + a00 * a22 * a33) * idet;
+		dest.r2c1 = (a03 * a21 * a30 - a01 * a23 * a30 - a03 * a20 * a31 + a00 * a23 * a31 + a01 * a20 * a33 - a00 * a21 * a33) * idet;
+		dest.r3c1 = (a01 * a22 * a30 - a02 * a21 * a30 + a02 * a20 * a31 - a00 * a22 * a31 - a01 * a20 * a32 + a00 * a21 * a32) * idet;
+
+		dest.r0c2 = t02 * idet;
+		dest.r1c2 = (a03 * a12 * a30 - a02 * a13 * a30 - a03 * a10 * a32 + a00 * a13 * a32 + a02 * a10 * a33 - a00 * a12 * a33) * idet;
+		dest.r2c2 = (a01 * a13 * a30 - a03 * a11 * a30 + a03 * a10 * a31 - a00 * a13 * a31 - a01 * a10 * a33 + a00 * a11 * a33) * idet;
+		dest.r3c2 = (a02 * a11 * a30 - a01 * a12 * a30 - a02 * a10 * a31 + a00 * a12 * a31 + a01 * a10 * a32 - a00 * a11 * a32) * idet;
+
+		dest.r0c3 = t03 * idet;
+		dest.r1c3 = (a02 * a13 * a20 - a03 * a12 * a20 + a03 * a10 * a22 - a00 * a13 * a22 - a02 * a10 * a23 + a00 * a12 * a23) * idet;
+		dest.r2c3 = (a03 * a11 * a20 - a01 * a13 * a20 - a03 * a10 * a21 + a00 * a13 * a21 + a01 * a10 * a23 - a00 * a11 * a23) * idet;
+		dest.r3c3 = (a01 * a12 * a20 - a02 * a11 * a20 + a02 * a10 * a21 - a00 * a12 * a21 - a01 * a10 * a22 + a00 * a11 * a22) * idet;
 		return dest;
 	}
 

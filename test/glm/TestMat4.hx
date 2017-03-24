@@ -84,14 +84,39 @@ class TestMat4 extends BuddySuite {
 
 			it("should invert", {
 				var target:Mat4 = new Mat4(
-					1, 0, 0, 0,
-					0, 1, 0, 0,
-					0, 0, 1, 0,
-					-1, -2, -3, 1
+					1, 0, 0, -1,
+					0, 1, 0, -2,
+					0, 0, 1, -3,
+					0, 0, 0, 1
 				);
 
 				mb = ma.invert(new Mat4());
 				target.equals(mb).should.be(true);
+
+				// now try a "real-world" matrix
+				ma = new Mat4(
+					1.3910845518112183, -0.3573116362094879, 1.3918377161026, 7.8977532386779785,
+					1.4369703531265259, 0.3458636403083801, -1.347402811050415, -7.944790840148926,
+					2.8320780984358862e-05, 1.9371904134750366, 0.4972859025001526, 2.9501945972442627,
+					0.0, 0.0, 0.0, 1.0);
+				
+				// invert it twice, it should go back to itself!
+				mb = ma.invert(mb);
+				mb.invert(mb);
+				for(i in 0...16) {
+					ma[i].should.beCloseTo(mb[i]);
+				}
+
+				// and it should roughly equal this:
+				target = new Mat4(
+					0.34777113795280457, 0.35924261808395386, 7.078052021824988e-06, 0.10747592151165009,
+					-0.08932791650295258, 0.08646592497825623, 0.48429763317108154, -0.03632880374789238,
+					0.3479594588279724, -0.33685073256492615, 0.12432148307561874, -5.791079521179199,
+					-0.0, 0.0, -0.0, 1.0);
+				mb.invert(mb);
+				for(i in 0...16) {
+					mb[i].should.beCloseTo(target[i]);
+				}
 			});
 
 			it("should multiply other matrices", {
