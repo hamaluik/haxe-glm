@@ -16,7 +16,7 @@ package glm;
 import glm.GLM.FloatArray;
 
 /**
- *  A trhee-element vector
+ *  A three-element vector
  */
 abstract Vec3(FloatArray) {
     /**
@@ -39,6 +39,27 @@ abstract Vec3(FloatArray) {
     public var z(get, set):Float;
     private inline function get_z():Float return this[2];
     private inline function set_z(v:Float):Float return this[2] = v;
+    
+    /**
+     *  Accessor utility for the first element of the vector
+     */
+    public var r(get, set):Float;
+    private inline function get_r():Float return this[0];
+    private inline function set_r(v:Float):Float return this[0] = v;
+
+    /**
+     *  Accessor utility for the second element of the vector
+     */
+    public var g(get, set):Float;
+    private inline function get_g():Float return this[1];
+    private inline function set_g(v:Float):Float return this[1] = v;
+
+    /**
+     *  Accessor utility for the third element of the vector
+     */
+    public var b(get, set):Float;
+    private inline function get_b():Float return this[2];
+    private inline function set_b(v:Float):Float return this[2] = v;
 
 	@:arrayAccess
 	public inline function get(key:Int) {
