@@ -1,0 +1,4 @@
+-lib glm
+-main Sample
+-dce full
+--interp
