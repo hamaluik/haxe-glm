@@ -4,6 +4,10 @@ import glm.GLM;
 import buddy.*;
 using buddy.Should;
 
+import glm.Vec3;
+import glm.Quat;
+import glm.Mat4;
+
 class TestGLM extends BuddySuite {
 	public function new() {
 		describe('Using GLM', {
@@ -12,7 +16,7 @@ class TestGLM extends BuddySuite {
 			});
 
             it("should create translation matrices", {
-                var t:Mat4 = GLM.translate(2, 4, 5, new Mat4());
+                var t:Mat4 = GLM.translate(new Vec3(2, 4, 5), new Mat4());
                 t.r0c3.should.be(2);
                 t.r1c3.should.be(4);
                 t.r2c3.should.be(5);
@@ -29,10 +33,45 @@ class TestGLM extends BuddySuite {
             it("should create rotation matrices about the z axis");
 
             it("should create scale matrices", {
-                var s:Mat4 = GLM.scale(-1, 2, 3, new Mat4());
+                var s:Mat4 = GLM.scale(new Vec3(-1, 2, 3), new Mat4());
                 s.r0c0.should.be(-1);
                 s.r1c1.should.be(2);
                 s.r2c2.should.be(3);
+            });
+
+            it("should construct complete transformation matrices", {
+                var t:Vec3 = new Vec3(-1, 2, 3);
+                var r:Quat = Quat.axisAngle(new Vec3(1, 0, 0), Math.PI / 2, new Quat());
+                var s:Vec3 = new Vec3(2, 3, 4);
+
+                var transform:Mat4 = GLM.transform(t, r, s, new Mat4());
+
+                var m_t:Mat4 = GLM.translate(t, new Mat4());
+                var m_r:Mat4 = GLM.rotate(r, new Mat4());
+                var m_s:Mat4 = GLM.scale(s, new Mat4());
+
+                var result:Mat4 = Mat4.multMat(m_r, m_s, new Mat4());
+                result = Mat4.multMat(m_t, result, result);
+
+                transform.r0c0.should.beCloseTo(result.r0c0);
+                transform.r1c0.should.beCloseTo(result.r1c0);
+                transform.r1c0.should.beCloseTo(result.r1c0);
+                transform.r1c0.should.beCloseTo(result.r1c0);
+
+                transform.r0c1.should.beCloseTo(result.r0c1);
+                transform.r1c1.should.beCloseTo(result.r1c1);
+                transform.r1c1.should.beCloseTo(result.r1c1);
+                transform.r1c1.should.beCloseTo(result.r1c1);
+
+                transform.r0c2.should.beCloseTo(result.r0c2);
+                transform.r1c2.should.beCloseTo(result.r1c2);
+                transform.r1c2.should.beCloseTo(result.r1c2);
+                transform.r1c2.should.beCloseTo(result.r1c2);
+
+                transform.r0c3.should.beCloseTo(result.r0c3);
+                transform.r1c3.should.beCloseTo(result.r1c3);
+                transform.r1c3.should.beCloseTo(result.r1c3);
+                transform.r1c3.should.beCloseTo(result.r1c3);
             });
 
             it("should create perspective matrices", {

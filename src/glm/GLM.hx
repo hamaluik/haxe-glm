@@ -41,33 +41,106 @@ class GLM {
 
     /**
      *  Constructs a 3D translation matrix
-     *  @param x - How far to move in the `x` direction
-     *  @param y - How far to move in the `y` direction
-     *  @param z - How far to move in the `z` direction
+     *  @param translation - How far to move in each of the directions
      *  @param dest - Where the result will be stored
      *  @return Mat4
      */
-    public inline static function translate(x:Float, y:Float, z:Float, dest:Mat4):Mat4 {
+    public inline static function translate(translation:Vec3, dest:Mat4):Mat4 {
         dest.identity();
-        dest.r0c3 = x;
-        dest.r1c3 = y;
-        dest.r2c3 = z;
+        dest.r0c3 = translation.x;
+        dest.r1c3 = translation.y;
+        dest.r2c3 = translation.z;
+        return dest;
+    }
+
+    /**
+     *  Constructs a 3D rotation matrix
+     *  @param rotation - The quaternion to use as rotation
+     *  @param dest - Where the result will be stored
+     *  @return Mat4
+     */
+    public inline function rotate(rotation:Quat, dest:Mat4):Mat4 {
+        var x2:Float = rotation.x+rotation.x, y2:Float = rotation.y+rotation.y, z2:Float = rotation.z+rotation.z;
+		var xx:Float = rotation.x * x2, xy:Float = rotation.x * y2, xz:Float = rotation.x * z2;
+		var yy:Float = rotation.y * y2, yz:Float = rotation.y * z2, zz:Float = rotation.z * z2;
+		var wx:Float = rotation.w * x2, wy:Float = rotation.w * y2, wz:Float = rotation.w * z2;
+
+        dest.r0c0 = 1 - (yy + zz);
+        dest.r0c1 = xy - wz;
+        dest.r0c2 = xz + wy;
+        dest.r0c3 = 0;
+
+        dest.r1c0 = xy + wz;
+        dest.r1c1 = 1 - (xx + zz);
+        dest.r1c2 = yz - wx;
+        dest.r1c3 = 0;
+        
+        dest.r2c0 = xz - wy;
+        dest.r2c1 = yz + wx;
+        dest.r2c2 = 1 - (xx + yy);
+        dest.r2c3 = 0;
+
+        dest.r3c0 = 0;
+        dest.r3c1 = 0;
+        dest.r3c2 = 0;
+        dest.r3c3 = 1;
         return dest;
     }
 
     /**
      *  Constructs a 3D scale matrix
-     *  @param x - How much to scale in the x direction by
-     *  @param y - How much to scale in the y direction by
-     *  @param z - How much to scale in the z direction by
+     *  @param amount - How much to scale by in each of the three directions
      *  @param dest - Where the result will be stored
      *  @return Mat4
      */
-    public inline static function scale(x:Float, y:Float, z:Float, dest:Mat4):Mat4 {
+    public inline static function scale(amount:Vec3, dest:Mat4):Mat4 {
         dest.identity();
-        dest.r0c0 = x;
-        dest.r1c1 = y;
-        dest.r2c2 = z;
+        dest.r0c0 = amount.x;
+        dest.r1c1 = amount.y;
+        dest.r2c2 = amount.z;
+        return dest;
+    }
+
+    /**
+     *  Constructs a complete transformation matrix from translation, rotation, and scale components.
+     *  It should be a fair bit faster than constructing each on their own and multiplying together.
+     *  @param translation - The translation vector
+     *  @param rotation - The rotation quaternion
+     *  @param scale - The scale vector
+     *  @param dest - Where to store the result
+     *  @return Mat4
+     */
+    public inline static function transform(translation:Vec3, rotation:Quat, scale:Vec3, dest:Mat4):Mat4 {
+        var x2:Float = rotation.x + rotation.x;
+        var y2:Float = rotation.y + rotation.y;
+        var z2:Float = rotation.z + rotation.z;
+
+        var xx:Float = rotation.x * x2;
+        var xy:Float = rotation.x * y2;
+        var xz:Float = rotation.x * z2;
+        var yy:Float = rotation.y * y2;
+        var yz:Float = rotation.y * z2;
+        var zz:Float = rotation.z * z2;
+        var wx:Float = rotation.w * x2;
+        var wy:Float = rotation.w * y2;
+        var wz:Float = rotation.w * z2;
+
+        dest.r0c0 = (1 - (yy + zz)) * scale.x;
+        dest.r1c0 = (xy + wz) * scale.x;
+        dest.r2c0 = (xz - wy) * scale.x;
+        dest.r3c0 = 0;
+        dest.r0c1 = (xy - wz) * scale.y;
+        dest.r1c1 = (1 - (xx + zz)) * scale.y;
+        dest.r2c1 = (yz + wx) * scale.y;
+        dest.r3c1 = 0;
+        dest.r0c2 = (xz + wy) * scale.z;
+        dest.r1c2 = (yz - wx) * scale.z;
+        dest.r2c2 = (1 - (xx + yy)) * scale.z;
+        dest.r3c2 = 0;
+        dest.r0c3 = translation.x;
+        dest.r1c3 = translation.y;
+        dest.r2c3 = translation.z;
+        dest.r3c3 = 1;
         return dest;
     }
 
