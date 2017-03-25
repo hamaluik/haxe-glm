@@ -326,4 +326,24 @@ abstract Quat(FloatArray) {
         dest.w =      q.w;
         return dest;
     }
+
+    /**
+     *  Constructs a quaternion from roll, pitch, and yaw (x, y, and z axes)
+     *  @param x - The angle to rotate around x
+     *  @param y - The angle to rotate around y
+     *  @param z - The angle to rotate around z
+     *  @param dest - Where to store the result
+     *  @return Quat
+     */
+    public inline static function fromEuler(x:Float, y:Float, z:Float, dest:Quat):Quat {
+        var c1:Float = Math.cos(x / 2), c2:Float = Math.cos(y / 2), c3:Float = Math.cos(z / 2);
+        var s1:Float = Math.sin(x / 2), s2:Float = Math.sin(y / 2), s3:Float = Math.sin(z / 2);
+
+        dest.x = s1 * c2 * c3 + c1 * s2 * s3;
+        dest.y = c1 * s2 * c3 - s1 * c2 * s3;
+        dest.z = c1 * c2 * s3 + s1 * s2 * c3;
+        dest.w = c1 * c2 * c3 - s1 * s2 * s3;
+
+        return dest;
+    }
 }

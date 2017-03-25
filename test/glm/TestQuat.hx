@@ -129,6 +129,40 @@ class TestQuat extends BuddySuite {
                 qr.z.should.be(-3);
                 qr.w.should.be(4);
             });
+
+            it("should convert euler angles", {
+                var qx:Quat = Quat.fromEuler(Math.PI / 2, 0, 0, new Quat());
+                var qy:Quat = Quat.fromEuler(0, Math.PI / 2, 0, new Quat());
+                var qz:Quat = Quat.fromEuler(0, 0, Math.PI / 2, new Quat());
+
+                var x:Vec4 = new Vec4(1, 0, 0, 1);
+                var y:Vec4 = new Vec4(0, 1, 0, 1);
+                var z:Vec4 = new Vec4(0, 0, 1, 1);
+
+                var m:Mat4 = new Mat4();
+                var r:Vec4 = new Vec4();
+
+                GLM.rotate(qx, m);
+                Mat4.multVec(m, y, r);
+                r.x.should.beCloseTo(0);
+                r.y.should.beCloseTo(0);
+                r.z.should.beCloseTo(1);
+                r.w.should.beCloseTo(1);
+
+                GLM.rotate(qy, m);
+                Mat4.multVec(m, x, r);
+                r.x.should.beCloseTo(0);
+                r.y.should.beCloseTo(0);
+                r.z.should.beCloseTo(-1);
+                r.w.should.beCloseTo(1);
+
+                GLM.rotate(qz, m);
+                Mat4.multVec(m, x, r);
+                r.x.should.beCloseTo(0);
+                r.y.should.beCloseTo(1);
+                r.z.should.beCloseTo(0);
+                r.w.should.beCloseTo(1);
+            });
 		});
 	}
 }

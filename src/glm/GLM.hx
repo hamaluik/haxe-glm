@@ -59,7 +59,7 @@ class GLM {
      *  @param dest - Where the result will be stored
      *  @return Mat4
      */
-    public inline function rotate(rotation:Quat, dest:Mat4):Mat4 {
+    public inline static function rotate(rotation:Quat, dest:Mat4):Mat4 {
         var x2:Float = rotation.x+rotation.x, y2:Float = rotation.y+rotation.y, z2:Float = rotation.z+rotation.z;
 		var xx:Float = rotation.x * x2, xy:Float = rotation.x * y2, xz:Float = rotation.x * z2;
 		var yy:Float = rotation.y * y2, yz:Float = rotation.y * z2, zz:Float = rotation.z * z2;
@@ -140,6 +140,89 @@ class GLM {
         dest.r0c3 = translation.x;
         dest.r1c3 = translation.y;
         dest.r2c3 = translation.z;
+        dest.r3c3 = 1;
+        return dest;
+    }
+
+    /**
+     *  Constructs a lookat matrix to position a view matrix at `eye`, looking at `centre`, with `up` orienting the view
+     *  @param eye - Where the viewer is located
+     *  @param centre - Where the viewer is looking at
+     *  @param up - A vector pointing `up` for the view
+     *  @param dest - Where to store the result
+     *  @return Mat4
+     */
+    public static function lookAt(eye:Vec3, centre:Vec3, up:Vec3, dest:Mat4):Mat4 {
+        var x0:Float, x1:Float, x2:Float, y0:Float, y1:Float, y2:Float, z0:Float, z1:Float, z2:Float;
+        var len:Float;
+
+        if (Math.abs(eye.x - centre.x) < EPSILON &&
+            Math.abs(eye.y - centre.y) < EPSILON &&
+            Math.abs(eye.z - centre.z) < EPSILON) {
+            dest.identity();
+            return dest;
+        }
+
+        z0 = eye.x - centre.x;
+        z1 = eye.y - centre.y;
+        z2 = eye.z - centre.z;
+
+        len = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
+        z0 *= len;
+        z1 *= len;
+        z2 *= len;
+
+        x0 = up.y * z2 - up.z * z1;
+        x1 = up.z * z0 - up.x * z2;
+        x2 = up.x * z1 - up.y * z0;
+        len = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
+        if (len <= EPSILON) {
+            x0 = 0;
+            x1 = 0;
+            x2 = 0;
+        }
+        else {
+            len = 1 / len;
+            x0 *= len;
+            x1 *= len;
+            x2 *= len;
+        }
+
+        y0 = z1 * x2 - z2 * x1;
+        y1 = z2 * x0 - z0 * x2;
+        y2 = z0 * x1 - z1 * x0;
+
+        len = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
+        if (len <= EPSILON) {
+            y0 = 0;
+            y1 = 0;
+            y2 = 0;
+        }
+        else {
+            len = 1 / len;
+            y0 *= len;
+            y1 *= len;
+            y2 *= len;
+        }
+
+        dest.r0c0 = x0;
+        dest.r1c0 = y0;
+        dest.r2c0 = z0;
+        dest.r3c0 = 0;
+
+        dest.r0c1 = x1;
+        dest.r1c1 = y1;
+        dest.r2c1 = z1;
+        dest.r3c1 = 0;
+
+        dest.r0c2 = x2;
+        dest.r1c2 = y2;
+        dest.r2c2 = z2;
+        dest.r3c2 = 0;
+
+        dest.r0c3 = -(x0 * eye.x + x1 * eye.y + x2 * eye.z);
+        dest.r1c3 = -(y0 * eye.x + y1 * eye.y + y2 * eye.z);
+        dest.r2c3 = -(z0 * eye.x + z1 * eye.y + z2 * eye.z);
         dest.r3c3 = 1;
         return dest;
     }

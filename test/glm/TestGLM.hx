@@ -22,15 +22,17 @@ class TestGLM extends BuddySuite {
                 t.r2c3.should.be(5);
             });
 
-            it("should create rotation matrices from quaternions");
+            it("should create rotation matrices from quaternions", {
+                var r:Quat = Quat.axisAngle(new Vec3(0, 1, 0), -Math.PI / 2, new Quat());
+                var r_m:Mat4 = GLM.rotate(r, new Mat4());
 
-            it("should create rotation matrices from euler angles");
-
-            it("should create rotation matrices about the x axis");
-
-            it("should create rotation matrices about the y axis");
-
-            it("should create rotation matrices about the z axis");
+                var x:Vec4 = new Vec4(1, 0, 0, 1);
+                var z:Vec4 = Mat4.multVec(r_m, x, new Vec4());
+                z.x.should.beCloseTo(0);
+                z.y.should.beCloseTo(0);
+                z.z.should.beCloseTo(1);
+                z.w.should.beCloseTo(1);
+            });
 
             it("should create scale matrices", {
                 var s:Mat4 = GLM.scale(new Vec3(-1, 2, 3), new Mat4());
