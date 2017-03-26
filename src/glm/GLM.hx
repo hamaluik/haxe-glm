@@ -265,7 +265,6 @@ class GLM {
 
     /**
      *  Constructs an orthographic projection matrix
-     *  Taken from: https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js#L1860
      *  @param left - 
      *  @param right - 
      *  @param bottom - 
@@ -276,28 +275,28 @@ class GLM {
      *  @return Mat4
      */
     public inline static function orthographic(left:Float, right:Float, bottom:Float, top:Float, near:Float=-1, far:Float=1, dest:Mat4):Mat4 {
-        var lr:Float = 1 / (left - right);
-        var bt:Float = 1 / (bottom - top);
-        var nf:Float = 1 / (near - far);
+        var rl:Float = 1 / (right - left);
+        var tb:Float = 1 / (top - bottom);
+        var fn:Float = 1 / (far - near);
 
-        dest.r0c0 = -2 * lr;
-        dest.r1c0 = 0;
-        dest.r2c0 = 0;
-        dest.r3c0 = 0;
-
+        dest.r0c0 = 2 * rl;
         dest.r0c1 = 0;
-        dest.r1c1 = -2 * bt;
-        dest.r2c1 = 0;
-        dest.r3c1 = 0;
-        
         dest.r0c2 = 0;
-        dest.r1c2 = 0;
-        dest.r2c2 = 2 * nf;
-        dest.r3c2 = 0;
+        dest.r0c3 = -1 * (left + right) * rl;
 
-        dest.r0c3 = (left + right) * lr;
-        dest.r1c3 = (top + bottom) * bt;
-        dest.r2c3 = (far + near) * nf;
+        dest.r1c0 = 0;
+        dest.r1c1 = 2 * tb;
+        dest.r1c2 = 0;
+        dest.r1c3 = -1 * (top + bottom) * tb;
+
+        dest.r2c0 = 0;
+        dest.r2c1 = 0;
+        dest.r2c2 = -2 * fn;
+        dest.r2c3 = -1 * (far + near) * fn;
+
+        dest.r3c0 = 0;
+        dest.r3c1 = 0;
+        dest.r3c2 = 0;
         dest.r3c3 = 1;
         return dest;
     }

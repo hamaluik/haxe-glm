@@ -87,13 +87,40 @@ class TestGLM extends BuddySuite {
             });
             
             it("should create orthogonal matrices", {
-                var persp:Mat4 = GLM.orthographic(-1, 1, -1, 1, -1, 1, new Mat4());
-                persp.equals(new Mat4(
-                    1, 0, 0, 0,
-                    0, 1, 0, 0,
-                    0, 0, -1, 0,
+                var r:Float = 3;
+                var b:Float = 3 * 9 / 16;
+                var l:Float = -r;
+                var t:Float = -b;
+                var n:Float = -1;
+                var f:Float = 1;
+
+                var persp:Mat4 = GLM.orthographic(l, r, b, t, n, f, new Mat4());
+                var target:Mat4 = new Mat4(
+                    1/r, 0, 0, 0,
+                    0, 1/t, 0, 0,
+                    0, 0, -2/(f-n), -1*(f+n)/(f-n),
                     0, 0, 0, 1
-                )).should.be(true);
+                );
+
+                persp.r0c0.should.beCloseTo(target.r0c0);
+                persp.r1c0.should.beCloseTo(target.r1c0);
+                persp.r2c0.should.beCloseTo(target.r2c0);
+                persp.r3c0.should.beCloseTo(target.r3c0);
+
+                persp.r0c1.should.beCloseTo(target.r0c1);
+                persp.r1c1.should.beCloseTo(target.r1c1);
+                persp.r2c1.should.beCloseTo(target.r2c1);
+                persp.r3c1.should.beCloseTo(target.r3c1);
+
+                persp.r0c2.should.beCloseTo(target.r0c2);
+                persp.r1c2.should.beCloseTo(target.r1c2);
+                persp.r2c2.should.beCloseTo(target.r2c2);
+                persp.r3c2.should.beCloseTo(target.r3c2);
+
+                persp.r0c3.should.beCloseTo(target.r0c3);
+                persp.r1c3.should.beCloseTo(target.r1c3);
+                persp.r2c3.should.beCloseTo(target.r2c3);
+                persp.r3c3.should.beCloseTo(target.r3c3);
             });
 
             it("should create frustrum matrices", {
