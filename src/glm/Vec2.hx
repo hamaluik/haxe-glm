@@ -280,6 +280,21 @@ abstract Vec2(FloatArray) {
     }
 
     /**
+     *  Calculates the cross product of `a` and `b`
+     *  @param a - The left-hand side vector to cross
+     *  @param b - The right-hand side vector to cross
+     *  @param dest - Where to store the result
+     *  @return Vec3 `dest`
+     */
+    public inline static function cross(a:Vec2, b:Vec2, dest:Vec3):Vec3 {
+        dest = new Vec3(
+            0,
+            0,
+            a.x * b.y - a.y * b.x);
+        return dest;
+    }
+
+    /**
      *  Normalizes `v` such that `v.length() == 1`, and stores the result in `dest`
      *  @param v - 
      *  @param dest - 
