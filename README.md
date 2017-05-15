@@ -17,7 +17,7 @@ API documentation is available here: http://fuzzywuzzie.github.io/haxe-glm/
 
 ### Manual
 
-The library includes [static extensions](docs/static_extensions.md) and gives you the flexibility to instantiate or reuse objects as desired using [destination arguments](docs/destination_arguments.md).
+The library includes [static extensions](manual/static_extensions.md) and gives you the flexibility to instantiate or reuse objects as desired using [destination arguments](manual/destination_arguments.md).
 
 #### Introduction
 
