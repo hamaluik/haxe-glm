@@ -9,22 +9,43 @@ Issues, forks, and pull requests are gladly welcomed! This library is meant for 
 
 ## Documentation
 
-### API
-
-API documentation is available here: http://fuzzywuzzie.github.io/haxe-glm/
-
-### Samples
-
 ### Manual
 
+This library provides several classes (actually, abstracts over floating point arrays) which enable vector, matrix, and quaternion mathematical operations (`Vec2`, `Vec3`, `Vec4`, `Mat2`, `Mat4`, and `Quat`). The library also includes static utilities for generating transformation and projection matrices (`GLM`).
+
 The library includes [static extensions](manual/static_extensions.md) and gives you the flexibility to instantiate or reuse objects as desired using [destination arguments](manual/destination_arguments.md).
-
-#### Introduction
-
-This library provides 7 classes (actually, abstracts) which enable vector, matrix, and quaternion mathematical operations (`Vec2`, `Vec3`, `Vec4`, `Mat2`, `Mat3`, `Mat4`, and `Quat`). The library also includes static utilities for generating transformation matrices (`GLM`) and projection matrices (`Projection`).
 
 #### Motivation
 
 I decided to create this library for Haxe after seeing project after project write their own code for dealing with vectors, matrices, and quaternions. This has resulted in a lot of duplicated effort by developers who all seem to write their own classes to deal with this.
 
 Hopefully the creation of this [fully cross-target and cross-platform] library, some of this duplicated effort can be minimized in the future.
+
+### API
+
+API documentation is available here: http://fuzzywuzzie.github.io/haxe-glm/
+
+### Samples
+
+```haxe
+// create a new perspective projection matrix
+var P:Mat4 = GLM.perspective(
+    45 * Math.PI / 180, // field of view (radians)
+    640 / 480, // aspect ratio
+    0.1, 100, // near, far
+    new Mat4() // where to store the result
+);
+```
+
+```haxe
+// transform components
+var pos:Vec3 = new Vec3(0, 0, 1.5);
+var rot:Quat = Quat.identity(new Quat());
+var sca:Vec3 = new Vec3(1, 1, 1);
+var modelMatrix:Mat4 = new Mat4();
+
+// ...
+
+// update the model matrix
+GLM.transform(pos, rot, sca, modelMatrix);
+```
