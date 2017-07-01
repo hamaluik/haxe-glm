@@ -1,12 +1,12 @@
 {
   "name": "glm",
   "url" : "https://github.com/FuzzyWuzzie/haxe-glm",
-  "license": "MIT",
+  "license": "Apache",
   "classPath": "src",
   "tags": ["cross", "utility"],
   "description": "Native Haxe version of the fantastic GLM library.",
-  "version": "2.0.0",
-  "releasenote": "New API to give more flexible control over instantiation",
+  "version": "2.0.1",
+  "releasenote": "Updated license in Haxelib",
   "contributors": ["FuzzyWuzzie"],
   "dependencies": {}
 }
