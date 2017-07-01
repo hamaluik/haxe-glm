@@ -12,9 +12,9 @@ env:
     - TARGET=php
     - TARGET=python
 
-# Test with Haxe 3.2.1 and Haxe development.
+# Test with Current Haxe and Haxe development.
 haxe:
-  - "3.2.1"
+  - "3.4.2"
   - development
 
 matrix:
