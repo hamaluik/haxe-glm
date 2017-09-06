@@ -1,3 +1,0 @@
-test.each.hxml
--neko bin/TestMain.n
--cmd neko bin/TestMain.n
