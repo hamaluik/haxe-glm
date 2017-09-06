@@ -8,7 +8,6 @@ env:
     - TARGET=cs
     - TARGET=java
     - TARGET=node
-    - TARGET=php
     - TARGET=python
 
 # Test with Current Haxe and Haxe development.
@@ -29,7 +28,6 @@ install:
   - sudo apt-get update
   - sh -c "if [ '$TARGET' = 'cpp' ]; then sudo apt-get install gcc-multilib g++-multilib -y; fi"
   - sh -c "if [ '$TARGET' = 'cs' ]; then sudo apt-get install mono-devel -y; fi"
-  - sh -c "if [ '$TARGET' = 'php' ]; then sudo apt-get install php5-cli -y; fi"
   - sh -c "if [ '$TARGET' = 'python' ]; then sudo apt-get install python3 -y; fi"
 
   # haxelib dependencies for each target

@@ -1,3 +1,0 @@
-test.each.hxml
--php bin
--cmd php bin/index.php
