@@ -357,4 +357,14 @@ abstract Vec4(FloatArray) {
         dest.w = glm.GLM.lerp(a.w, b.w, t);
         return dest;
     }
+
+    /**
+     *  Construct a Vec4 from an array of floats
+     *  @param arr an array with 4 elements, corresponding to x, y, z, w
+     *  @return Vec4
+     */
+    @:from
+    public inline static function fromFloatArray(arr:Array<Float>):Vec4 {
+        return new Vec4(arr[0], arr[1], arr[2], arr[3]);
+    }
 }

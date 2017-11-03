@@ -322,4 +322,14 @@ abstract Vec2(FloatArray) {
         dest.y = glm.GLM.lerp(a.y, b.y, t);
         return dest;
     }
+
+    /**
+     *  Construct a Vec2 from an array of floats
+     *  @param arr an array with 2 elements, corresponding to x, y
+     *  @return Vec2
+     */
+    @:from
+    public inline static function fromFloatArray(arr:Array<Float>):Vec2 {
+        return new Vec2(arr[0], arr[1]);
+    }
 }

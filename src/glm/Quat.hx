@@ -346,4 +346,14 @@ abstract Quat(FloatArray) {
 
         return dest;
     }
+
+    /**
+     *  Construct a Quat from an array of floats
+     *  @param arr an array with 4 elements, corresponding to x, y, z, w
+     *  @return Quat
+     */
+    @:from
+    public inline static function fromFloatArray(arr:Array<Float>):Quat {
+        return new Quat(arr[0], arr[1], arr[2], arr[3]);
+    }
 }

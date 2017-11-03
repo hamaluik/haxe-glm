@@ -348,4 +348,14 @@ abstract Vec3(FloatArray) {
         dest.z = glm.GLM.lerp(a.z, b.z, t);
         return dest;
     }
+
+    /**
+     *  Construct a Vec3 from an array of floats
+     *  @param arr an array with 3 elements, corresponding to x, y, z
+     *  @return Vec3
+     */
+    @:from
+    public inline static function fromFloatArray(arr:Array<Float>):Vec3 {
+        return new Vec3(arr[0], arr[1], arr[2]);
+    }
 }
