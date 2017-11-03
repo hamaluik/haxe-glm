@@ -15,6 +15,7 @@ package glm;
 
 import glm.GLM.FloatArray;
 
+ @:forward
 abstract Mat3(FloatArray) {
 	public inline function new(
 			_r0c0:Float = 0, _r0c1:Float = 0, _r0c2:Float = 0,

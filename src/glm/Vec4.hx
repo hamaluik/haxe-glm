@@ -18,6 +18,7 @@ import glm.GLM.FloatArray;
 /**
  *  A four-element vector
  */
+ @:forward
 abstract Vec4(FloatArray) {
     /**
      *  Accessor utility for the first element of the vector

@@ -18,6 +18,7 @@ import glm.GLM.FloatArray;
 /**
  *  A two-element vector
  */
+ @:forward
 abstract Vec2(FloatArray) {
     /**
      *  Accessor utility for the first element of the vector

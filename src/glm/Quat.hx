@@ -18,6 +18,7 @@ import glm.GLM.FloatArray;
 /**
  *  A quaternion
  */
+ @:forward
 abstract Quat(FloatArray) {
     /**
      *  Accessor utility for the first element of the quaternion
