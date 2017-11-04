@@ -356,4 +356,15 @@ abstract Quat(FloatArray) {
     public inline static function fromFloatArray(arr:Array<Float>):Quat {
         return new Quat(arr[0], arr[1], arr[2], arr[3]);
     }
+
+    /**
+     *  Converts this into a 4-element array of floats
+     *  @return Array<Float>
+     */
+    @:to
+    public inline function toFloatArray():Array<Float> {
+        return [
+            x, y, z, w
+        ];
+    }
 }

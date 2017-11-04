@@ -254,4 +254,31 @@ abstract Mat3(FloatArray) {
 	public inline static function multVecOp(m:Mat3, v:Vec3):Vec3 {
 		return multVec(m, v, new Vec3());
 	}
+
+    /**
+     *  Construct a Mat3 from an array of floats in column-major order
+     *  @param arr an array with 16 elements
+     *  @return Mat3
+     */
+    @:from
+    public inline static function fromFloatArray(arr:Array<Float>):Mat3 {
+        return new Mat3(
+			arr[0], arr[3], arr[6],
+			arr[1], arr[4], arr[7],
+			arr[2], arr[5], arr[8]
+		);
+    }
+
+	/**
+	 *  Cast the matrix in an array of floats, in column-major order
+	 *  @return Array<Float>
+	 */
+	@:to
+	public inline function toFloatArray():Array<Float> {
+		return [
+			r0c0, r1c0, r2c0,
+			r0c1, r1c1, r2c1,
+			r0c2, r1c2, r2c2,
+		];
+	}
 }

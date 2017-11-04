@@ -358,4 +358,15 @@ abstract Vec3(FloatArray) {
     public inline static function fromFloatArray(arr:Array<Float>):Vec3 {
         return new Vec3(arr[0], arr[1], arr[2]);
     }
+
+    /**
+     *  Converts this into a 3-element array of floats
+     *  @return Array<Float>
+     */
+    @:to
+    public inline function toFloatArray():Array<Float> {
+        return [
+            x, y, z
+        ];
+    }
 }

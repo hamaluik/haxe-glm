@@ -332,4 +332,15 @@ abstract Vec2(FloatArray) {
     public inline static function fromFloatArray(arr:Array<Float>):Vec2 {
         return new Vec2(arr[0], arr[1]);
     }
+
+    /**
+     *  Converts this into a 2-element array of floats
+     *  @return Array<Float>
+     */
+    @:to
+    public inline function toFloatArray():Array<Float> {
+        return [
+            x, y
+        ];
+    }
 }
