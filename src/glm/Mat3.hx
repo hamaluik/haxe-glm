@@ -23,7 +23,7 @@ abstract Mat3(Vector<Float>) from Vector<Float> to Vector<Float> {
 			_r0c0:Float = 0, _r0c1:Float = 0, _r0c2:Float = 0,
 			_r1c0:Float = 0, _r1c1:Float = 0, _r1c2:Float = 0,
 			_r2c0:Float = 0, _r2c1:Float = 0, _r2c2:Float = 0) {
-		this = new Vector<Float>(16);
+		this = new Vector<Float>(9);
 		r0c0 = _r0c0;
 		r1c0 = _r1c0;
 		r2c0 = _r2c0;
@@ -62,43 +62,43 @@ abstract Mat3(Vector<Float>) from Vector<Float> to Vector<Float> {
 	 *  Accessor for the element in row 0 and column 1
 	 */
 	public var r0c1(get, set):Float;
-	private inline function get_r0c1():Float return this[4];
-	private inline function set_r0c1(v:Float):Float return this[4] = v;
+	private inline function get_r0c1():Float return this[3];
+	private inline function set_r0c1(v:Float):Float return this[3] = v;
 
 	/**
 	 *  Accessor for the element in row 1 and column 1
 	 */
 	public var r1c1(get, set):Float;
-	private inline function get_r1c1():Float return this[5];
-	private inline function set_r1c1(v:Float):Float return this[5] = v;
+	private inline function get_r1c1():Float return this[4];
+	private inline function set_r1c1(v:Float):Float return this[4] = v;
 
 	/**
 	 *  Accessor for the element in row 2 and column 1
 	 */
 	public var r2c1(get, set):Float;
-	private inline function get_r2c1():Float return this[6];
-	private inline function set_r2c1(v:Float):Float return this[6] = v;
+	private inline function get_r2c1():Float return this[5];
+	private inline function set_r2c1(v:Float):Float return this[5] = v;
 
 	/**
 	 *  Accessor for the element in row 0 and column 2
 	 */
 	public var r0c2(get, set):Float;
-	private inline function get_r0c2():Float return this[8];
-	private inline function set_r0c2(v:Float):Float return this[8] = v;
+	private inline function get_r0c2():Float return this[6];
+	private inline function set_r0c2(v:Float):Float return this[6] = v;
 
 	/**
 	 *  Accessor for the element in row 1 and column 2
 	 */
 	public var r1c2(get, set):Float;
-	private inline function get_r1c2():Float return this[9];
-	private inline function set_r1c2(v:Float):Float return this[9] = v;
+	private inline function get_r1c2():Float return this[7];
+	private inline function set_r1c2(v:Float):Float return this[7] = v;
 
 	/**
 	 *  Accessor for the element in row 2 and column 2
 	 */
 	public var r2c2(get, set):Float;
-	private inline function get_r2c2():Float return this[10];
-	private inline function set_r2c2(v:Float):Float return this[10] = v;
+	private inline function get_r2c2():Float return this[8];
+	private inline function set_r2c2(v:Float):Float return this[8] = v;
 
 	@:arrayAccess
 	public inline function get(key:Int) {
