@@ -18,7 +18,7 @@ import haxe.io.Float32Array;
 /**
  *  A quaternion
  */
-abstract Quat(Float32Array) {
+abstract Quat(Float32Array) to Float32Array {
     /**
      *  Accessor utility for the first element of the quaternion
      */

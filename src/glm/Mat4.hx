@@ -15,7 +15,7 @@ package glm;
 
 import haxe.io.Float32Array;
 
-abstract Mat4(Float32Array) {
+abstract Mat4(Float32Array) to Float32Array {
 	public inline function new(
 			_r0c0:Float = 0, _r0c1:Float = 0, _r0c2:Float = 0, _r0c3:Float = 0,
 			_r1c0:Float = 0, _r1c1:Float = 0, _r1c2:Float = 0, _r1c3:Float = 0,

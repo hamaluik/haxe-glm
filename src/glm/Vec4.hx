@@ -18,7 +18,7 @@ import haxe.io.Float32Array;
 /**
  *  A four-element vector
  */
-abstract Vec4(Float32Array) {
+abstract Vec4(Float32Array) to Float32Array {
     /**
      *  Accessor utility for the first element of the vector
      */
