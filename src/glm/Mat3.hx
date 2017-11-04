@@ -13,14 +13,17 @@
 */
 package glm;
 
-import haxe.io.Float32Array;
+import haxe.ds.Vector;
 
-abstract Mat3(Float32Array) to Float32Array {
+/**
+ *  A 3x3 matrix
+ */
+abstract Mat3(Vector<Float>) from Vector<Float> to Vector<Float> {
 	public inline function new(
 			_r0c0:Float = 0, _r0c1:Float = 0, _r0c2:Float = 0,
 			_r1c0:Float = 0, _r1c1:Float = 0, _r1c2:Float = 0,
 			_r2c0:Float = 0, _r2c1:Float = 0, _r2c2:Float = 0) {
-		this = new Float32Array(16);
+		this = new Vector<Float>(16);
 		r0c0 = _r0c0;
 		r1c0 = _r1c0;
 		r2c0 = _r2c0;
@@ -181,21 +184,21 @@ abstract Mat3(Float32Array) to Float32Array {
 	 *  @return Mat3
 	 */
 	public inline static function transpose(src:Mat3, dest:Mat3):Mat3 {
-        var _r0c1 = src.r0c1;
-        var _r0c2 = src.r0c2;
-        var _r1c2 = src.r1c2;
+		var _r0c1 = src.r0c1;
+		var _r0c2 = src.r0c2;
+		var _r1c2 = src.r1c2;
 
 		dest.r0c0 = src.r0c0;
-        dest.r1c1 = src.r1c1;
-        dest.r2c2 = src.r2c2;
+		dest.r1c1 = src.r1c1;
+		dest.r2c2 = src.r2c2;
 
-        dest.r0c1 = src.r1c0;
-        dest.r0c2 = src.r2c0;
-        dest.r1c2 = src.r2c1;
+		dest.r0c1 = src.r1c0;
+		dest.r0c2 = src.r2c0;
+		dest.r1c2 = src.r2c1;
 
-        dest.r1c0 = _r0c1;
-        dest.r2c0 = _r0c2;
-        dest.r2c1 = _r1c2;
+		dest.r1c0 = _r0c1;
+		dest.r2c0 = _r0c2;
+		dest.r2c1 = _r1c2;
 
 		return dest;
 	}
@@ -239,10 +242,10 @@ abstract Mat3(Float32Array) to Float32Array {
 	 *  @param b - 
 	 *  @return Mat3
 	 */
-	@:op(A * B)
+	/*@:op(A * B)
 	public inline static function multMatOp(a:Mat3, b:Mat3):Mat3 {
 		return multMat(a, b, new Mat3());
-	}
+	}*/
 
 	/**
 	 *  Multiplies a vector `v` by a matrix `m`, storing the result in `dest`. Caches so `v == dest` is valid.
@@ -270,30 +273,26 @@ abstract Mat3(Float32Array) to Float32Array {
 		return multVec(m, v, new Vec3());
 	}
 
-    /**
-     *  Construct a Mat3 from an array of floats in column-major order
-     *  @param arr an array with 16 elements
-     *  @return Mat3
-     */
-    @:from
-    public inline static function fromFloat32Array(arr:Array<Float>):Mat3 {
+	/**
+	 *  Construct a Mat3 from an array of floats in column-major order
+	 *  @param arr an array with 16 elements
+	 *  @return Mat3
+	 */
+	@:from
+	public inline static function fromFloatArray(arr:Array<Float>):Mat3 {
         return new Mat3(
 			arr[0], arr[3], arr[6],
 			arr[1], arr[4], arr[7],
 			arr[2], arr[5], arr[8]
 		);
-    }
+	}
 
 	/**
 	 *  Cast the matrix in an array of floats, in column-major order
 	 *  @return Array<Float>
 	 */
 	@:to
-	public inline function toFloat32Array():Array<Float> {
-		return [
-			r0c0, r1c0, r2c0,
-			r0c1, r1c1, r2c1,
-			r0c2, r1c2, r2c2,
-		];
+	public inline function toFloatArray():Array<Float> {
+		return this.toArray();
 	}
 }

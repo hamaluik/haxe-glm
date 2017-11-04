@@ -15,6 +15,9 @@ package glm;
 
 using glm.Mat4;
 
+/**
+ *  Utility functions for 3D math
+ */
 class GLM {
     /**
      *  Minimum absolute value difference of floats before they are considered equal

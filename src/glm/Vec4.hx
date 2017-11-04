@@ -13,12 +13,12 @@
 */
 package glm;
 
-import haxe.io.Float32Array;
+import haxe.ds.Vector;
 
 /**
  *  A four-element vector
  */
-abstract Vec4(Float32Array) to Float32Array {
+abstract Vec4(Vector<Float>) to Vector<Float> {
     /**
      *  Accessor utility for the first element of the vector
      */
@@ -86,7 +86,7 @@ abstract Vec4(Float32Array) to Float32Array {
 	}
 
     public inline function new(x:Float = 0, y:Float = 0, z:Float = 0, w:Float = 0) {
-        this = new Float32Array(4);
+        this = new Vector<Float>(4);
         this[0] = x;
         this[1] = y;
         this[2] = z;
@@ -364,7 +364,7 @@ abstract Vec4(Float32Array) to Float32Array {
      *  @return Vec4
      */
     @:from
-    public inline static function fromFloat32Array(arr:Array<Float>):Vec4 {
+    public inline static function fromFloatArray(arr:Array<Float>):Vec4 {
         return new Vec4(arr[0], arr[1], arr[2], arr[3]);
     }
 
@@ -373,9 +373,7 @@ abstract Vec4(Float32Array) to Float32Array {
      *  @return Array<Float>
      */
     @:to
-    public inline function toFloat32Array():Array<Float> {
-        return [
-            x, y, z, w
-        ];
+    public inline function toFloatArray():Array<Float> {
+        return this.toArray();
     }
 }

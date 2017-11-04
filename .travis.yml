@@ -12,7 +12,7 @@ env:
 
 # Test with Current Haxe and Haxe development.
 haxe:
-  - "3.4.2"
+  - stable
   - development
 
 matrix:

@@ -13,15 +13,18 @@
 */
 package glm;
 
-import haxe.io.Float32Array;
+import haxe.ds.Vector;
 
-abstract Mat4(Float32Array) to Float32Array {
+/**
+ *  A 4x4 matrix
+ */
+abstract Mat4(Vector<Float>) to Vector<Float> {
 	public inline function new(
 			_r0c0:Float = 0, _r0c1:Float = 0, _r0c2:Float = 0, _r0c3:Float = 0,
 			_r1c0:Float = 0, _r1c1:Float = 0, _r1c2:Float = 0, _r1c3:Float = 0,
 			_r2c0:Float = 0, _r2c1:Float = 0, _r2c2:Float = 0, _r2c3:Float = 0,
 			_r3c0:Float = 0, _r3c1:Float = 0, _r3c2:Float = 0, _r3c3:Float = 0) {
-		this = new Float32Array(16);
+		this = new Vector<Float>(16);
 		r0c0 = _r0c0;
 		r1c0 = _r1c0;
 		r2c0 = _r2c0;
@@ -438,7 +441,7 @@ abstract Mat4(Float32Array) to Float32Array {
      *  @return Mat4
      */
     @:from
-    public inline static function fromFloat32Array(arr:Array<Float>):Mat4 {
+    public inline static function fromFloatArray(arr:Array<Float>):Mat4 {
         return new Mat4(
 			arr[0], arr[4], arr[ 8], arr[12],
 			arr[1], arr[5], arr[ 9], arr[13],
@@ -452,7 +455,7 @@ abstract Mat4(Float32Array) to Float32Array {
 	 *  @return Array<Float>
 	 */
 	@:to
-	public inline function toFloat32Array():Array<Float> {
+	public inline function toFloatArray():Array<Float> {
 		return [
 			r0c0, r1c0, r2c0, r3c0,
 			r0c1, r1c1, r2c1, r3c1,
