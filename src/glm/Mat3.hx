@@ -181,7 +181,22 @@ abstract Mat3(Float32Array) {
 	 *  @return Mat3
 	 */
 	public inline static function transpose(src:Mat3, dest:Mat3):Mat3 {
-		// TODO:
+        var _r0c1 = src.r0c1;
+        var _r0c2 = src.r0c2;
+        var _r1c2 = src.r1c2;
+
+		dest.r0c0 = src.r0c0;
+        dest.r1c1 = src.r1c1;
+        dest.r2c2 = src.r2c2;
+
+        dest.r0c1 = src.r1c0;
+        dest.r0c2 = src.r2c0;
+        dest.r1c2 = src.r2c1;
+
+        dest.r1c0 = _r0c1;
+        dest.r2c0 = _r0c2;
+        dest.r2c1 = _r1c2;
+
 		return dest;
 	}
 
