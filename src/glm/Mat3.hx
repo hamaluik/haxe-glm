@@ -13,14 +13,14 @@
 */
 package glm;
 
-import glm.GLM.FloatArray;
+import haxe.io.Float32Array;
 
-abstract Mat3(FloatArray) {
+abstract Mat3(Float32Array) {
 	public inline function new(
 			_r0c0:Float = 0, _r0c1:Float = 0, _r0c2:Float = 0,
 			_r1c0:Float = 0, _r1c1:Float = 0, _r1c2:Float = 0,
 			_r2c0:Float = 0, _r2c1:Float = 0, _r2c2:Float = 0) {
-		this = new FloatArray(16);
+		this = new Float32Array(16);
 		r0c0 = _r0c0;
 		r1c0 = _r1c0;
 		r2c0 = _r2c0;
@@ -261,7 +261,7 @@ abstract Mat3(FloatArray) {
      *  @return Mat3
      */
     @:from
-    public inline static function fromFloatArray(arr:Array<Float>):Mat3 {
+    public inline static function fromFloat32Array(arr:Array<Float>):Mat3 {
         return new Mat3(
 			arr[0], arr[3], arr[6],
 			arr[1], arr[4], arr[7],
@@ -274,7 +274,7 @@ abstract Mat3(FloatArray) {
 	 *  @return Array<Float>
 	 */
 	@:to
-	public inline function toFloatArray():Array<Float> {
+	public inline function toFloat32Array():Array<Float> {
 		return [
 			r0c0, r1c0, r2c0,
 			r0c1, r1c1, r2c1,

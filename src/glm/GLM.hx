@@ -16,12 +16,6 @@ package glm;
 using glm.Mat4;
 using glm.Vec4;
 
-#if js
-typedef FloatArray = js.html.Float32Array;
-#else
-typedef FloatArray = haxe.io.Float32Array;
-#end
-
 class GLM {
     /**
      *  Minimum absolute value difference of floats before they are considered equal
