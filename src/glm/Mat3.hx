@@ -205,10 +205,10 @@ abstract Mat3(Float32Array) to Float32Array {
 	 *  @param src - The matrix to calculate the determinant of
 	 *  @return Float
 	 */
-	public inline static function determinant(src:Mat3):Float {
+	/*public inline static function determinant(src:Mat3):Float {
 		// TODO:
 		return 0;
-	}
+	}*/
 
 	/**
 	 *  Inverts the `src` matrix, storing the result in `dest`. If `src == dest`, modifies `src` in place.
@@ -216,10 +216,10 @@ abstract Mat3(Float32Array) to Float32Array {
 	 *  @param dest - The matrix to store the result in
 	 *  @return Mat3
 	 */
-	public inline static function invert(src:Mat3, dest:Mat3):Mat3 {
+	/*public inline static function invert(src:Mat3, dest:Mat3):Mat3 {
 		// TODO:
 		return dest;
-	}
+	}*/
 
 	/**
 	 *  Multiplies two matrices together, storing the result in `dest`. Caches `a` and `b` so `a == dest` and `b == dest` are valid.
@@ -228,10 +228,10 @@ abstract Mat3(Float32Array) to Float32Array {
 	 *  @param dest - The matrix to store the result in
 	 *  @return Mat3
 	 */
-	public inline static function multMat(a:Mat3, b:Mat3, dest:Mat3):Mat3 {
+	/*public inline static function multMat(a:Mat3, b:Mat3, dest:Mat3):Mat3 {
 		// TODO:
 		return dest;
-	}
+	}*/
 
 	/**
 	 *  Shortcut operator for `multMat(a, b, new Mat3())`
