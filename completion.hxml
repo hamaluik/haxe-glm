@@ -1,2 +1,11 @@
 -cp src
+
+glm.GLM
+glm.Mat3
+glm.Mat4
+glm.Quat
+glm.Vec2
+glm.Vec3
+glm.Vec4
+
 --interp

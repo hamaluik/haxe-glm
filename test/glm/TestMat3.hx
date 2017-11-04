@@ -22,14 +22,14 @@ class TestMat3 extends BuddySuite {
 			it("should provide copy support");
 
 			it("should be able to transpose", {
-                ma = new Mat3(
-                    0, 1, 2,
-                    3, 4, 5,
-                    6, 7, 8
-                );
-                var mb = ma.transpose(new Mat3());
-                mb.r1c0.should.be(1);
-                mb.r0c2.should.be(6);
+				ma = new Mat3(
+					0, 1, 2,
+					3, 4, 5,
+					6, 7, 8
+				);
+				var mb = ma.transpose(new Mat3());
+				mb.r1c0.should.be(1);
+				mb.r0c2.should.be(6);
 			});
 
 			it("should calculate the determinant");

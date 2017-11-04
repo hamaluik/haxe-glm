@@ -14,7 +14,6 @@
 package glm;
 
 using glm.Mat4;
-using glm.Vec4;
 
 class GLM {
     /**

@@ -11,15 +11,15 @@ class TestVec4 extends BuddySuite {
 			var va:Vec4, vb:Vec4;
 
 			beforeEach({
-                va = new Vec4(1, 2, 3, 1);
-                vb = new Vec4(-1, -2, -3, -1);
+				va = new Vec4(1, 2, 3, 1);
+				vb = new Vec4(-1, -2, -3, -1);
 			});
 
 			it("should provide element access", {
-                va[2].should.be(3);
-                va.y.should.be(2);
-                va.x = 42;
-                va[0].should.be(42);
+				va[2].should.be(3);
+				va.y.should.be(2);
+				va.x = 42;
+				va[0].should.be(42);
 			});
 
 			it("should calculate the magnitude", {
