@@ -58,7 +58,7 @@ abstract Vec2(Vector<Float>) to Vector<Float> {
 	}
 
     public inline function new(x:Float = 0, y:Float = 0) {
-        this = new Vector<Float>(4);
+        this = new Vector<Float>(2);
         this[0] = x;
         this[1] = y;
     }
