@@ -55,7 +55,7 @@ class ProfileMain {
 		return '${x}';
 	}
 
-	private static function measure(name:String, times:Int = 10000, fn:Void->Void):Void {
+	private static function measure(name:String, times:Int = 100000, fn:Void->Void):Void {
 		var start:Float = Timer.stamp();
 		for(i in 0...times) fn();
 		var end:Float = Timer.stamp();
