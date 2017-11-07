@@ -12,4 +12,4 @@ glm.Vec4
 -xml dox.xml
 
 --next
--cmd haxelib run dox -i . -o docs --title "GLM" --toplevel-package "glm" -D version "2.1.0" -D source-path "https://github.com/FuzzyWuzzie/haxe-glm/tree/master/src/glm"
+-cmd haxelib run dox -i . -o docs --title "GLM" --toplevel-package "glm" -D version "2.1.0" -D source-path "https://github.com/FuzzyWuzzie/haxe-glm/tree/master/src" -D description "Native Haxe version of the fantastic GLM library (https://github.com/g-truc/glm)."

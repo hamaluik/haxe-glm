@@ -17,30 +17,30 @@ using glm.Mat4;
 using glm.Vec3;
 
 /**
- *  Utility functions for 3D math
+  Utility functions for 3D math
  */
 class GLM {
     /**
-     *  Minimum absolute value difference of floats before they are considered equal
+      Minimum absolute value difference of floats before they are considered equal
      */
     public static var EPSILON:Float = 0.0000001;
 
     /**
-     *  Utility for linearly interpolating between two values
-     *  @param a - The value when `t == 0`
-     *  @param b - The value when `t == 1`
-     *  @param t - A value between `0` and `1`, not clamped by the function
-     *  @return Float
+      Utility for linearly interpolating between two values
+      @param a The value when `t == 0`
+      @param b The value when `t == 1`
+      @param t A value between `0` and `1`, not clamped by the function
+      @return Float
      */
     public inline static function lerp(a:Float, b:Float, t:Float):Float {
         return a + t * (b - a);
     }
 
     /**
-     *  Constructs a 3D translation matrix
-     *  @param translation - How far to move in each of the directions
-     *  @param dest - Where the result will be stored
-     *  @return Mat4
+      Constructs a 3D translation matrix
+      @param translation How far to move in each of the directions
+      @param dest Where the result will be stored
+      @return Mat4
      */
     public inline static function translate(translation:Vec3, dest:Mat4):Mat4 {
         dest.identity();
@@ -51,16 +51,16 @@ class GLM {
     }
 
     /**
-     *  Constructs a 3D rotation matrix
-     *  @param rotation - The quaternion to use as rotation
-     *  @param dest - Where the result will be stored
-     *  @return Mat4
+      Constructs a 3D rotation matrix
+      @param rotation The quaternion to use as rotation
+      @param dest Where the result will be stored
+      @return Mat4
      */
     public inline static function rotate(rotation:Quat, dest:Mat4):Mat4 {
         var x2:Float = rotation.x+rotation.x, y2:Float = rotation.y+rotation.y, z2:Float = rotation.z+rotation.z;
-		var xx:Float = rotation.x * x2, xy:Float = rotation.x * y2, xz:Float = rotation.x * z2;
-		var yy:Float = rotation.y * y2, yz:Float = rotation.y * z2, zz:Float = rotation.z * z2;
-		var wx:Float = rotation.w * x2, wy:Float = rotation.w * y2, wz:Float = rotation.w * z2;
+        var xx:Float = rotation.x * x2, xy:Float = rotation.x * y2, xz:Float = rotation.x * z2;
+        var yy:Float = rotation.y * y2, yz:Float = rotation.y * z2, zz:Float = rotation.z * z2;
+        var wx:Float = rotation.w * x2, wy:Float = rotation.w * y2, wz:Float = rotation.w * z2;
 
         dest.r0c0 = 1 - (yy + zz);
         dest.r0c1 = xy - wz;
@@ -85,10 +85,10 @@ class GLM {
     }
 
     /**
-     *  Constructs a 3D scale matrix
-     *  @param amount - How much to scale by in each of the three directions
-     *  @param dest - Where the result will be stored
-     *  @return Mat4
+      Constructs a 3D scale matrix
+      @param amount How much to scale by in each of the three directions
+      @param dest Where the result will be stored
+      @return Mat4
      */
     public inline static function scale(amount:Vec3, dest:Mat4):Mat4 {
         dest.identity();
@@ -99,13 +99,13 @@ class GLM {
     }
 
     /**
-     *  Constructs a complete transformation matrix from translation, rotation, and scale components.
-     *  It should be a fair bit faster than constructing each on their own and multiplying together.
-     *  @param translation - The translation vector
-     *  @param rotation - The rotation quaternion
-     *  @param scale - The scale vector
-     *  @param dest - Where to store the result
-     *  @return Mat4
+      Constructs a complete transformation matrix from translation, rotation, and scale components.
+      It should be a fair bit faster than constructing each on their own and multiplying together.
+      @param translation The translation vector
+      @param rotation The rotation quaternion
+      @param scale The scale vector
+      @param dest Where to store the result
+      @return Mat4
      */
     public inline static function transform(translation:Vec3, rotation:Quat, scale:Vec3, dest:Mat4):Mat4 {
         var x2:Float = rotation.x + rotation.x;
@@ -142,12 +142,12 @@ class GLM {
     }
 
     /**
-     *  Constructs a lookat matrix to position a view matrix at `eye`, looking at `centre`, with `up` orienting the view
-     *  @param eye - Where the viewer is located
-     *  @param centre - Where the viewer is looking at
-     *  @param up - A vector pointing `up` for the view
-     *  @param dest - Where to store the result
-     *  @return Mat4
+      Constructs a lookat matrix to position a view matrix at `eye`, looking at `centre`, with `up` orienting the view
+      @param eye Where the viewer is located
+      @param centre Where the viewer is looking at
+      @param up A vector pointing `up` for the view
+      @param dest Where to store the result
+      @return Mat4
      */
     public static function lookAt(eye:Vec3, centre:Vec3, up:Vec3, dest:Mat4):Mat4 {
         var f:Vec3 = centre - eye;
@@ -157,31 +157,31 @@ class GLM {
         var u:Vec3 = Vec3.cross(s, f, new Vec3());
 
         dest.identity();
-		dest.r0c0 = s.x;
-		dest.r0c1 = s.y;
-		dest.r0c2 = s.z;
-		dest.r1c0 = u.x;
-		dest.r1c1 = u.y;
-		dest.r1c2 = u.z;
-		dest.r2c0 =-f.x;
-		dest.r2c1 =-f.y;
-		dest.r2c2 =-f.z;
-		dest.r0c3 = -Vec3.dot(s, eye);
-		dest.r1c3 = -Vec3.dot(u, eye);
-		dest.r2c3 =  Vec3.dot(f, eye);
+        dest.r0c0 = s.x;
+        dest.r0c1 = s.y;
+        dest.r0c2 = s.z;
+        dest.r1c0 = u.x;
+        dest.r1c1 = u.y;
+        dest.r1c2 = u.z;
+        dest.r2c0 =-f.x;
+        dest.r2c1 =-f.y;
+        dest.r2c2 =-f.z;
+        dest.r0c3 = -Vec3.dot(s, eye);
+        dest.r1c3 = -Vec3.dot(u, eye);
+        dest.r2c3 =  Vec3.dot(f, eye);
 
         return dest;
     }
 
     /**
-     *  Constructs a perspective projection matrix
-     *  Taken from https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js#L1788
-     *  @param fovy - The vertical field of view in radians
-     *  @param aspectRatio - The aspect ratio of the view
-     *  @param near - The near clipping plane
-     *  @param far - The far clipping plane
-     *  @param dest - Where to store the result
-     *  @return Mat4
+      Constructs a perspective projection matrix
+      @see https://github.com/toji/gl-matrix/blob/7fc31d5d292fb65b10aa98186b218a0bdef3a207/src/gl-matrix/mat4.js#L1241-L1271
+      @param fovy The vertical field of view in radians
+      @param aspectRatio The aspect ratio of the view
+      @param near The near clipping plane
+      @param far The far clipping plane
+      @param dest Where to store the result
+      @return Mat4
      */
     public inline static function perspective(fovy:Float, aspectRatio:Float, near:Float, far:Float, dest:Mat4):Mat4 {
         var f:Float = 1 / Math.tan(fovy / 2);
@@ -210,15 +210,15 @@ class GLM {
     }
 
     /**
-     *  Constructs an orthographic projection matrix
-     *  @param left - 
-     *  @param right - 
-     *  @param bottom - 
-     *  @param top - 
-     *  @param near - 
-     *  @param far - 
-     *  @param dest - Where to store the result
-     *  @return Mat4
+      Constructs an orthographic projection matrix
+      @param left 
+      @param right 
+      @param bottom 
+      @param top 
+      @param near 
+      @param far 
+      @param dest Where to store the result
+      @return Mat4
      */
     public inline static function orthographic(left:Float, right:Float, bottom:Float, top:Float, near:Float=-1, far:Float=1, dest:Mat4):Mat4 {
         var rl:Float = 1 / (right - left);
@@ -248,16 +248,16 @@ class GLM {
     }
 
     /**
-     *  Constructs an orthographic projection matrix
-     *  Taken from: https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/mat4.js#L1755
-     *  @param left - 
-     *  @param right - 
-     *  @param bottom - 
-     *  @param top - 
-     *  @param near - 
-     *  @param far - 
-     *  @param dest - Where to store the result
-     *  @return Mat4
+      Constructs an orthographic projection matrix
+      @see https://github.com/toji/gl-matrix/blob/7fc31d5d292fb65b10aa98186b218a0bdef3a207/src/gl-matrix/mat4.js#L1206-L1239
+      @param left 
+      @param right 
+      @param bottom 
+      @param top 
+      @param near 
+      @param far 
+      @param dest Where to store the result
+      @return Mat4
      */
     public inline static function frustum(left:Float, right:Float, bottom:Float, top:Float, near:Float=-1, far:Float=1, dest:Mat4):Mat4 {
         var rl:Float = 1 / (right - left);
