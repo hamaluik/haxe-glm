@@ -5,8 +5,8 @@
   "classPath": "src",
   "tags": ["cross", "utility"],
   "description": "Native Haxe version of the fantastic GLM library.",
-  "version": "2.0.1",
-  "releasenote": "Updated license in Haxelib",
+  "version": "2.1.0",
+  "releasenote": "Added Mat2, fleshed out Mat3, changed underlying types",
   "contributors": ["FuzzyWuzzie"],
   "dependencies": {}
 }
