@@ -13,69 +13,98 @@
 */
 package glm;
 
-import haxe.ds.Vector;
+#if kha
+import kha.math.FastVector3;
+#else
+@:allow(glm.Vec3)
+class Vec3Base {
+    function new() {}
+
+    var x:Float;
+    var y:Float;
+    var z:Float;
+}
+#end
 
 /**
- *  A three-element vector
+ *  A two-element vector
  */
-abstract Vec3(Vector<Float>) to Vector<Float> {
+#if kha
+abstract Vec3(FastVector3) from FastVector3 to FastVector3  {
+#else
+abstract Vec3(Vec3Base) {
+#end
     /**
      *  Accessor utility for the first element of the vector
      */
     public var x(get, set):Float;
-    private inline function get_x():Float return this[0];
-    private inline function set_x(v:Float):Float return this[0] = v;
+    private inline function get_x():Float return this.x;
+    private inline function set_x(v:Float):Float return this.x = v;
 
     /**
      *  Accessor utility for the second element of the vector
      */
     public var y(get, set):Float;
-    private inline function get_y():Float return this[1];
-    private inline function set_y(v:Float):Float return this[1] = v;
+    private inline function get_y():Float return this.y;
+    private inline function set_y(v:Float):Float return this.y = v;
 
     /**
      *  Accessor utility for the third element of the vector
      */
     public var z(get, set):Float;
-    private inline function get_z():Float return this[2];
-    private inline function set_z(v:Float):Float return this[2] = v;
+    private inline function get_z():Float return this.z;
+    private inline function set_z(v:Float):Float return this.z = v;
     
     /**
      *  Accessor utility for the first element of the vector
      */
     public var r(get, set):Float;
-    private inline function get_r():Float return this[0];
-    private inline function set_r(v:Float):Float return this[0] = v;
+    private inline function get_r():Float return this.x;
+    private inline function set_r(v:Float):Float return this.x = v;
 
     /**
      *  Accessor utility for the second element of the vector
      */
     public var g(get, set):Float;
-    private inline function get_g():Float return this[1];
-    private inline function set_g(v:Float):Float return this[1] = v;
+    private inline function get_g():Float return this.y;
+    private inline function set_g(v:Float):Float return this.y = v;
 
     /**
      *  Accessor utility for the third element of the vector
      */
     public var b(get, set):Float;
-    private inline function get_b():Float return this[2];
-    private inline function set_b(v:Float):Float return this[2] = v;
+    private inline function get_b():Float return this.z;
+    private inline function set_b(v:Float):Float return this.z = v;
 
 	@:arrayAccess
 	public inline function get(key:Int) {
-		return this[key];
+		return switch(key) {
+            case 0: x;
+            case 1: y;
+            case 2: z;
+            case _: throw 'Index ${key} out of bounds (0-2)!';
+        };
 	}
 
 	@:arrayAccess
 	public inline function arrayWrite(key:Int, value:Float):Float {
-		return this[key] = value;
+		return switch(key) {
+            case 0: x = value;
+            case 1: y = value;
+            case 2: z = value;
+            case _: throw 'Index ${key} out of bounds (0-2)!';
+        };
 	}
 
     public inline function new(x:Float = 0, y:Float = 0, z:Float = 0) {
-        this = new Vector<Float>(3);
-        this[0] = x;
-        this[1] = y;
-        this[2] = z;
+        #if kha
+        this = new FastVector3();
+        #else
+        this = new Vec3Base();
+        #end
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
 	/**
@@ -84,14 +113,11 @@ abstract Vec3(Vector<Float>) to Vector<Float> {
 	 *  @return Bool
 	 */
 	public inline function equals(b:Vec3):Bool {
-		var equal:Bool = true;
-		for(i in 0...3) {
-			if(Math.abs(this[i] - b[i]) >= glm.GLM.EPSILON) {
-				equal = false;
-				break;
-			}
-		}
-		return equal;
+        return !(
+               Math.abs(x - b.x) >= glm.GLM.EPSILON
+            || Math.abs(y - b.y) >= glm.GLM.EPSILON
+            || Math.abs(z - b.z) >= glm.GLM.EPSILON
+        );
 	}
 
 	/**
@@ -100,7 +126,7 @@ abstract Vec3(Vector<Float>) to Vector<Float> {
 	 */
 	public inline function toString():String {
 		return
-			'<${this[0]}, ${this[1]}, ${this[2]}>';
+			'<${this.x}, ${this.y}, ${this.z}>';
 	}
 
     /**
@@ -126,9 +152,9 @@ abstract Vec3(Vector<Float>) to Vector<Float> {
 	 *  @return Vec3
 	 */
 	public inline static function copy(src:Vec3, dest:Vec3):Vec3 {
-        dest[0] = src[0];
-        dest[1] = src[1];
-        dest[2] = src[2];
+        dest.x = src.x;
+        dest.y = src.y;
+        dest.z = src.z;
         return dest;
     }
 
@@ -155,9 +181,9 @@ abstract Vec3(Vector<Float>) to Vector<Float> {
      *  @return Vec3
      */
     public inline static function addVec(a:Vec3, b:Vec3, dest:Vec3):Vec3 {
-        dest[0] = a[0] + b[0];
-        dest[1] = a[1] + b[1];
-        dest[2] = a[2] + b[2];
+        dest.x = a.x + b.x;
+        dest.y = a.y + b.y;
+        dest.z = a.z + b.z;
         return dest;
     }
 
@@ -169,9 +195,9 @@ abstract Vec3(Vector<Float>) to Vector<Float> {
      *  @return Vec3
      */
     public inline static function subtractVec(a:Vec3, b:Vec3, dest:Vec3):Vec3 {
-        dest[0] = a[0] - b[0];
-        dest[1] = a[1] - b[1];
-        dest[2] = a[2] - b[2];
+        dest.x = a.x - b.x;
+        dest.y = a.y - b.y;
+        dest.z = a.z - b.z;
         return dest;
     }
 
@@ -205,9 +231,9 @@ abstract Vec3(Vector<Float>) to Vector<Float> {
      *  @return Vec3
      */
     public inline static function addScalar(a:Vec3, s:Float, dest:Vec3):Vec3 {
-        dest[0] = a[0] + s;
-        dest[1] = a[1] + s;
-        dest[2] = a[2] + s;
+        dest.x = a.x + s;
+        dest.y = a.y + s;
+        dest.z = a.z + s;
         return dest;
     }
 
@@ -219,9 +245,9 @@ abstract Vec3(Vector<Float>) to Vector<Float> {
      *  @return Vec3
      */
     public inline static function multiplyScalar(a:Vec3, s:Float, dest:Vec3):Vec3 {
-        dest[0] = a[0] * s;
-        dest[1] = a[1] * s;
-        dest[2] = a[2] * s;
+        dest.x = a.x * s;
+        dest.y = a.y * s;
+        dest.z = a.z * s;
         return dest;
     }
 
@@ -365,6 +391,6 @@ abstract Vec3(Vector<Float>) to Vector<Float> {
      */
     @:to
     public inline function toFloatArray():Array<Float> {
-        return this.toArray();
+        return [x, y, z];
     }
 }

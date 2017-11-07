@@ -13,18 +13,42 @@
 */
 package glm;
 
-import haxe.ds.Vector;
+#if kha
+import kha.math.FastMatrix4;
+#else
+@:allow(glm.Mat4)
+class Mat4Base {
+    function new() {}
+
+	var _00: Float; var _10: Float; var _20: Float; var _30: Float;
+	var _01: Float; var _11: Float; var _21: Float; var _31: Float;
+	var _02: Float; var _12: Float; var _22: Float; var _32: Float;
+	var _03: Float; var _13: Float; var _23: Float; var _33: Float;
+}
+#end
 
 /**
  *  A 4x4 matrix
  */
-abstract Mat4(Vector<Float>) to Vector<Float> {
+#if kha
+abstract Mat4(FastMatrix4) from FastMatrix4 to FastMatrix4  {
+#else
+abstract Mat4(Mat4Base) {
+#end
 	public inline function new(
 			_r0c0:Float = 0, _r0c1:Float = 0, _r0c2:Float = 0, _r0c3:Float = 0,
 			_r1c0:Float = 0, _r1c1:Float = 0, _r1c2:Float = 0, _r1c3:Float = 0,
 			_r2c0:Float = 0, _r2c1:Float = 0, _r2c2:Float = 0, _r2c3:Float = 0,
 			_r3c0:Float = 0, _r3c1:Float = 0, _r3c2:Float = 0, _r3c3:Float = 0) {
-		this = new Vector<Float>(16);
+        #if kha
+        this = new FastMatrix4(
+			_r0c0, _r0c1, _r0c2, _r0c3,
+			_r1c0, _r1c1, _r1c2, _r1c3,
+			_r2c0, _r2c1, _r2c2, _r2c3,
+			_r3c0, _r3c1, _r3c2, _r3c3
+		);
+        #else
+        this = new Mat4Base();
 		r0c0 = _r0c0;
 		r1c0 = _r1c0;
 		r2c0 = _r2c0;
@@ -44,128 +68,165 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 		r1c3 = _r1c3;
 		r2c3 = _r2c3;
 		r3c3 = _r3c3;
+        #end
 	}
 
 	/**
 	 *  Accessor for the element in row 0 and column 0
 	 */
 	public var r0c0(get, set):Float;
-	private inline function get_r0c0():Float return this[0];
-	private inline function set_r0c0(v:Float):Float return this[0] = v;
+	private inline function get_r0c0():Float return this._00;
+	private inline function set_r0c0(v:Float):Float return this._00 = v;
 
 	/**
 	 *  Accessor for the element in row 1 and column 0
 	 */
 	public var r1c0(get, set):Float;
-	private inline function get_r1c0():Float return this[1];
-	private inline function set_r1c0(v:Float):Float return this[1] = v;
+	private inline function get_r1c0():Float return this._01;
+	private inline function set_r1c0(v:Float):Float return this._01 = v;
 
 	/**
 	 *  Accessor for the element in row 2 and column 0
 	 */
 	public var r2c0(get, set):Float;
-	private inline function get_r2c0():Float return this[2];
-	private inline function set_r2c0(v:Float):Float return this[2] = v;
+	private inline function get_r2c0():Float return this._02;
+	private inline function set_r2c0(v:Float):Float return this._02 = v;
 
 	/**
 	 *  Accessor for the element in row 3 and column 0
 	 */
 	public var r3c0(get, set):Float;
-	private inline function get_r3c0():Float return this[3];
-	private inline function set_r3c0(v:Float):Float return this[3] = v;
+	private inline function get_r3c0():Float return this._03;
+	private inline function set_r3c0(v:Float):Float return this._03 = v;
 
 	/**
 	 *  Accessor for the element in row 0 and column 1
 	 */
 	public var r0c1(get, set):Float;
-	private inline function get_r0c1():Float return this[4];
-	private inline function set_r0c1(v:Float):Float return this[4] = v;
+	private inline function get_r0c1():Float return this._10;
+	private inline function set_r0c1(v:Float):Float return this._10 = v;
 
 	/**
 	 *  Accessor for the element in row 1 and column 1
 	 */
 	public var r1c1(get, set):Float;
-	private inline function get_r1c1():Float return this[5];
-	private inline function set_r1c1(v:Float):Float return this[5] = v;
+	private inline function get_r1c1():Float return this._11;
+	private inline function set_r1c1(v:Float):Float return this._11 = v;
 
 	/**
 	 *  Accessor for the element in row 2 and column 1
 	 */
 	public var r2c1(get, set):Float;
-	private inline function get_r2c1():Float return this[6];
-	private inline function set_r2c1(v:Float):Float return this[6] = v;
+	private inline function get_r2c1():Float return this._12;
+	private inline function set_r2c1(v:Float):Float return this._12 = v;
 
 	/**
 	 *  Accessor for the element in row 3 and column 1
 	 */
 	public var r3c1(get, set):Float;
-	private inline function get_r3c1():Float return this[7];
-	private inline function set_r3c1(v:Float):Float return this[7] = v;
+	private inline function get_r3c1():Float return this._13;
+	private inline function set_r3c1(v:Float):Float return this._13 = v;
 
 	/**
 	 *  Accessor for the element in row 0 and column 2
 	 */
 	public var r0c2(get, set):Float;
-	private inline function get_r0c2():Float return this[8];
-	private inline function set_r0c2(v:Float):Float return this[8] = v;
+	private inline function get_r0c2():Float return this._20;
+	private inline function set_r0c2(v:Float):Float return this._20 = v;
 
 	/**
 	 *  Accessor for the element in row 1 and column 2
 	 */
 	public var r1c2(get, set):Float;
-	private inline function get_r1c2():Float return this[9];
-	private inline function set_r1c2(v:Float):Float return this[9] = v;
+	private inline function get_r1c2():Float return this._21;
+	private inline function set_r1c2(v:Float):Float return this._21 = v;
 
 	/**
 	 *  Accessor for the element in row 2 and column 2
 	 */
 	public var r2c2(get, set):Float;
-	private inline function get_r2c2():Float return this[10];
-	private inline function set_r2c2(v:Float):Float return this[10] = v;
+	private inline function get_r2c2():Float return this._22;
+	private inline function set_r2c2(v:Float):Float return this._22 = v;
 
 	/**
 	 *  Accessor for the element in row 3 and column 2
 	 */
 	public var r3c2(get, set):Float;
-	private inline function get_r3c2():Float return this[11];
-	private inline function set_r3c2(v:Float):Float return this[11] = v;
+	private inline function get_r3c2():Float return this._23;
+	private inline function set_r3c2(v:Float):Float return this._23 = v;
 
 	/**
 	 *  Accessor for the element in row 0 and column 3
 	 */
 	public var r0c3(get, set):Float;
-	private inline function get_r0c3():Float return this[12];
-	private inline function set_r0c3(v:Float):Float return this[12] = v;
+	private inline function get_r0c3():Float return this._30;
+	private inline function set_r0c3(v:Float):Float return this._30 = v;
 
 	/**
 	 *  Accessor for the element in row 1 and column 3
 	 */
 	public var r1c3(get, set):Float;
-	private inline function get_r1c3():Float return this[13];
-	private inline function set_r1c3(v:Float):Float return this[13] = v;
+	private inline function get_r1c3():Float return this._31;
+	private inline function set_r1c3(v:Float):Float return this._31 = v;
 
 	/**
 	 *  Accessor for the element in row 2 and column 3
 	 */
 	public var r2c3(get, set):Float;
-	private inline function get_r2c3():Float return this[14];
-	private inline function set_r2c3(v:Float):Float return this[14] = v;
+	private inline function get_r2c3():Float return this._32;
+	private inline function set_r2c3(v:Float):Float return this._32 = v;
 
 	/**
 	 *  Accessor for the element in row 3 and column 3
 	 */
 	public var r3c3(get, set):Float;
-	private inline function get_r3c3():Float return this[15];
-	private inline function set_r3c3(v:Float):Float return this[15] = v;
+	private inline function get_r3c3():Float return this._33;
+	private inline function set_r3c3(v:Float):Float return this._33 = v;
 
 	@:arrayAccess
 	public inline function get(key:Int) {
-		return this[key];
+		return switch(key) {
+            case  0: r0c0;
+            case  1: r1c0;
+            case  2: r2c0;
+            case  3: r3c0;
+            case  4: r0c1;
+            case  5: r1c1;
+            case  6: r2c1;
+            case  7: r3c1;
+            case  8: r0c2;
+            case  9: r1c2;
+            case 10: r2c2;
+            case 11: r3c2;
+            case 12: r0c3;
+            case 13: r1c3;
+            case 14: r2c3;
+            case 15: r3c3;
+            case _: throw 'Index ${key} out of bounds (0-15)!';
+        };
 	}
 
 	@:arrayAccess
 	public inline function arrayWrite(key:Int, value:Float):Float {
-		return this[key] = value;
+		return switch(key) {
+            case  0: r0c0 = value;
+            case  1: r1c0 = value;
+            case  2: r2c0 = value;
+            case  3: r3c0 = value;
+            case  4: r0c1 = value;
+            case  5: r1c1 = value;
+            case  6: r2c1 = value;
+            case  7: r3c1 = value;
+            case  8: r0c2 = value;
+            case  9: r1c2 = value;
+            case 10: r2c2 = value;
+            case 11: r3c2 = value;
+            case 12: r0c3 = value;
+            case 13: r1c3 = value;
+            case 14: r2c3 = value;
+            case 15: r3c3 = value;
+            case _: throw 'Index ${key} out of bounds (0-15)!';
+        };
 	}
 
 	/**
@@ -174,14 +235,24 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 	 *  @return Bool
 	 */
 	public inline function equals(b:Mat4):Bool {
-		var equal:Bool = true;
-		for(i in 0...16) {
-			if(Math.abs(this[i] - b[i]) >= glm.GLM.EPSILON) {
-				equal = false;
-				break;
-			}
-		}
-		return equal;
+        return !(
+               Math.abs(r0c0 - b.r0c0) >= glm.GLM.EPSILON
+            || Math.abs(r0c1 - b.r0c1) >= glm.GLM.EPSILON
+            || Math.abs(r0c2 - b.r0c2) >= glm.GLM.EPSILON
+            || Math.abs(r0c3 - b.r0c3) >= glm.GLM.EPSILON
+            || Math.abs(r1c0 - b.r1c0) >= glm.GLM.EPSILON
+            || Math.abs(r1c1 - b.r1c1) >= glm.GLM.EPSILON
+            || Math.abs(r1c2 - b.r1c2) >= glm.GLM.EPSILON
+            || Math.abs(r1c3 - b.r1c3) >= glm.GLM.EPSILON
+            || Math.abs(r2c0 - b.r2c0) >= glm.GLM.EPSILON
+            || Math.abs(r2c1 - b.r2c1) >= glm.GLM.EPSILON
+            || Math.abs(r2c2 - b.r2c2) >= glm.GLM.EPSILON
+            || Math.abs(r2c3 - b.r2c3) >= glm.GLM.EPSILON
+            || Math.abs(r3c0 - b.r3c0) >= glm.GLM.EPSILON
+            || Math.abs(r3c1 - b.r3c1) >= glm.GLM.EPSILON
+            || Math.abs(r3c2 - b.r3c2) >= glm.GLM.EPSILON
+            || Math.abs(r3c3 - b.r3c3) >= glm.GLM.EPSILON
+        );
 	}
 
 	/**
@@ -190,10 +261,10 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 	 */
 	public inline function toString():String {
 		return
-			'[${this[0]}, ${this[4]}, ${this[8]}, ${this[12]}]\n' +
-			'[${this[1]}, ${this[5]}, ${this[9]}, ${this[13]}]\n' +
-			'[${this[2]}, ${this[6]}, ${this[10]}, ${this[14]}]\n' +
-			'[${this[3]}, ${this[7]}, ${this[11]}, ${this[15]}]\n';
+			'[${r0c0}, ${r0c1}, ${r0c2}, ${r0c3}]\n' +
+			'[${r1c0}, ${r1c1}, ${r1c2}, ${r1c3}]\n' +
+			'[${r2c0}, ${r2c1}, ${r2c2}, ${r2c3}]\n' +
+			'[${r3c0}, ${r3c1}, ${r3c2}, ${r3c3}]\n';
 	}
 
 	/**
@@ -202,25 +273,25 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 	 *  @return Mat4
 	 */
 	public inline static function identity(dest:Mat4):Mat4 {
-		dest[0] = 1;
-		dest[1] = 0;
-		dest[2] = 0;
-		dest[3] = 0;
+		dest.r0c0 = 1;
+		dest.r0c1 = 0;
+		dest.r0c2 = 0;
+		dest.r0c3 = 0;
 
-		dest[4] = 0;
-		dest[5] = 1;
-		dest[6] = 0;
-		dest[7] = 0;
-
-		dest[8] = 0;
-		dest[9] = 0;
-		dest[10] = 1;
-		dest[11] = 0;
-
-		dest[12] = 0;
-		dest[13] = 0;
-		dest[14] = 0;
-		dest[15] = 1;
+		dest.r1c0 = 0;
+		dest.r1c1 = 1;
+		dest.r1c2 = 0;
+		dest.r1c3 = 0;
+		
+		dest.r2c0 = 0;
+		dest.r2c1 = 0;
+		dest.r2c2 = 1;
+		dest.r2c3 = 0;
+		
+		dest.r3c0 = 0;
+		dest.r3c1 = 0;
+		dest.r3c2 = 0;
+		dest.r3c3 = 1;
 
 		return dest;
 	}
@@ -232,22 +303,26 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 	 *  @return Mat4
 	 */
 	public inline static function copy(src:Mat4, dest:Mat4):Mat4 {
-		dest[0] = src[0];
-		dest[1] = src[1];
-		dest[2] = src[2];
-		dest[3] = src[3];
-		dest[4] = src[4];
-		dest[5] = src[5];
-		dest[6] = src[6];
-		dest[7] = src[7];
-		dest[8] = src[8];
-		dest[9] = src[9];
-		dest[10] = src[10];
-		dest[11] = src[11];
-		dest[12] = src[12];
-		dest[13] = src[13];
-		dest[14] = src[14];
-		dest[15] = src[15];
+		dest.r0c0 = src.r0c0;
+		dest.r0c1 = src.r0c1;
+		dest.r0c2 = src.r0c2;
+		dest.r0c3 = src.r0c3;
+		
+		dest.r1c0 = src.r1c0;
+		dest.r1c1 = src.r1c1;
+		dest.r1c2 = src.r1c2;
+		dest.r1c3 = src.r1c3;
+		
+		dest.r2c0 = src.r2c0;
+		dest.r2c1 = src.r2c1;
+		dest.r2c2 = src.r2c2;
+		dest.r2c3 = src.r2c3;
+		
+		dest.r3c0 = src.r3c0;
+		dest.r3c1 = src.r3c1;
+		dest.r3c2 = src.r3c2;
+		dest.r3c3 = src.r3c3;
+
 		return dest;
 	}
 
@@ -258,29 +333,32 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 	 *  @return Mat4
 	 */
 	public inline static function transpose(src:Mat4, dest:Mat4):Mat4 {
-		var src01 = src[1];
-		var src02 = src[2];
-		var src03 = src[3];
-		var src12 = src[6];
-		var src13 = src[7];
-		var src23 = src[11];
+		var src_r1c0 = src.r1c0;
+		var src_r2c0 = src.r2c0;
+		var src_r2c1 = src.r2c1;
+		var src_r3c0 = src.r3c0;
+		var src_r3c1 = src.r3c1;
+		var src_r3c2 = src.r3c2;
 
-		dest[0] = src[0];
-		dest[1] = src[4];
-		dest[2] = src[8];
-		dest[3] = src[12];
-		dest[4] = src01;
-		dest[5] = src[5];
-		dest[6] = src[9];
-		dest[7] = src[13];
-		dest[8] = src02;
-		dest[9] = src12;
-		dest[10] = src[10];
-		dest[11] = src[14];
-		dest[12] = src03;
-		dest[13] = src13;
-		dest[14] = src23;
-		dest[15] = src[15];
+		dest.r0c0 = src.r0c0;
+		dest.r1c0 = src.r0c1;
+		dest.r2c0 = src.r0c2;
+		dest.r3c0 = src.r0c3;
+
+		dest.r0c1 = src_r1c0;
+		dest.r1c1 = src.r1c1;
+		dest.r2c1 = src.r1c2;
+		dest.r3c1 = src.r1c3;
+
+		dest.r0c2 = src_r2c0;
+		dest.r1c2 = src_r2c1;
+		dest.r2c2 = src.r2c2;
+		dest.r3c2 = src.r2c3;
+
+		dest.r0c3 = src_r3c0;
+		dest.r1c3 = src_r3c1;
+		dest.r2c3 = src_r3c2;
+		dest.r3c3 = src.r3c3;
 
 		return dest;
 	}
@@ -291,10 +369,10 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 	 *  @return Float
 	 */
 	public inline static function determinant(src:Mat4):Float {
-		var a00:Float = src[0], a01:Float = src[1], a02:Float = src[2], a03:Float = src[3],
-		    a10:Float = src[4], a11:Float = src[5], a12:Float = src[6], a13:Float = src[7],
-		    a20:Float = src[8], a21:Float = src[9], a22:Float = src[10], a23:Float = src[11],
-		    a30:Float = src[12], a31:Float = src[13], a32:Float = src[14], a33:Float = src[15];
+		var a00:Float = src.r0c0, a01:Float = src.r1c0, a02:Float = src.r2c0, a03:Float = src.r3c0,
+		    a10:Float = src.r0c1, a11:Float = src.r1c1, a12:Float = src.r2c1, a13:Float = src.r3c1,
+		    a20:Float = src.r0c2, a21:Float = src.r1c2, a22:Float = src.r2c2, a23:Float = src.r3c2,
+		    a30:Float = src.r0c3, a31:Float = src.r1c3, a32:Float = src.r2c3, a33:Float = src.r3c3;
 
 		var b00:Float = a00 * a11 - a01 * a10,
 		    b01:Float = a00 * a12 - a02 * a10,
@@ -319,10 +397,10 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 	 *  @return Mat4
 	 */
 	public inline static function invert(src:Mat4, dest:Mat4):Mat4 {
-		var a00:Float = src[0], a01:Float = src[4], a02:Float = src[8], a03:Float = src[12];
-		var a10:Float = src[1], a11:Float = src[5], a12:Float = src[9], a13:Float = src[13];
-		var a20:Float = src[2], a21:Float = src[6], a22:Float = src[10], a23:Float = src[14];
-		var a30:Float = src[3], a31:Float = src[7], a32:Float = src[11], a33:Float = src[15];
+		var a00:Float = src.r0c0, a01:Float = src.r0c1, a02:Float = src.r0c2, a03:Float = src.r0c3;
+		var a10:Float = src.r1c0, a11:Float = src.r1c1, a12:Float = src.r1c2, a13:Float = src.r1c3;
+		var a20:Float = src.r2c0, a21:Float = src.r2c1, a22:Float = src.r2c2, a23:Float = src.r2c3;
+		var a30:Float = src.r3c0, a31:Float = src.r3c1, a32:Float = src.r3c2, a33:Float = src.r3c3;
 
 		var t00:Float = a12 * a23 * a31 - a13 * a22 * a31 + a13 * a21 * a32 - a11 * a23 * a32 - a12 * a21 * a33 + a11 * a22 * a33;
 		var t01:Float = a03 * a22 * a31 - a02 * a23 * a31 - a03 * a21 * a32 + a01 * a23 * a32 + a02 * a21 * a33 - a01 * a22 * a33;
@@ -365,35 +443,42 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
 	 *  @return Mat4
 	 */
 	public inline static function multMat(a:Mat4, b:Mat4, dest:Mat4):Mat4 {
-		var a00:Float = a[0], a01:Float = a[1], a02:Float = a[2], a03:Float = a[3];
-		var a10:Float = a[4], a11:Float = a[5], a12:Float = a[6], a13:Float = a[7];
-		var a20:Float = a[8], a21:Float = a[9], a22:Float = a[10], a23:Float = a[11];
-		var a30:Float = a[12], a31:Float = a[13], a32:Float = a[14], a33:Float = a[15];
+		// cache what we need to do the calculations
+		var _a:Mat4;
+		var _b:Mat4;
+		if(dest == a) {
+			_a = Mat4.copy(a, new Mat4());
+			_b = b;
+		}
+		else if(dest == b) {
+			_a = a;
+			_b = Mat4.copy(b, new Mat4());
+		}
+		else {
+			_a = a;
+			_b = b;
+		}
 
-		var b00:Float = b[0], b01:Float = b[1], b02:Float = b[2], b03:Float = b[3];
-		var b10:Float = b[4], b11:Float = b[5], b12:Float = b[6], b13:Float = b[7];
-		var b20:Float = b[8], b21:Float = b[9], b22:Float = b[10], b23:Float = b[11];
-		var b30:Float = b[12], b31:Float = b[13], b32:Float = b[14], b33:Float = b[15];
+		dest.r0c0 = _a.r0c0*_b.r0c0 + _a.r0c1*_b.r1c0 + _a.r0c2*_b.r2c0 + _a.r0c3*_b.r3c0;
+		dest.r0c1 = _a.r0c0*_b.r0c1 + _a.r0c1*_b.r1c1 + _a.r0c2*_b.r2c1 + _a.r0c3*_b.r3c1;
+		dest.r0c2 = _a.r0c0*_b.r0c2 + _a.r0c1*_b.r1c2 + _a.r0c2*_b.r2c2 + _a.r0c3*_b.r3c2;
+		dest.r0c3 = _a.r0c0*_b.r0c3 + _a.r0c1*_b.r1c3 + _a.r0c2*_b.r2c3 + _a.r0c3*_b.r3c3;
 
-		dest[0] = b00*a00 + b01*a10 + b02*a20 + b03*a30;
-		dest[1] = b00*a01 + b01*a11 + b02*a21 + b03*a31;
-		dest[2] = b00*a02 + b01*a12 + b02*a22 + b03*a32;
-		dest[3] = b00*a03 + b01*a13 + b02*a23 + b03*a33;
+		dest.r1c0 = _a.r1c0*_b.r0c0 + _a.r1c1*_b.r1c0 + _a.r1c2*_b.r2c0 + _a.r1c3*_b.r3c0;
+		dest.r1c1 = _a.r1c0*_b.r0c1 + _a.r1c1*_b.r1c1 + _a.r1c2*_b.r2c1 + _a.r1c3*_b.r3c1;
+		dest.r1c2 = _a.r1c0*_b.r0c2 + _a.r1c1*_b.r1c2 + _a.r1c2*_b.r2c2 + _a.r1c3*_b.r3c2;
+		dest.r1c3 = _a.r1c0*_b.r0c3 + _a.r1c1*_b.r1c3 + _a.r1c2*_b.r2c3 + _a.r1c3*_b.r3c3;
 
-		dest[4] = b10*a00 + b11*a10 + b12*a20 + b13*a30;
-		dest[5] = b10*a01 + b11*a11 + b12*a21 + b13*a31;
-		dest[6] = b10*a02 + b11*a12 + b12*a22 + b13*a32;
-		dest[7] = b10*a03 + b11*a13 + b12*a23 + b13*a33;
+		dest.r2c0 = _a.r2c0*_b.r0c0 + _a.r2c1*_b.r1c0 + _a.r2c2*_b.r2c0 + _a.r2c3*_b.r3c0;
+		dest.r2c1 = _a.r2c0*_b.r0c1 + _a.r2c1*_b.r1c1 + _a.r2c2*_b.r2c1 + _a.r2c3*_b.r3c1;
+		dest.r2c2 = _a.r2c0*_b.r0c2 + _a.r2c1*_b.r1c2 + _a.r2c2*_b.r2c2 + _a.r2c3*_b.r3c2;
+		dest.r2c3 = _a.r2c0*_b.r0c3 + _a.r2c1*_b.r1c3 + _a.r2c2*_b.r2c3 + _a.r2c3*_b.r3c3;
 
-		dest[8] = b20*a00 + b21*a10 + b22*a20 + b23*a30;
-		dest[9] = b20*a01 + b21*a11 + b22*a21 + b23*a31;
-		dest[10] = b20*a02 + b21*a12 + b22*a22 + b23*a32;
-		dest[11] = b20*a03 + b21*a13 + b22*a23 + b23*a33;
-
-		dest[12] = b30*a00 + b31*a10 + b32*a20 + b33*a30;
-		dest[13] = b30*a01 + b31*a11 + b32*a21 + b33*a31;
-		dest[14] = b30*a02 + b31*a12 + b32*a22 + b33*a32;
-		dest[15] = b30*a03 + b31*a13 + b32*a23 + b33*a33;
+		dest.r3c0 = _a.r3c0*_b.r0c0 + _a.r3c1*_b.r1c0 + _a.r3c2*_b.r2c0 + _a.r3c3*_b.r3c0;
+		dest.r3c1 = _a.r3c0*_b.r0c1 + _a.r3c1*_b.r1c1 + _a.r3c2*_b.r2c1 + _a.r3c3*_b.r3c1;
+		dest.r3c2 = _a.r3c0*_b.r0c2 + _a.r3c1*_b.r1c2 + _a.r3c2*_b.r2c2 + _a.r3c3*_b.r3c2;
+		dest.r3c3 = _a.r3c0*_b.r0c3 + _a.r3c1*_b.r1c3 + _a.r3c2*_b.r2c3 + _a.r3c3*_b.r3c3;
+		
 		return dest;
 	}
 
@@ -443,10 +528,10 @@ abstract Mat4(Vector<Float>) to Vector<Float> {
     @:from
     public inline static function fromFloatArray(arr:Array<Float>):Mat4 {
         return new Mat4(
-			arr[0], arr[4], arr[ 8], arr[12],
-			arr[1], arr[5], arr[ 9], arr[13],
-			arr[2], arr[6], arr[10], arr[14],
-			arr[3], arr[7], arr[11], arr[15]
+			arr[ 0], arr[ 4], arr[ 8], arr[12],
+			arr[ 1], arr[ 5], arr[ 9], arr[13],
+			arr[ 2], arr[ 6], arr[10], arr[14],
+			arr[ 3], arr[ 7], arr[11], arr[15]
 		);
     }
 

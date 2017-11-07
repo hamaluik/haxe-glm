@@ -9,6 +9,7 @@ class TestMain {
 			new TestGLM(),
 			new TestMat3(),
 			new TestMat4(),
+			new TestVec2(),
 			new TestVec3(),
 			new TestVec4(),
 			new TestQuat()

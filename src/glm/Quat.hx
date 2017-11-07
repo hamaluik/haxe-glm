@@ -13,56 +13,88 @@
 */
 package glm;
 
-import haxe.ds.Vector;
+#if kha
+import kha.math.FastVector4;
+#else
+@:allow(glm.Quat)
+class QuatBase {
+    function new() {}
+
+    var x:Float;
+    var y:Float;
+    var z:Float;
+    var w:Float;
+}
+#end
 
 /**
  *  A quaternion
  */
-abstract Quat(Vector<Float>) to Vector<Float> {
+#if kha
+abstract Quat(FastVector4) from FastVector4 to FastVector4  {
+#else
+abstract Quat(QuatBase) {
+#end
     /**
      *  Accessor utility for the first element of the quaternion
      */
     public var x(get, set):Float;
-    private inline function get_x():Float return this[0];
-    private inline function set_x(v:Float):Float return this[0] = v;
+    private inline function get_x():Float return this.x;
+    private inline function set_x(v:Float):Float return this.x = v;
 
     /**
      *  Accessor utility for the second element of the quaternion
      */
     public var y(get, set):Float;
-    private inline function get_y():Float return this[1];
-    private inline function set_y(v:Float):Float return this[1] = v;
+    private inline function get_y():Float return this.y;
+    private inline function set_y(v:Float):Float return this.y = v;
 
     /**
      *  Accessor utility for the third element of the quaternion
      */
     public var z(get, set):Float;
-    private inline function get_z():Float return this[2];
-    private inline function set_z(v:Float):Float return this[2] = v;
+    private inline function get_z():Float return this.z;
+    private inline function set_z(v:Float):Float return this.z = v;
 
     /**
      *  Accessor utility for the fourth element of the quaternion
      */
     public var w(get, set):Float;
-    private inline function get_w():Float return this[3];
-    private inline function set_w(v:Float):Float return this[3] = v;
+    private inline function get_w():Float return this.w;
+    private inline function set_w(v:Float):Float return this.w = v;
 
 	@:arrayAccess
 	public inline function get(key:Int) {
-		return this[key];
+		return switch(key) {
+            case 0: x;
+            case 1: y;
+            case 2: z;
+            case 3: w;
+            case _: throw 'Index ${key} out of bounds (0-3)!';
+        };
 	}
 
 	@:arrayAccess
 	public inline function arrayWrite(key:Int, value:Float):Float {
-		return this[key] = value;
+		return switch(key) {
+            case 0: x = value;
+            case 1: y = value;
+            case 2: z = value;
+            case 3: w = value;
+            case _: throw 'Index ${key} out of bounds (0-3)!';
+        };
 	}
 
     public inline function new(x:Float = 0, y:Float = 0, z:Float = 0, w:Float = 1) {
-        this = new Vector<Float>(4);
-        this[0] = x;
-        this[1] = y;
-        this[2] = z;
-        this[3] = w;
+        #if kha
+        this = new FastVector4();
+        #else
+        this = new QuatBase();
+        #end
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.w = w;
     }
 
 	/**
@@ -71,14 +103,12 @@ abstract Quat(Vector<Float>) to Vector<Float> {
 	 *  @return Bool
 	 */
 	public inline function equals(b:Quat):Bool {
-		var equal:Bool = true;
-		for(i in 0...4) {
-			if(Math.abs(this[i] - b[i]) >= glm.GLM.EPSILON) {
-				equal = false;
-				break;
-			}
-		}
-		return equal;
+        return !(
+               Math.abs(x - b.x) >= glm.GLM.EPSILON
+            || Math.abs(y - b.y) >= glm.GLM.EPSILON
+            || Math.abs(z - b.z) >= glm.GLM.EPSILON
+            || Math.abs(w - b.w) >= glm.GLM.EPSILON
+        );
 	}
 
 	/**
@@ -87,7 +117,7 @@ abstract Quat(Vector<Float>) to Vector<Float> {
 	 */
 	public inline function toString():String {
 		return
-			'{${this[0]}, ${this[1]}, ${this[2]}, ${this[3]}}';
+			'{${this.x}, ${this.y}, ${this.z}, ${this.w}}';
 	}
 
     /**
@@ -128,7 +158,8 @@ abstract Quat(Vector<Float>) to Vector<Float> {
      *  @return Float
      */
     public inline static function dot(a:Quat, b:Quat):Float {
-        return a.x * b.x +
+        return
+            a.x * b.x +
             a.y * b.y +
             a.z * b.z +
             a.w * b.w;
@@ -363,6 +394,6 @@ abstract Quat(Vector<Float>) to Vector<Float> {
      */
     @:to
     public inline function toFloatArray():Array<Float> {
-        return this.toArray();
+        return [x, y, z, w];
     }
 }

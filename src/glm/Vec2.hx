@@ -13,54 +13,80 @@
 */
 package glm;
 
-import haxe.ds.Vector;
+#if kha
+import kha.math.FastVector2;
+#else
+@:allow(glm.Vec2)
+class Vec2Base {
+    function new() {}
+
+    var x:Float;
+    var y:Float;
+}
+#end
 
 /**
- *  A two-element vector
+ *  A three-element vector
  */
-abstract Vec2(Vector<Float>) to Vector<Float> {
+#if kha
+abstract Vec2(FastVector2) from FastVector2 to FastVector2  {
+#else
+abstract Vec2(Vec2Base) {
+#end
     /**
      *  Accessor utility for the first element of the vector
      */
     public var x(get, set):Float;
-    private inline function get_x():Float return this[0];
-    private inline function set_x(v:Float):Float return this[0] = v;
+    private inline function get_x():Float return this.x;
+    private inline function set_x(v:Float):Float return this.x = v;
 
     /**
      *  Accessor utility for the second element of the vector
      */
     public var y(get, set):Float;
-    private inline function get_y():Float return this[1];
-    private inline function set_y(v:Float):Float return this[1] = v;
+    private inline function get_y():Float return this.y;
+    private inline function set_y(v:Float):Float return this.y = v;
     
     /**
      *  Accessor utility for the first element of the vector
      */
     public var i(get, set):Float;
-    private inline function get_i():Float return this[0];
-    private inline function set_i(v:Float):Float return this[0] = v;
+    private inline function get_i():Float return this.x;
+    private inline function set_i(v:Float):Float return this.x = v;
 
     /**
      *  Accessor utility for the second element of the vector
      */
     public var j(get, set):Float;
-    private inline function get_j():Float return this[1];
-    private inline function set_j(v:Float):Float return this[1] = v;
+    private inline function get_j():Float return this.y;
+    private inline function set_j(v:Float):Float return this.y = v;
 
 	@:arrayAccess
 	public inline function get(key:Int) {
-		return this[key];
+		return switch(key) {
+            case 0: x;
+            case 1: y;
+            case _: throw 'Index ${key} out of bounds (0-1)!';
+        };
 	}
 
 	@:arrayAccess
 	public inline function arrayWrite(key:Int, value:Float):Float {
-		return this[key] = value;
+		return switch(key) {
+            case 0: x = value;
+            case 1: y = value;
+            case _: throw 'Index ${key} out of bounds (0-1)!';
+        };
 	}
 
     public inline function new(x:Float = 0, y:Float = 0) {
-        this = new Vector<Float>(2);
-        this[0] = x;
-        this[1] = y;
+        #if kha
+        this = new FastVector2();
+        #else
+        this = new Vec2Base();
+        #end
+        this.x = x;
+        this.y = y;
     }
 
 	/**
@@ -69,14 +95,10 @@ abstract Vec2(Vector<Float>) to Vector<Float> {
 	 *  @return Bool
 	 */
 	public inline function equals(b:Vec2):Bool {
-		var equal:Bool = true;
-		for(i in 0...2) {
-			if(Math.abs(this[i] - b[i]) >= glm.GLM.EPSILON) {
-				equal = false;
-				break;
-			}
-		}
-		return equal;
+        return !(
+               Math.abs(x - b.x) >= glm.GLM.EPSILON
+            || Math.abs(y - b.y) >= glm.GLM.EPSILON
+        );
 	}
 
 	/**
@@ -85,7 +107,7 @@ abstract Vec2(Vector<Float>) to Vector<Float> {
 	 */
 	public inline function toString():String {
 		return
-			'<${this[0]}, ${this[1]}>';
+			'<${x}, ${y}>';
 	}
 
     /**
@@ -339,6 +361,6 @@ abstract Vec2(Vector<Float>) to Vector<Float> {
      */
     @:to
     public inline function toFloatArray():Array<Float> {
-        return this.toArray();
+        return [x, y];
     }
 }
