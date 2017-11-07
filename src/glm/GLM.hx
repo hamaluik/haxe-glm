@@ -14,6 +14,7 @@
 package glm;
 
 using glm.Mat4;
+using glm.Vec3;
 
 /**
  *  Utility functions for 3D math
@@ -149,77 +150,26 @@ class GLM {
      *  @return Mat4
      */
     public static function lookAt(eye:Vec3, centre:Vec3, up:Vec3, dest:Mat4):Mat4 {
-        var x0:Float, x1:Float, x2:Float, y0:Float, y1:Float, y2:Float, z0:Float, z1:Float, z2:Float;
-        var len:Float;
+        var f:Vec3 = centre - eye;
+        f.normalize(f);
+        var s:Vec3 = Vec3.cross(f, up, new Vec3());
+        s.normalize(s);
+        var u:Vec3 = Vec3.cross(s, f, new Vec3());
 
-        if (Math.abs(eye.x - centre.x) < EPSILON &&
-            Math.abs(eye.y - centre.y) < EPSILON &&
-            Math.abs(eye.z - centre.z) < EPSILON) {
-            dest.identity();
-            return dest;
-        }
+        dest.identity();
+		dest.r0c0 = s.x;
+		dest.r0c1 = s.y;
+		dest.r0c2 = s.z;
+		dest.r1c0 = u.x;
+		dest.r1c1 = u.y;
+		dest.r1c2 = u.z;
+		dest.r2c0 =-f.x;
+		dest.r2c1 =-f.y;
+		dest.r2c2 =-f.z;
+		dest.r0c3 = -Vec3.dot(s, eye);
+		dest.r1c3 = -Vec3.dot(u, eye);
+		dest.r2c3 =  Vec3.dot(f, eye);
 
-        z0 = eye.x - centre.x;
-        z1 = eye.y - centre.y;
-        z2 = eye.z - centre.z;
-
-        len = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
-        z0 *= len;
-        z1 *= len;
-        z2 *= len;
-
-        x0 = up.y * z2 - up.z * z1;
-        x1 = up.z * z0 - up.x * z2;
-        x2 = up.x * z1 - up.y * z0;
-        len = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
-        if (len <= EPSILON) {
-            x0 = 0;
-            x1 = 0;
-            x2 = 0;
-        }
-        else {
-            len = 1 / len;
-            x0 *= len;
-            x1 *= len;
-            x2 *= len;
-        }
-
-        y0 = z1 * x2 - z2 * x1;
-        y1 = z2 * x0 - z0 * x2;
-        y2 = z0 * x1 - z1 * x0;
-
-        len = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
-        if (len <= EPSILON) {
-            y0 = 0;
-            y1 = 0;
-            y2 = 0;
-        }
-        else {
-            len = 1 / len;
-            y0 *= len;
-            y1 *= len;
-            y2 *= len;
-        }
-
-        dest.r0c0 = x0;
-        dest.r1c0 = y0;
-        dest.r2c0 = z0;
-        dest.r3c0 = 0;
-
-        dest.r0c1 = x1;
-        dest.r1c1 = y1;
-        dest.r2c1 = z1;
-        dest.r3c1 = 0;
-
-        dest.r0c2 = x2;
-        dest.r1c2 = y2;
-        dest.r2c2 = z2;
-        dest.r3c2 = 0;
-
-        dest.r0c3 = -(x0 * eye.x + x1 * eye.y + x2 * eye.z);
-        dest.r1c3 = -(y0 * eye.x + y1 * eye.y + y2 * eye.z);
-        dest.r2c3 = -(z0 * eye.x + z1 * eye.y + z2 * eye.z);
-        dest.r3c3 = 1;
         return dest;
     }
 
