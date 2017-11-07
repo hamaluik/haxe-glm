@@ -7,6 +7,7 @@ class TestMain {
 		var reporter = new buddy.reporting.ConsoleFileReporter(true);
 		var runner = new buddy.SuitesRunner([
 			new TestGLM(),
+			new TestMat2(),
 			new TestMat3(),
 			new TestMat4(),
 			new TestVec2(),

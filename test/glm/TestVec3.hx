@@ -15,6 +15,24 @@ class TestVec3 extends BuddySuite {
 				vb = new Vec3(-1, -2, -3);
 			});
 
+			it("should provide element access");
+
+			it("should calculate the magnitude");
+
+			it("should provide copy support");
+
+			it("should provide vector math");
+
+			it("should provide scalar math");
+
+			it("should calculate distance between vectors");
+
+			it("should calculate the dot product");
+
+			it("should normalize");
+
+			it("should linearly interpolate");
+
 			it("provide the cross product", {
 				va = new Vec3(1, 0, 0);
 				vb = new Vec3(0, 1, 0);

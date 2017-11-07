@@ -1,6 +1,7 @@
 -cp src
 
 glm.GLM
+glm.Mat2
 glm.Mat3
 glm.Mat4
 glm.Quat
