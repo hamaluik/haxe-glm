@@ -1,18 +1,15 @@
--cmd cd dox
+-cp src
 
---next 
---interp
---macro Clean.run()
+glm.GLM
+glm.Mat2
+glm.Mat3
+glm.Mat4
+glm.Quat
+glm.Vec2
+glm.Vec3
+glm.Vec4
 
---next
--cp ../src
--D docgen
---macro ImportAll.run()
-
---each
-
---interp
--xml haxe.xml
+-xml dox.xml
 
 --next
--cmd haxelib run dox -i . -o ../docs --title "GLM" --toplevel-package "glm" -D version "2.0.0" -D source-path "https://github.com/FuzzyWuzzie/haxe-glm/tree/master/src/glm"
+-cmd haxelib run dox -i . -o docs --title "GLM" --toplevel-package "glm" -D version "2.1.0" -D source-path "https://github.com/FuzzyWuzzie/haxe-glm/tree/master/src/glm"
