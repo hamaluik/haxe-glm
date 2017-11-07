@@ -43,7 +43,7 @@ class TestMat4 extends BuddySuite {
 				ma.r0c1.should.be(42);
 			});
 
-			it("should store element in column-major order", {
+			it("should access elements in column-major order", {
 				ma[3].should.be(ma.r3c0);
 				ma[7].should.be(ma.r3c1);
 				ma[11].should.be(ma.r3c2);

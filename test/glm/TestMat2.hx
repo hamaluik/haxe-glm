@@ -15,7 +15,7 @@ class TestMat2 extends BuddySuite {
 
 			it("should provide element access");
 
-			it("should store element in column-major order");
+			it("should access elements in column-major order");
 
 			it("should provide an identity");
 
