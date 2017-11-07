@@ -133,7 +133,38 @@ class TestGLM extends BuddySuite {
 				)).should.be(true);
 			});
 
-			it("should create lookat matrices");
+			it("should create lookat matrices", {
+				var eye:Vec3 = new Vec3(-3, 1, 3);
+				var centre:Vec3 = new Vec3(0, 0, 0);
+				var up:Vec3 = new Vec3(0, 1, 0);
+				
+				var lookat:Mat4 = GLM.lookAt(eye, centre, up, new Mat4());
+				
+				lookat.r0c0.should.beCloseTo(-0.70711);
+				lookat.r0c1.should.beCloseTo( 0.16222);
+				lookat.r0c2.should.beCloseTo( 0.68825);
+				lookat.r0c3.should.beCloseTo(-3.00000);
+				
+				lookat.r1c0.should.beCloseTo( 0.00000);
+				lookat.r1c1.should.beCloseTo( 0.97333);
+				lookat.r1c2.should.beCloseTo(-0.22942);
+				lookat.r1c3.should.beCloseTo( 1.00000);
+				
+				lookat.r2c0.should.beCloseTo(-0.70711);
+				lookat.r2c1.should.beCloseTo(-0.16222);
+				lookat.r2c2.should.beCloseTo(-0.68825);
+				lookat.r2c3.should.beCloseTo( 3.00000);
+				
+				lookat.r3c0.should.beCloseTo( 0.00000);
+				lookat.r3c1.should.beCloseTo( 0.00000);
+				lookat.r3c2.should.beCloseTo( 0.00000);
+				lookat.r3c3.should.beCloseTo( 1.00000);
+
+				//	-0.70711	 0.16222	 0.68825	-3.00000
+				//	 0.00000	 0.97333	-0.22942	 1.00000
+				//	-0.70711	-0.16222	-0.68825	 3.00000
+				//	 0.00000	 0.00000	 0.00000	 1.00000
+			});
 		});
 	}
 }
