@@ -141,8 +141,8 @@ Implemented underlying types:
 | SLerp | :heavy_check_mark: | `Quat.slerp(a, b, t, dest)` |
 | Multiply w/ quats | :heavy_check_mark: | `Quat.multiplyQuats(a, b, dest)` |
 | Multiply w/ scalar | :heavy_check_mark: | `Quat.multiplyScalar(a, s, dest)` |
-| Quat × quat | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `a * b` |
-| Quat × scalar | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `a * s` |
+| Quat × quat | :heavy_check_mark: | `a * b` |
+| Quat × scalar | :heavy_check_mark: | `a * s` |
 | Normalize | :heavy_check_mark: | `Quat.normalize(q, dest)` |
 | String representation | :heavy_check_mark: | `quat.toString()` |
 | To/from float array | :heavy_check_mark: | `quat.toFloatArray()`, `Quat.fromFloatArray(arr)` |
