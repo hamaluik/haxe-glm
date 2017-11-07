@@ -1,4 +1,4 @@
--cp src
--cp test
+-cp .
+-cp ../src
 -dce full
 -main ProfileMain

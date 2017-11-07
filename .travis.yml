@@ -1,6 +1,9 @@
 # adapted from https://github.com/andyli/HaxeCI/blob/master/.travis.yml
 language: haxe
 
+# keep everything in the test subdir
+before_script: cd test
+
 env:
     matrix:
     - TARGET=interp

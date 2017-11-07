@@ -38,9 +38,11 @@ var P:Mat4 = GLM.perspective(
 ```
 
 ```haxe
+using glm.Quat;
+
 // transform components
 var pos:Vec3 = new Vec3(0, 0, 1.5);
-var rot:Quat = Quat.identity(new Quat());
+var rot:Quat = new Quat().identity();
 var sca:Vec3 = new Vec3(1, 1, 1);
 var modelMatrix:Mat4 = new Mat4();
 

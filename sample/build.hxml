@@ -1,4 +1,5 @@
--lib glm
+-D glm
+-cp ../src
 -main Sample
 -dce full
 --interp
